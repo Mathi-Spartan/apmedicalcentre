@@ -280,6 +280,19 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 
+
+/* department filter pills + tooltips */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:44px}
+.pill{position:relative;display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-family:'Figtree';font-size:13.5px;font-weight:700;color:var(--ink);cursor:pointer;transition:.18s}
+.pill i{font-style:normal;font-size:11px;font-weight:800;color:var(--pea);background:var(--pea-soft);border-radius:999px;padding:2px 7px;transition:.18s}
+.pill:hover{border-color:var(--pea);transform:translateY(-2px);box-shadow:var(--shadow)}
+.pill.on{background:var(--pea);border-color:var(--pea);color:#fff}
+.pill.on i{background:rgba(255,255,255,.18);color:var(--mari)}
+.pill[data-tip]::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);background:var(--ink);color:var(--paper);font-size:12.5px;font-weight:500;line-height:1.5;padding:10px 14px;border-radius:12px;width:max-content;max-width:250px;text-align:center;opacity:0;pointer-events:none;transition:.18s;z-index:30;box-shadow:0 10px 28px -8px rgba(23,33,29,.35)}
+.pill[data-tip]::before{content:"";position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%) translateY(4px);border:6px solid transparent;border-top-color:var(--ink);opacity:0;transition:.18s;z-index:30}
+.pill[data-tip]:hover::after,.pill[data-tip]:focus-visible::after,.pill[data-tip]:hover::before,.pill[data-tip]:focus-visible::before{opacity:1;transform:translateX(-50%) translateY(0)}
+.doc.hidden{display:none}
+@media(hover:none){.pill[data-tip]::after,.pill[data-tip]::before{display:none}}
 </style>
 </head>
 <body>
@@ -319,7 +332,38 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 <section style="padding-top:60px">
   <div class="wrap">
     <div class="filters">
-      <span class="pill on">All</span><span class="pill">Surgical Gastro</span><span class="pill">Obstetrics &amp; Fertility</span><span class="pill">Cardiology</span><span class="pill">Orthopedics</span><span class="pill">Paediatrics</span><span class="pill">Nephrology</span><span class="pill">Neurosurgery</span><span class="pill">More…</span>
+      <button class="pill on" data-spec="*">All<i>42</i></button>
+      <button class="pill" data-spec="Obstetrics &amp; Gynecology" data-tip="Women’s health, pregnancy and childbirth.">Obstetrics &amp; Gynecology<i>5</i></button>
+      <button class="pill" data-spec="Anaesthesiology" data-tip="Keeps you safe, comfortable and pain-free through surgery.">Anaesthesiology<i>2</i></button>
+      <button class="pill" data-spec="Cardiology" data-tip="Prevention, diagnosis and treatment of heart disease.">Cardiology<i>2</i></button>
+      <button class="pill" data-spec="Nephrology" data-tip="Kidney disease care, including dialysis.">Nephrology<i>2</i></button>
+      <button class="pill" data-spec="Orthopedic Surgery" data-tip="Bones and joints — fractures, replacements and spine care.">Orthopedic Surgery<i>2</i></button>
+      <button class="pill" data-spec="Paediatric Surgery" data-tip="Surgery for infants and children.">Paediatric Surgery<i>2</i></button>
+      <button class="pill" data-spec="Pulmonology" data-tip="Lungs and breathing — asthma, TB and sleep disorders.">Pulmonology<i>2</i></button>
+      <button class="pill" data-spec="Urology &amp; Andrology" data-tip="Urinary tract care and men’s reproductive health.">Urology &amp; Andrology<i>2</i></button>
+      <button class="pill" data-spec="Arthroscopy · Sports Medicine" data-tip="Keyhole joint surgery and care for sports injuries.">Arthroscopy · Sports Medicine<i>1</i></button>
+      <button class="pill" data-spec="Clinical Psychology" data-tip="Talk-based therapy and assessment for mental wellbeing.">Clinical Psychology<i>1</i></button>
+      <button class="pill" data-spec="Dermatology" data-tip="Skin, hair and nail conditions.">Dermatology<i>1</i></button>
+      <button class="pill" data-spec="Diabetology · Geriatrics" data-tip="Diabetes management and healthcare for older adults.">Diabetology · Geriatrics<i>1</i></button>
+      <button class="pill" data-spec="ENT Surgery" data-tip="Ear, nose and throat problems, treated medically and surgically.">ENT Surgery<i>1</i></button>
+      <button class="pill" data-spec="Emergency &amp; Critical Care" data-tip="Immediate, round-the-clock care for accidents and life-threatening illness.">Emergency &amp; Critical Care<i>1</i></button>
+      <button class="pill" data-spec="Endocrinology" data-tip="Hormone and gland disorders — thyroid, diabetes and beyond.">Endocrinology<i>1</i></button>
+      <button class="pill" data-spec="Fetal Medicine" data-tip="Specialised scans and care for the unborn baby in high-risk pregnancies.">Fetal Medicine<i>1</i></button>
+      <button class="pill" data-spec="General Medicine" data-tip="Your first point of care for fevers, infections and chronic illness.">General Medicine<i>1</i></button>
+      <button class="pill" data-spec="General Surgery" data-tip="Common surgical treatment — hernia, appendix and abdominal conditions.">General Surgery<i>1</i></button>
+      <button class="pill" data-spec="Neonatology" data-tip="Intensive care for newborns and premature babies.">Neonatology<i>1</i></button>
+      <button class="pill" data-spec="Neurosurgery · Interventional Neurology" data-tip="Brain, spine and nerve surgery, with rapid stroke response.">Neurosurgery · Interventional Neurology<i>1</i></button>
+      <button class="pill" data-spec="Obstetrics · Fertility" data-tip="Pregnancy care, safe deliveries and fertility treatment.">Obstetrics · Fertility<i>1</i></button>
+      <button class="pill" data-spec="Oral &amp; Maxillofacial Surgery" data-tip="Surgery of the mouth, jaw and face.">Oral &amp; Maxillofacial Surgery<i>1</i></button>
+      <button class="pill" data-spec="Paediatrics" data-tip="Complete medical care for babies, children and teenagers.">Paediatrics<i>1</i></button>
+      <button class="pill" data-spec="Palliative &amp; Critical Care" data-tip="Comfort-focused care for serious and long-term illness.">Palliative &amp; Critical Care<i>1</i></button>
+      <button class="pill" data-spec="Plastic Surgery" data-tip="Reconstructive and cosmetic surgery.">Plastic Surgery<i>1</i></button>
+      <button class="pill" data-spec="Psychiatry" data-tip="Diagnosis and treatment of mental health conditions.">Psychiatry<i>1</i></button>
+      <button class="pill" data-spec="Radiodiagnosis" data-tip="X-ray, ultrasound and scan-based diagnosis.">Radiodiagnosis<i>1</i></button>
+      <button class="pill" data-spec="Radiodiagnosis · Fetal Medicine" data-tip="Imaging diagnosis, including detailed pregnancy scans.">Radiodiagnosis · Fetal Medicine<i>1</i></button>
+      <button class="pill" data-spec="Surgical Gastroenterology" data-tip="Advanced surgery of the digestive system — stomach, liver, pancreas &amp; intestines.">Surgical Gastroenterology<i>1</i></button>
+      <button class="pill" data-spec="Surgical Oncology" data-tip="Surgical treatment of cancers.">Surgical Oncology<i>1</i></button>
+      <button class="pill" data-spec="Vascular Surgery" data-tip="Blood vessel conditions — varicose veins, blockages and aneurysms.">Vascular Surgery<i>1</i></button>
     </div>
     <div class="doc-grid">
       
@@ -598,5 +642,24 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
     <div class="base"><span>© A P Medical Center 2026 · All rights reserved</span><span>Facebook · Instagram · YouTube</span></div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var pills = document.querySelectorAll('.pill');
+  var docs = document.querySelectorAll('.doc');
+  pills.forEach(function(p){
+    p.addEventListener('click', function(){
+      pills.forEach(function(x){ x.classList.remove('on'); });
+      p.classList.add('on');
+      var key = p.dataset.spec;
+      docs.forEach(function(c){
+        var s = c.querySelector('.spec');
+        var match = key === '*' || (s && s.textContent.trim() === key);
+        c.classList.toggle('hidden', !match);
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
