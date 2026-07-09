@@ -362,6 +362,18 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 @media(max-width:600px){
   .topbar .wrap span:last-child{display:none}
 }
+
+/* campus / getting here */
+.campus{padding-bottom:64px}
+.campus .duo{display:grid;grid-template-columns:1.55fr 1fr;gap:22px;align-items:stretch}
+.campus figure{position:relative;margin:0;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);min-height:280px}
+.campus figure img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.campus figure:hover img{transform:scale(1.03)}
+.campus figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 22px 18px;background:linear-gradient(180deg,transparent,rgba(9,59,51,.82));color:#fff;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600}
+.campus figcaption .fdot{width:8px;height:8px;border-radius:50%;background:var(--mari);flex-shrink:0}
+.campus figcaption small{display:block;font-weight:400;font-size:12.5px;color:#CDE2DC;margin-top:2px}
+.campus .badge{position:absolute;top:16px;left:16px;background:var(--mari);color:#3A2A0E;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:7px 14px;box-shadow:0 6px 18px -6px rgba(58,42,14,.5)}
+@media(max-width:960px){.campus .duo{grid-template-columns:1fr}.campus figure{min-height:220px}}
 </style>
 </head>
 <body>
@@ -709,6 +721,29 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
         <div class="ph"><img src="images/board/kamaraj.jpg" alt="Mr. A. Kamaraj"></div>
         <h3>Mr. A. Kamaraj</h3><div class="role">Director</div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="campus" id="campus" style="padding-bottom:24px">
+  <div class="wrap">
+    <div class="shead" style="margin-bottom:36px">
+      <div>
+        <span class="chip"><span class="dot"></span>Getting Here &middot; <span class="tamil">வருகை</span></span>
+        <h2>You&rsquo;ll know it <em>when you see it.</em></h2>
+      </div>
+    </div>
+    <div class="duo">
+      <figure>
+        <span class="badge">Our Campus</span>
+        <img src="images/campus-building.jpg" alt="A P Medical Center building on Saradha College Road, Salem" loading="lazy">
+        <figcaption><span class="fdot"></span><span>A P Medical Center<small>Saradha College Road, Near Alagapuram Police Station</small></span></figcaption>
+      </figure>
+      <figure>
+        <img src="images/campus-parking.jpg" alt="Free on-campus parking with 24x7 ambulance bay at A P Medical Center" loading="lazy">
+        <figcaption><span class="fdot"></span><span>Free on-campus parking<small>Two &amp; four-wheelers &middot; 24&times;7 ambulance bay</small></span></figcaption>
+      </figure>
     </div>
   </div>
 </section>
