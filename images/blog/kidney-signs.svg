@@ -1,16 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 260">
 <defs>
 <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
 <stop offset="0" stop-color="#14495D"/><stop offset="1" stop-color="#0F3B4C"/>
 </linearGradient>
-<filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="14" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .04 0"/></filter>
+<filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="24" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .035 0"/></filter>
 </defs>
-<rect width="800" height="340" fill="url(#g)"/>
-<path d="M640 340 L640 160 A110 110 0 0 1 860 160 L860 340 Z" fill="none" stroke="#FAF8F3" stroke-width="1.5" opacity=".16"/>
-
-<text x="58" y="272" font-family="Georgia,'Times New Roman',serif" font-size="270" fill="#FAF8F3">06</text>
-<path d="M560 96 c18 26 30 42 30 59 a30 30 0 0 1 -60 0 c0 -17 12 -33 30 -59z" fill="#E8A13D"/>
-<text x="430" y="246" font-family="Figtree,Arial,sans-serif" font-size="17" font-weight="700" letter-spacing="4.5" fill="#E8A13D" text-anchor="start">QUIET SIGNS YOUR</text>
-<text x="430" y="274" font-family="Figtree,Arial,sans-serif" font-size="17" font-weight="700" letter-spacing="4.5" fill="#E8A13D" text-anchor="start">KIDNEYS ARE ASKING</text>
-<rect width="800" height="340" filter="url(#n)"/>
+<rect width="800" height="260" fill="url(#g)"/>
+<path d="M672 260 L672 120 A88 88 0 0 1 848 120 L848 260 Z" fill="none" stroke="#FAF8F3" stroke-width="1.2" opacity=".14"/>
+<text x="64" y="168" font-family="Georgia,'Times New Roman',serif" font-size="118" fill="#FAF8F3">06</text><text x="64" y="214" font-family="Georgia,'Times New Roman',serif" font-size="34" font-style="italic" fill="#E8A13D">quiet signs your kidneys are asking</text><line x1="64" y1="186" x2="320" y2="186" stroke="#E8A13D" stroke-width="1.5" opacity="0.9"/><path d="M700 84 c12 18 20 29 20 41 a20 20 0 0 1 -40 0 c0 -12 8 -23 20 -41z" fill="#E8A13D"/>
+<rect width="800" height="260" filter="url(#n)"/>
 </svg>
