@@ -376,6 +376,34 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 @media(max-width:960px){.campus .duo{grid-template-columns:1fr}.campus figure{min-height:220px}}
 
 
+
+/* one-stop excellence redesign */
+.onestop{display:grid;grid-template-columns:1.05fr 1.6fr;gap:22px;align-items:stretch}
+.os-state{background:linear-gradient(155deg,var(--pea),var(--pea-deep));border-radius:var(--r);padding:38px 34px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.os-state .tamil-mark{position:absolute;right:-14px;top:-20px;font-family:'Noto Sans Tamil',sans-serif;font-size:150px;font-weight:600;color:rgba(255,255,255,.06);line-height:1;pointer-events:none}
+.os-state h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(26px,2.6vw,34px);line-height:1.2;margin-bottom:14px}
+.os-state h3 em{font-style:italic;color:var(--mari)}
+.os-state p{color:#BFDAD3;font-size:14.5px;line-height:1.65}
+.os-nums{display:flex;gap:26px;margin:26px 0}
+.os-nums div b{display:block;font-family:'Instrument Serif',serif;font-size:38px;line-height:1;color:#fff}
+.os-nums div b em{font-style:italic;color:var(--mari)}
+.os-nums div span{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9FC3BB}
+.os-state .btn{align-self:flex-start;background:var(--mari);color:#3A2A0E}
+.os-state .btn:hover{background:var(--mari-deep)}
+.os-clusters{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.osc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;transition:.18s;display:flex;gap:14px;align-items:flex-start}
+.osc:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.osc .oi{flex-shrink:0;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:#fff}
+.osc h4{font-size:14.5px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}
+.osc p{font-size:12.5px;color:var(--muted);line-height:1.55}
+.osc.c-mari .oi{background:var(--mari);color:#3A2A0E}.osc.c-mari:hover{border-color:var(--mari)}
+.osc.c-rose .oi{background:var(--rose)}.osc.c-rose:hover{border-color:var(--rose)}
+.osc.c-plum .oi{background:var(--plum)}.osc.c-plum:hover{border-color:var(--plum)}
+.osc.c-sky .oi{background:var(--sky)}.osc.c-sky:hover{border-color:var(--sky)}
+.osc.c-pea .oi{background:var(--pea)}.osc.c-pea:hover{border-color:var(--pea)}
+.osc.c-peacock .oi{background:var(--peacock)}.osc.c-peacock:hover{border-color:var(--peacock)}
+@media(max-width:960px){.onestop{grid-template-columns:1fr}.os-clusters{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.os-clusters{grid-template-columns:1fr}.os-nums{gap:18px}}
 </style>
 </head>
 <body>
@@ -490,24 +518,33 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
   <div class="wrap">
     <div class="shead">
       <div>
-        <span class="chip"><span class="dot"></span>Centres of Excellence</span>
-        <h2>Where our expertise <em>runs deepest.</em></h2>
+        <span class="chip"><span class="dot"></span>One-Stop Medical Centre &middot; <span class="tamil">எல்லாம் ஒரே கூரையின் கீழ்</span></span>
+        <h2>Whatever it is, <em>it&rsquo;s treated here.</em></h2>
       </div>
     </div>
-    <div class="bento">
-      <div class="bcard g">
-        <svg class="deco" width="260" height="260" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1"><path d="M4 20l9-9M13 11l6.5-6.5a2.1 2.1 0 0 1 3 3L16 14l-5 1z"/></svg>
-        <span class="tag">Advanced Surgery</span>
-        <h3>Surgical Gastroenterology</h3>
-        <p>Advanced laparoscopic, HPB and colorectal surgery performed in a laminar-flow ultra-modern theatre complex — the kind of surgical infrastructure patients once travelled to metro cities for.</p>
-        <span class="lead">Led by Dr. A. P. Shankar Narayanan — M.S, M.Ch (SGE), FMAS</span>
+    <div class="onestop">
+      <div class="os-state">
+        <span class="tamil-mark">அ</span>
+        <div>
+          <h3>Every age. Every organ. <em>One address.</em></h3>
+          <p>From a newborn&rsquo;s first checkup to advanced surgery and senior care &mdash; you don&rsquo;t need to travel to metro cities, and you don&rsquo;t need three different hospitals. Anchored by advanced surgical gastroenterology and complete mother-&amp;-child care.</p>
+        </div>
+        <div class="os-nums">
+          <div><b>42</b><span>Doctors</span></div>
+          <div><b>31</b><span>Departments</span></div>
+          <div><b><em>1</em></b><span>Address</span></div>
+        </div>
+        <a class="btn" href="doctors.html">Find your doctor</a>
       </div>
-      <div class="bcard m">
-        <svg class="deco" width="240" height="240" viewBox="0 0 24 24" fill="none" stroke="#3A2A0E" stroke-width="1"><circle cx="12" cy="8" r="4.5"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
-        <span class="tag">Mothers &amp; Children</span>
-        <h3>Fertility, Maternity &amp; Newborn</h3>
-        <p>From fertility treatment to safe delivery and NICU support — complete care for the newest members of your family.</p>
-        <span class="lead">Led by Dr. G. Kirana Selvi — M.S (OG), DRM (Germany)</span>
+      <div class="os-clusters">
+        <div class="osc c-mari"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span><span><h4>Mother &amp; Child</h4><p>Obstetrics &amp; fertility &middot; Fetal medicine &middot; Neonatology &middot; Paediatrics &amp; paediatric surgery</p></span></div>
+        <div class="osc c-rose"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.3-9A5.2 5.2 0 0 1 12 6.5 5.2 5.2 0 0 1 21.3 11c-1.8 4.4-9.3 9-9.3 9z"/></svg></span><span><h4>Heart, Lungs &amp; Vessels</h4><p>Cardiology &middot; Pulmonology &middot; Vascular surgery</p></span></div>
+        <div class="osc c-pea"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20l9-9M13 11l6.5-6.5a2.1 2.1 0 0 1 3 3L16 14l-5 1z"/></svg></span><span><h4>Digestion &amp; Surgery</h4><p>Surgical gastroenterology &middot; General &amp; plastic surgery &middot; Surgical oncology &middot; Oral &amp; maxillofacial</p></span></div>
+        <div class="osc c-plum"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3a5.5 5.5 0 0 1 5.5 5.5c0 2-1 3.2-1 5V17a4.5 4.5 0 0 1-9 0v-3.5c0-1.8-1-3-1-5A5.5 5.5 0 0 1 12 3z"/></svg></span><span><h4>Brain, Mind &amp; Nerves</h4><p>Neurosurgery &amp; stroke response &middot; Psychiatry &middot; Clinical psychology</p></span></div>
+        <div class="osc c-sky"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M17 7l-10 10M15 4a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1 0 5M4 15a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 5 0"/></svg></span><span><h4>Bones &amp; Movement</h4><p>Orthopedic surgery &middot; Arthroscopy &amp; sports medicine &middot; Physiotherapy</p></span></div>
+        <div class="osc c-peacock"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3c3 3.5 5 6.2 5 9a5 5 0 0 1-10 0c0-2.8 2-5.5 5-9z"/></svg></span><span><h4>Kidney &amp; Men&rsquo;s Health</h4><p>Nephrology &amp; dialysis &middot; Urology &amp; andrology</p></span></div>
+        <div class="osc c-mari"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span><span><h4>Skin, ENT &amp; Hormones</h4><p>Dermatology &middot; ENT surgery &middot; Endocrinology &amp; diabetology</p></span></div>
+        <div class="osc c-rose"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 4 12 2.5-6h5"/></svg></span><span><h4>Everyday &amp; Emergency</h4><p>General medicine &middot; 24&times;7 emergency &amp; critical care &middot; Geriatrics &middot; Diagnostics &amp; imaging</p></span></div>
       </div>
     </div>
   </div>
