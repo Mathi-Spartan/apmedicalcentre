@@ -321,27 +321,28 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
         <h2>Patient details</h2>
         <div class="sub">Fields marked * are required. Your information stays private with the hospital.</div>
         <div class="frow">
-          <div class="field"><label>Full name *</label><input type="text" placeholder="e.g., R. Lakshmi"></div>
-          <div class="field"><label>Mobile number *</label><input type="tel" placeholder="+91 …"></div>
+          <div class="field"><label>Full name *</label><input type="text" id="f-name" placeholder="e.g., R. Lakshmi" required></div>
+          <div class="field"><label>Mobile number *</label><input type="tel" id="f-mobile" placeholder="+91 …" required></div>
         </div>
         <div class="frow">
           <div class="field"><label>Specialty *</label>
-            <select><option>Choose specialty</option><option>Surgical Gastroenterology</option><option>Obstetrics &amp; Fertility</option><option>Cardiology</option><option>Orthopedics</option><option>Paediatrics</option><option>Nephrology</option><option>Neurosurgery</option></select>
+            <select id="f-spec" required><option value="">Choose specialty</option><option>Anaesthesiology</option><option>Arthroscopy &amp; Sports Medicine</option><option>Cardiology</option><option>Clinical Psychology</option><option>Dermatology</option><option>Diabetology &amp; Geriatrics</option><option>ENT Surgery</option><option>Emergency &amp; Critical Care</option><option>Endocrinology</option><option>Fetal Medicine</option><option>General Medicine</option><option>General Surgery</option><option>Neonatology</option><option>Nephrology</option><option>Neurosurgery</option><option>Obstetrics &amp; Fertility</option><option>Obstetrics &amp; Gynecology</option><option>Oral &amp; Maxillofacial Surgery</option><option>Orthopedic Surgery</option><option>Paediatric Surgery</option><option>Paediatrics</option><option>Palliative &amp; Critical Care</option><option>Plastic Surgery</option><option>Psychiatry</option><option>Pulmonology</option><option>Radiodiagnosis</option><option>Radiodiagnosis &amp; Fetal Medicine</option><option>Surgical Gastroenterology</option><option>Surgical Oncology</option><option>Urology &amp; Andrology</option><option>Vascular Surgery</option></select>
           </div>
           <div class="field"><label>Doctor</label>
-            <select><option>Any available doctor</option><option>Dr. A. P. Shankar Narayanan</option><option>Dr. G. Kirana Selvi</option><option>Dr. Suresh Perumal</option><option>Dr. K. Dinesh</option></select>
+            <select id="f-doc"><option value="Any available doctor" data-spec="*">Any available doctor</option><option data-spec="Surgical Gastroenterology">Dr. A. P. Shankar Narayanan</option><option data-spec="Obstetrics &amp; Fertility">Dr. G. Kirana Selvi</option><option data-spec="Arthroscopy &amp; Sports Medicine">Dr. Suresh Perumal</option><option data-spec="Paediatrics">Dr. K. Dinesh</option><option data-spec="Anaesthesiology">Dr. P. Justin</option><option data-spec="Anaesthesiology">Dr. G. P. Kirubakaran</option><option data-spec="Cardiology">Dr. K. Krishna Moorthy</option><option data-spec="Cardiology">Dr. K. S. Suseenth Kanna</option><option data-spec="Diabetology &amp; Geriatrics">Dr. S. Prabhagaran</option><option data-spec="Emergency &amp; Critical Care">Dr. N. Tharaneeswaran</option><option data-spec="Endocrinology">Dr. A. Prem Kumar</option><option data-spec="ENT Surgery">Dr. S. Anjankumar</option><option data-spec="Dermatology">Dr. K. S. Sri Rathna Maheswari</option><option data-spec="General Medicine">Dr. V. Sathiskumar</option><option data-spec="General Surgery">Dr. Rajan David</option><option data-spec="Fetal Medicine">Dr. Deepa Justine</option><option data-spec="Neonatology">Dr. S. Balaji</option><option data-spec="Neurosurgery">Dr. S. P. Goutham</option><option data-spec="Nephrology">Dr. Archana Chiniwalar</option><option data-spec="Nephrology">Dr. Kavya</option><option data-spec="Obstetrics &amp; Gynecology">Dr. Vidhya Prabakar</option><option data-spec="Obstetrics &amp; Gynecology">Dr. Arunita Nandy Goutham</option><option data-spec="Obstetrics &amp; Gynecology">Dr. P. Sathya Sudhakar</option><option data-spec="Obstetrics &amp; Gynecology">Dr. G. Divya</option><option data-spec="Obstetrics &amp; Gynecology">Dr. M. Madhumitha Arunkarthick</option><option data-spec="Orthopedic Surgery">Dr. P. Narendran</option><option data-spec="Orthopedic Surgery">Dr. Prabhu Thangam</option><option data-spec="Surgical Oncology">Dr. G. M. Jagadeesan</option><option data-spec="Oral &amp; Maxillofacial Surgery">Dr. B. S. Saravanan</option><option data-spec="Palliative &amp; Critical Care">Dr. N. Vishwanthan</option><option data-spec="Paediatric Surgery">Dr. Ravichandran</option><option data-spec="Paediatric Surgery">Dr. N. Saravanan</option><option data-spec="Plastic Surgery">Dr. S. Vijay Kannan</option><option data-spec="Psychiatry">Dr. R. Karthikeyan</option><option data-spec="Clinical Psychology">Dr. Babu Rangarajan</option><option data-spec="Pulmonology">Dr. G. Vedhamoorthy</option><option data-spec="Pulmonology">Dr. S. Samundram</option><option data-spec="Radiodiagnosis">Dr. Sathiya Narayanan</option><option data-spec="Radiodiagnosis &amp; Fetal Medicine">Dr. S. Sivaranjanie</option><option data-spec="Urology &amp; Andrology">Dr. S. Gowthaman</option><option data-spec="Urology &amp; Andrology">Dr. P. Arun Karthick</option><option data-spec="Vascular Surgery">Dr. M. Balaji</option></select>
           </div>
         </div>
         <div class="frow">
-          <div class="field"><label>Preferred date *</label><input type="date"></div>
+          <div class="field"><label>Preferred date *</label><input type="date" id="f-date" required></div>
           <div class="field"><label>Preferred time *</label>
             <div class="slots"><span class="slot">9–11 AM</span><span class="slot on">11–1 PM</span><span class="slot">4–6 PM</span><span class="slot">6–8 PM</span></div>
           </div>
         </div>
         <div class="frow one">
-          <div class="field"><label>Reason for visit (optional)</label><textarea rows="3" placeholder="Briefly tell us what you'd like to consult about"></textarea></div>
+          <div class="field"><label>Reason for visit (optional)</label><textarea id="f-reason" rows="3" placeholder="Briefly tell us what you'd like to consult about"></textarea></div>
         </div>
-        <button class="btn btn-p" type="button" style="width:100%;padding:17px">Request appointment</button>
+        <div id="f-msg" style="display:none;margin-bottom:14px;padding:14px 18px;border-radius:14px;font-size:14.5px;font-weight:600"></div>
+        <button class="btn btn-p" type="button" id="f-submit" style="width:100%;padding:17px">Request appointment</button>
         <p style="font-size:13px;color:var(--muted);margin-top:16px;text-align:center">Prefer to talk? Call or WhatsApp <b>+91 99405 91616</b> — we'll book it for you.</p>
       </div>
       <div class="aside">
@@ -383,5 +384,79 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
     <div class="base"><span>© A P Medical Center 2026 · All rights reserved</span><span>Facebook · Instagram · YouTube</span></div>
   </div>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var sb = supabase.createClient('https://rjceujscaepqyxdlmqyp.supabase.co','sb_publishable_OmWwOc2efyaKNiWjwVPO-A_bZRfLT0i');
+  var $ = function(id){ return document.getElementById(id); };
+
+  // time-slot picking
+  var slots = document.querySelectorAll('.slot');
+  slots.forEach(function(s){
+    s.style.cursor = 'pointer';
+    s.addEventListener('click', function(){
+      slots.forEach(function(x){ x.classList.remove('on'); });
+      s.classList.add('on');
+    });
+  });
+
+  // filter doctors by specialty
+  var specSel = $('f-spec'), docSel = $('f-doc');
+  var allDocs = Array.prototype.slice.call(docSel.options);
+  specSel.addEventListener('change', function(){
+    var v = specSel.value;
+    docSel.innerHTML = '';
+    allDocs.forEach(function(o){
+      if (o.dataset.spec === '*' || !v || o.dataset.spec === v) docSel.appendChild(o);
+    });
+    docSel.value = 'Any available doctor';
+  });
+
+  function msg(text, ok){
+    var m = $('f-msg');
+    m.style.display = 'block';
+    m.style.background = ok ? 'var(--pea-soft)' : 'var(--rose-soft)';
+    m.style.color = ok ? 'var(--pea-deep)' : 'var(--rose)';
+    m.textContent = text;
+    m.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+
+  $('f-submit').addEventListener('click', function(){
+    var name = $('f-name').value.trim(),
+        mobile = $('f-mobile').value.trim(),
+        spec = specSel.value,
+        date = $('f-date').value;
+    if (name.length < 2)  return msg('Please enter the patient\u2019s full name.', false);
+    if (!/^[+\d][\d\s-]{7,18}$/.test(mobile)) return msg('Please enter a valid mobile number.', false);
+    if (!spec) return msg('Please choose a specialty.', false);
+    if (!date) return msg('Please pick a preferred date.', false);
+    if (new Date(date) < new Date(new Date().toDateString())) return msg('Preferred date can\u2019t be in the past.', false);
+    var slotEl = document.querySelector('.slot.on');
+
+    var btn = $('f-submit');
+    btn.disabled = true; btn.textContent = 'Sending\u2026';
+    sb.from('appointments').insert({
+      full_name: name,
+      mobile: mobile,
+      specialty: spec,
+      doctor: docSel.value,
+      preferred_date: date,
+      preferred_time: slotEl ? slotEl.textContent.trim() : null,
+      reason: $('f-reason').value.trim() || null
+    }).then(function(res){
+      btn.disabled = false; btn.textContent = 'Request appointment';
+      if (res.error) {
+        msg('Something went wrong sending your request. Please try again, or call +91 99405 91616.', false);
+      } else {
+        msg('Request received! Our desk will confirm your slot by SMS or WhatsApp shortly.', true);
+        $('f-name').value = ''; $('f-mobile').value = ''; $('f-date').value = ''; $('f-reason').value = '';
+        specSel.value = ''; specSel.dispatchEvent(new Event('change'));
+        slots.forEach(function(x){ x.classList.remove('on'); });
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
