@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book an Appointment · A P Medical Center, Salem</title>
+<title>Facilities · Our Doctors · A P Medical Center, Salem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -279,6 +279,28 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
+
+
+/* department filter rail */
+.filterbar{position:relative;margin-bottom:40px}
+.filters{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;padding:6px 2px;scroll-behavior:smooth}
+.filters::-webkit-scrollbar{display:none}
+.filterbar::before,.filterbar::after{content:"";position:absolute;top:0;bottom:0;width:48px;pointer-events:none;z-index:2}
+.filterbar::before{left:0;background:linear-gradient(90deg,var(--paper),transparent)}
+.filterbar::after{right:0;background:linear-gradient(270deg,var(--paper),transparent)}
+.pill{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-family:'Figtree';font-size:12.5px;font-weight:700;color:var(--ink);cursor:pointer;transition:.18s;white-space:nowrap}
+.pill i{font-style:normal;font-size:10.5px;font-weight:800;color:var(--pea);background:var(--pea-soft);border-radius:999px;padding:1px 6px;transition:.18s}
+.pill:hover{border-color:var(--pea);box-shadow:var(--shadow)}
+.pill.on{background:var(--pea);border-color:var(--pea);color:#fff}
+.pill.on i{background:rgba(255,255,255,.18);color:var(--mari)}
+.frail-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--pea);display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow);transition:.18s}
+.frail-btn:hover{background:var(--pea);color:#fff}
+.frail-btn.prev{left:-10px}.frail-btn.next{right:-10px}
+#dept-tip{position:fixed;z-index:60;background:var(--ink);color:var(--paper);font-family:'Figtree';font-size:12.5px;font-weight:500;line-height:1.5;padding:9px 13px;border-radius:11px;max-width:250px;text-align:center;pointer-events:none;opacity:0;transform:translateY(4px);transition:.15s;box-shadow:0 10px 28px -8px rgba(23,33,29,.35)}
+#dept-tip.show{opacity:1;transform:translateY(0)}
+.doc.hidden{display:none}
+@media(max-width:700px){.frail-btn{display:none}.filterbar::before,.filterbar::after{width:24px}}
+
 /* mobile navigation */
 .hamburger{display:none;width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;place-items:center;margin-left:auto;margin-right:12px}
 .mobnav{display:none;background:var(--card);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
@@ -294,6 +316,31 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 @media(max-width:600px){
   .topbar .wrap span:last-child{display:none}
 }
+
+/* facilities photo mosaic */
+.facgal{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}
+.facgal figure{position:relative;margin:0;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);min-height:230px}
+.facgal figure.w2{grid-column:span 2}
+.facgal figure img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.facgal figure:hover img{transform:scale(1.04)}
+.facgal figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 20px 16px;background:linear-gradient(180deg,transparent,rgba(9,59,51,.85));color:#fff;font-size:13.5px;font-weight:700}
+.facgal figcaption small{display:block;font-weight:400;font-size:12px;color:#CDE2DC;margin-top:2px}
+.facgal .fbadge{position:absolute;top:14px;left:14px;background:var(--mari);color:#3A2A0E;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:6px 12px}
+.facgal-head{display:flex;align-items:center;gap:12px;margin-top:52px;margin-bottom:-30px}
+.facgal-head .ln{flex:1;height:1px;background:var(--line)}
+.facgal-head span{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.facgal-head span .tamil{text-transform:none;letter-spacing:0;font-weight:600;color:var(--pea)}
+@media(max-width:960px){.facgal{grid-template-columns:1fr 1fr}.facgal figure.w2{grid-column:span 2}}
+@media(max-width:600px){.facgal{grid-template-columns:1fr}.facgal figure.w2{grid-column:span 1}.facgal figure{min-height:200px}}
+.fac-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.fac{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px;display:flex;gap:16px;align-items:flex-start;transition:.2s}
+.fac:hover{border-color:var(--mari);box-shadow:var(--shadow)}
+.fac .ic{width:44px;height:44px;border-radius:13px;background:var(--mari-soft);color:var(--mari-deep);display:grid;place-items:center;flex-shrink:0}
+.fac h3{font-family:'Figtree';font-weight:800;font-size:16px;margin-bottom:4px}
+.fac p{font-size:13.5px;color:var(--muted)}
+
+@media(max-width:960px){.fac-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.fac-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -314,77 +361,69 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
       <a href="index.html">Home</a>
       <a href="index.html#specialties">Specialties</a>
       <a href="doctors.html">Doctors</a>
-      <a href="facilities.html">Facilities</a>
+      <a href="facilities.html" class="on">Facilities</a>
       <a href="index.html#visit">Visit</a>
     </nav>
     <button class="hamburger" aria-label="Menu" aria-expanded="false"><svg class="ico" viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><a class="btn btn-m" href="appointment.html">Book Appointment</a>
   </div>
 </header>
-<div class="mobnav"><a href="index.html">Home<span class="tamil">முகப்பு</span></a><a href="index.html#specialties">Specialties<span class="tamil">சிறப்பு பிரிவுகள்</span></a><a href="doctors.html">Doctors<span class="tamil">மருத்துவர்கள்</span></a><a href="facilities.html">Facilities<span class="tamil">வசதிகள்</span></a><a href="index.html#visit">Visit<span class="tamil">வழி</span></a><a class="cta" href="appointment.html">Book Appointment</a></div>
+<div class="mobnav"><a href="index.html">Home<span class="tamil">முகப்பு</span></a><a href="index.html#specialties">Specialties<span class="tamil">சிறப்பு பிரிவுகள்</span></a><a href="doctors.html" class="on">Doctors<span class="tamil">மருத்துவர்கள்</span></a><a href="facilities.html" class="on">Facilities<span class="tamil">வசதிகள்</span></a><a href="index.html#visit">Visit<span class="tamil">வழி</span></a><a class="cta" href="appointment.html">Book Appointment</a></div>
 
 <div class="phero">
   <div class="glow"></div>
   <div class="wrap">
-    <div class="tamil">முன்பதிவு</div>
-    <h1>Book an <em>appointment</em></h1>
-    <p>Choose your doctor and a convenient time — we'll confirm by SMS and WhatsApp within minutes.</p>
+    <div class="tamil">நவீன வசதிகள்</div>
+    <h1>Built for <em>serious</em> medicine</h1>
+    <p>Laminar-flow theatres, ICU &amp; NICU, round-the-clock diagnostics and pharmacy — infrastructure that means you no longer have to travel to metro cities for advanced care.</p>
   </div>
 </div>
 
-<section class="book" style="padding-top:60px">
+<section style="padding-top:60px">
   <div class="wrap">
-    <div class="grid">
-      <div class="form">
-        <h2>Patient details</h2>
-        <div class="sub">Fields marked * are required. Your information stays private with the hospital.</div>
-        <div class="frow">
-          <div class="field"><label>Full name *</label><input type="text" id="f-name" placeholder="e.g., R. Lakshmi" required></div>
-          <div class="field"><label>Mobile number *</label><input type="tel" id="f-mobile" placeholder="+91 …" required></div>
-        </div>
-        <div class="frow">
-          <div class="field"><label>Specialty *</label>
-            <select id="f-spec" required><option value="">Choose specialty</option><option>Anaesthesiology</option><option>Arthroscopy &amp; Sports Medicine</option><option>Cardiology</option><option>Clinical Psychology</option><option>Dermatology</option><option>Diabetology &amp; Geriatrics</option><option>ENT Surgery</option><option>Emergency &amp; Critical Care</option><option>Endocrinology</option><option>Fetal Medicine</option><option>General Medicine</option><option>General Surgery</option><option>Neonatology</option><option>Nephrology</option><option>Neurosurgery</option><option>Obstetrics &amp; Fertility</option><option>Obstetrics &amp; Gynecology</option><option>Oral &amp; Maxillofacial Surgery</option><option>Orthopedic Surgery</option><option>Paediatric Surgery</option><option>Paediatrics</option><option>Palliative &amp; Critical Care</option><option>Plastic Surgery</option><option>Psychiatry</option><option>Pulmonology</option><option>Radiodiagnosis</option><option>Radiodiagnosis &amp; Fetal Medicine</option><option>Surgical Gastroenterology</option><option>Surgical Oncology</option><option>Urology &amp; Andrology</option><option>Vascular Surgery</option></select>
-          </div>
-          <div class="field"><label>Doctor</label>
-            <select id="f-doc"><option value="Any available doctor" data-spec="*">Any available doctor</option><option data-spec="Surgical Gastroenterology">Dr. A. P. Shankar Narayanan</option><option data-spec="Obstetrics &amp; Fertility">Dr. G. Kirana Selvi</option><option data-spec="Arthroscopy &amp; Sports Medicine">Dr. Suresh Perumal</option><option data-spec="Paediatrics">Dr. K. Dinesh</option><option data-spec="Anaesthesiology">Dr. P. Justin</option><option data-spec="Anaesthesiology">Dr. G. P. Kirubakaran</option><option data-spec="Cardiology">Dr. K. Krishna Moorthy</option><option data-spec="Cardiology">Dr. K. S. Suseenth Kanna</option><option data-spec="Diabetology &amp; Geriatrics">Dr. S. Prabhagaran</option><option data-spec="Emergency &amp; Critical Care">Dr. N. Tharaneeswaran</option><option data-spec="Endocrinology">Dr. A. Prem Kumar</option><option data-spec="ENT Surgery">Dr. S. Anjankumar</option><option data-spec="Dermatology">Dr. K. S. Sri Rathna Maheswari</option><option data-spec="General Medicine">Dr. V. Sathiskumar</option><option data-spec="General Surgery">Dr. Rajan David</option><option data-spec="Fetal Medicine">Dr. Deepa Justine</option><option data-spec="Neonatology">Dr. S. Balaji</option><option data-spec="Neurosurgery">Dr. S. P. Goutham</option><option data-spec="Nephrology">Dr. Archana Chiniwalar</option><option data-spec="Nephrology">Dr. Kavya</option><option data-spec="Obstetrics &amp; Gynecology">Dr. Vidhya Prabakar</option><option data-spec="Obstetrics &amp; Gynecology">Dr. Arunita Nandy Goutham</option><option data-spec="Obstetrics &amp; Gynecology">Dr. P. Sathya Sudhakar</option><option data-spec="Obstetrics &amp; Gynecology">Dr. G. Divya</option><option data-spec="Obstetrics &amp; Gynecology">Dr. M. Madhumitha Arunkarthick</option><option data-spec="Orthopedic Surgery">Dr. P. Narendran</option><option data-spec="Orthopedic Surgery">Dr. Prabhu Thangam</option><option data-spec="Surgical Oncology">Dr. G. M. Jagadeesan</option><option data-spec="Oral &amp; Maxillofacial Surgery">Dr. B. S. Saravanan</option><option data-spec="Palliative &amp; Critical Care">Dr. N. Vishwanthan</option><option data-spec="Paediatric Surgery">Dr. Ravichandran</option><option data-spec="Paediatric Surgery">Dr. N. Saravanan</option><option data-spec="Plastic Surgery">Dr. S. Vijay Kannan</option><option data-spec="Psychiatry">Dr. R. Karthikeyan</option><option data-spec="Clinical Psychology">Dr. Babu Rangarajan</option><option data-spec="Pulmonology">Dr. G. Vedhamoorthy</option><option data-spec="Pulmonology">Dr. S. Samundram</option><option data-spec="Radiodiagnosis">Dr. Sathiya Narayanan</option><option data-spec="Radiodiagnosis &amp; Fetal Medicine">Dr. S. Sivaranjanie</option><option data-spec="Urology &amp; Andrology">Dr. S. Gowthaman</option><option data-spec="Urology &amp; Andrology">Dr. P. Arun Karthick</option><option data-spec="Vascular Surgery">Dr. M. Balaji</option></select>
-          </div>
-        </div>
-        <div class="frow">
-          <div class="field"><label>Preferred date *</label><input type="date" id="f-date" required></div>
-          <div class="field"><label>Preferred time *</label>
-            <div class="slots"><span class="slot">9–11 AM</span><span class="slot on">11–1 PM</span><span class="slot">4–6 PM</span><span class="slot">6–8 PM</span></div>
-          </div>
-        </div>
-        <div class="frow one">
-          <div class="field"><label>Reason for visit (optional)</label><textarea id="f-reason" rows="3" placeholder="Briefly tell us what you'd like to consult about"></textarea></div>
-        </div>
-        <div id="f-msg" style="display:none;margin-bottom:14px;padding:14px 18px;border-radius:14px;font-size:14.5px;font-weight:600"></div>
-        <button class="btn btn-p" type="button" id="f-submit" style="width:100%;padding:17px">Request appointment</button>
-        <p style="font-size:13px;color:var(--muted);margin-top:16px;text-align:center">Prefer to talk? Call or WhatsApp <b>+91 99405 91616</b> — we'll book it for you.</p>
-      </div>
-      <div class="aside">
-        <div class="card emg">
-          <h3>Medical emergency?</h3>
-          <p>Don't wait for an appointment. Our emergency unit is open 24×7.</p>
-          <div class="big">0427-277 9999</div>
-        </div>
-        <div class="card">
-          <h3>How it works</h3>
-          <ul class="steps">
-            <li>Send your request with a preferred date and time.</li>
-            <li>Our desk confirms your slot by SMS / WhatsApp.</li>
-            <li>Walk in, skip the queue, meet your doctor.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>OP timings</h3>
-          <p>Monday – Saturday<br>9:00 AM – 8:00 PM<br><br>Emergency &amp; pharmacy: always open.</p>
-        </div>
-      </div>
+<div class="facgal-head"><span>See it for yourself &middot; <span class="tamil">நேரில் பாருங்கள்</span></span><i class="ln"></i></div>
+    <div class="facgal">
+      <figure class="w2">
+        <span class="fbadge">Laminar-Flow Theatre</span>
+        <img src="images/facility-laminar-theatre.jpg" alt="Laminar-flow operation theatre at A P Medical Center" loading="lazy">
+        <figcaption>Ultra-modern operation theatre<small>Laminar airflow keeps the surgical field sterile &mdash; infrastructure once found only in metro cities</small></figcaption>
+      </figure>
+      <figure>
+        <img src="images/facility-ot-equipment.jpg" alt="Anaesthesia workstation inside the theatre complex" loading="lazy">
+        <figcaption>Theatre complex<small>Advanced anaesthesia workstations</small></figcaption>
+      </figure>
+      <figure>
+        <img src="images/facility-icu.jpg" alt="Intensive care unit with monitored beds and nursing staff" loading="lazy">
+        <figcaption>Intensive Care Unit<small>Monitored beds, nursing round the clock</small></figcaption>
+      </figure>
+      <figure class="w2">
+        <img src="images/facility-ward.jpg" alt="Bright in-patient recovery ward at A P Medical Center" loading="lazy">
+        <figcaption>In-patient wards<small>Bright, calm spaces for recovery</small></figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
+<section style="padding-top:24px">
+  <div class="wrap">
+    <div class="shead">
+      <div>
+        <span class="chip"><span class="dot"></span>Everything on campus &middot; <span class="tamil">அனைத்தும் ஒரே இடத்தில்</span></span>
+        <h2>One campus, <em>every essential.</em></h2>
+      </div>
+    </div>
+    <div class="fac-grid">
+      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20l9-9M13 11l6.5-6.5a2.1 2.1 0 0 1 3 3L16 14l-5 1z"/></svg></span><span><h3>Ultra-Modern Theatre Complex</h3><p>Laminar-flow theatres for advanced laparoscopic &amp; open surgery</p></span></div>
+      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="12" r="3.5"/></svg></span><span><h3>Endoscopy Unit</h3><p>Diagnostic &amp; therapeutic endoscopy, same-day reporting</p></span></div>
+      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 4 12 2.5-6h5"/></svg></span><span><h3>ICU &amp; NICU</h3><p>Round-the-clock intensive care for adults and newborns</p></span></div>
+      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M9 3v6L4 18a2.4 2.4 0 0 0 2 3.5h12A2.4 2.4 0 0 0 20 18L15 9V3"/><path d="M7 3h10M8 14h8"/></svg></span><span><h3>Laboratory &amp; Diagnostics</h3><p>Clinical lab, radiodiagnosis &amp; fetal ultrasound</p></span></div>
+      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="7" rx="3.5" transform="rotate(-35 12 12.5)"/><path d="M9 8.5l5 7"/></svg></span><span><h3>24×7 Pharmacy</h3><p>In-house pharmacy, stocked and open at all hours</p></span></div>
+      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="16" cy="5" r="2.2"/><path d="M14 9l-4 3 2 4-4 5M10 12l-5-1M12 16l5 1 2 4"/></svg></span><span><h3>Physiotherapy</h3><p>Rehab from post-surgical recovery to sports injury</p></span></div>
+    </div>
+    <div style="margin-top:52px;text-align:center">
+      <a class="btn btn-p" href="appointment.html" style="padding:16px 34px">Book an appointment</a>
+    </div>
+  </div>
+</section>
 
 <footer>
   <div class="wrap">
@@ -395,96 +434,14 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
         <p class="tamil">உங்கள் நலமே எங்கள் நோக்கம்</p>
       </div>
       <div><h4>Care</h4><ul><li><a href="index.html#specialties">Specialties</a></li><li><a href="doctors.html">Our Doctors</a></li><li><a href="appointment.html">Book Appointment</a></li><li><a href="tel:04272779999">Emergency</a></li></ul></div>
-      <div><h4>Hospital</h4><ul><li><a href="index.html#excellence">Centres of Excellence</a></li><li><a href="facilities.html">Facilities</a></li><li><a href="index.html#stories">Patient Stories</a></li><li><a href="index.html#visit">Directions</a></li></ul></div>
+      <div><h4>Hospital</h4><ul><li><a href="index.html#excellence">Centres of Excellence</a></li><li><a href="facilities.html" class="on">Facilities</a></li><li><a href="index.html#stories">Patient Stories</a></li><li><a href="index.html#visit">Directions</a></li></ul></div>
       <div><h4>Reach Us</h4><ul><li><a href="tel:04272779999">0427-277 9999</a></li><li><a href="tel:+919940591616">+91 99405 91616</a></li><li><a href="https://wa.me/919940591616">WhatsApp</a></li><li><a href="index.html#visit">Google Maps</a></li></ul></div>
     </div>
     <div class="base"><span>© A P Medical Center 2026 · All rights reserved</span><span>Facebook · Instagram · YouTube</span></div>
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-(function(){
-  var sb = supabase.createClient('https://rjceujscaepqyxdlmqyp.supabase.co','sb_publishable_OmWwOc2efyaKNiWjwVPO-A_bZRfLT0i');
-  var $ = function(id){ return document.getElementById(id); };
 
-  // time-slot picking
-  var slots = document.querySelectorAll('.slot');
-  slots.forEach(function(s){
-    s.style.cursor = 'pointer';
-    s.addEventListener('click', function(){
-      slots.forEach(function(x){ x.classList.remove('on'); });
-      s.classList.add('on');
-    });
-  });
-
-  // filter doctors by specialty
-  var specSel = $('f-spec'), docSel = $('f-doc');
-  var allDocs = Array.prototype.slice.call(docSel.options);
-  specSel.addEventListener('change', function(){
-    var v = specSel.value;
-    docSel.innerHTML = '';
-    allDocs.forEach(function(o){
-      if (o.dataset.spec === '*' || !v || o.dataset.spec === v) docSel.appendChild(o);
-    });
-    docSel.value = 'Any available doctor';
-  });
-
-  function msg(text, ok){
-    var m = $('f-msg');
-    m.style.display = 'block';
-    m.style.background = ok ? 'var(--pea-soft)' : 'var(--rose-soft)';
-    m.style.color = ok ? 'var(--pea-deep)' : 'var(--rose)';
-    m.textContent = text;
-    m.scrollIntoView({behavior:'smooth', block:'center'});
-  }
-
-  $('f-submit').addEventListener('click', function(){
-    var name = $('f-name').value.trim(),
-        mobile = $('f-mobile').value.trim(),
-        spec = specSel.value,
-        date = $('f-date').value;
-    if (name.length < 2)  return msg('Please enter the patient\u2019s full name.', false);
-    if (!/^[+\d][\d\s-]{7,18}$/.test(mobile)) return msg('Please enter a valid mobile number.', false);
-    if (!spec) return msg('Please choose a specialty.', false);
-    if (!date) return msg('Please pick a preferred date.', false);
-    if (new Date(date) < new Date(new Date().toDateString())) return msg('Preferred date can\u2019t be in the past.', false);
-    var slotEl = document.querySelector('.slot.on');
-
-    var btn = $('f-submit');
-    btn.disabled = true; btn.textContent = 'Sending\u2026';
-    sb.from('appointments').insert({
-      full_name: name,
-      mobile: mobile,
-      specialty: spec,
-      doctor: docSel.value,
-      preferred_date: date,
-      preferred_time: slotEl ? slotEl.textContent.trim() : null,
-      reason: $('f-reason').value.trim() || null
-    }).then(function(res){
-      btn.disabled = false; btn.textContent = 'Request appointment';
-      if (res.error) {
-        msg('Something went wrong sending your request. Please try again, or call +91 99405 91616.', false);
-      } else {
-        msg('Request received! Our desk will confirm your slot by SMS or WhatsApp shortly.', true);
-        var wa = 'https://wa.me/919940591616?text=' + encodeURIComponent(
-          'Hello A P Medical Center, I just requested an appointment.\n' +
-          'Name: ' + name + '\nSpecialty: ' + spec + '\nDoctor: ' + docSel.value +
-          '\nDate: ' + date + (slotEl ? '\nTime: ' + slotEl.textContent.trim() : ''));
-        var m = $('f-msg');
-        var a = document.createElement('a');
-        a.href = wa; a.target = '_blank'; a.rel = 'noopener';
-        a.textContent = 'Continue on WhatsApp \u2192';
-        a.style.cssText = 'display:inline-block;margin-top:10px;font-weight:800;color:var(--pea-deep);text-decoration:underline';
-        m.appendChild(document.createElement('br')); m.appendChild(a);
-        $('f-name').value = ''; $('f-mobile').value = ''; $('f-date').value = ''; $('f-reason').value = '';
-        specSel.value = ''; specSel.dispatchEvent(new Event('change'));
-        slots.forEach(function(x){ x.classList.remove('on'); });
-      }
-    });
-  });
-})();
-</script>
 
 <script>
 (function(){

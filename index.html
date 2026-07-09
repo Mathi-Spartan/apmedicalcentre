@@ -375,21 +375,7 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 .campus .badge{position:absolute;top:16px;left:16px;background:var(--mari);color:#3A2A0E;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:7px 14px;box-shadow:0 6px 18px -6px rgba(58,42,14,.5)}
 @media(max-width:960px){.campus .duo{grid-template-columns:1fr}.campus figure{min-height:220px}}
 
-/* facilities photo mosaic */
-.facgal{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}
-.facgal figure{position:relative;margin:0;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);min-height:230px}
-.facgal figure.w2{grid-column:span 2}
-.facgal figure img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
-.facgal figure:hover img{transform:scale(1.04)}
-.facgal figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 20px 16px;background:linear-gradient(180deg,transparent,rgba(9,59,51,.85));color:#fff;font-size:13.5px;font-weight:700}
-.facgal figcaption small{display:block;font-weight:400;font-size:12px;color:#CDE2DC;margin-top:2px}
-.facgal .fbadge{position:absolute;top:14px;left:14px;background:var(--mari);color:#3A2A0E;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:6px 12px}
-.facgal-head{display:flex;align-items:center;gap:12px;margin-top:52px;margin-bottom:-30px}
-.facgal-head .ln{flex:1;height:1px;background:var(--line)}
-.facgal-head span{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.facgal-head span .tamil{text-transform:none;letter-spacing:0;font-weight:600;color:var(--pea)}
-@media(max-width:960px){.facgal{grid-template-columns:1fr 1fr}.facgal figure.w2{grid-column:span 2}}
-@media(max-width:600px){.facgal{grid-template-columns:1fr}.facgal figure.w2{grid-column:span 1}.facgal figure{min-height:200px}}
+
 </style>
 </head>
 <body>
@@ -410,13 +396,13 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
       <a href="index.html" class="on">Home</a>
       <a href="index.html#specialties">Specialties</a>
       <a href="doctors.html">Doctors</a>
-      <a href="index.html#facilities">Facilities</a>
+      <a href="facilities.html">Facilities</a>
       <a href="index.html#visit">Visit</a>
     </nav>
     <button class="hamburger" aria-label="Menu" aria-expanded="false"><svg class="ico" viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><a class="btn btn-m" href="appointment.html">Book Appointment</a>
   </div>
 </header>
-<div class="mobnav"><a href="index.html" class="on">Home<span class="tamil">முகப்பு</span></a><a href="index.html#specialties">Specialties<span class="tamil">சிறப்பு பிரிவுகள்</span></a><a href="doctors.html">Doctors<span class="tamil">மருத்துவர்கள்</span></a><a href="index.html#facilities">Facilities<span class="tamil">வசதிகள்</span></a><a href="index.html#visit">Visit<span class="tamil">வழி</span></a><a class="cta" href="appointment.html">Book Appointment</a></div>
+<div class="mobnav"><a href="index.html" class="on">Home<span class="tamil">முகப்பு</span></a><a href="index.html#specialties">Specialties<span class="tamil">சிறப்பு பிரிவுகள்</span></a><a href="doctors.html">Doctors<span class="tamil">மருத்துவர்கள்</span></a><a href="facilities.html">Facilities<span class="tamil">வசதிகள்</span></a><a href="index.html#visit">Visit<span class="tamil">வழி</span></a><a class="cta" href="appointment.html">Book Appointment</a></div>
 
 <section class="hero" style="padding-bottom:120px">
   <div class="bg"><div class="blob b1"></div><div class="blob b2"></div></div>
@@ -534,6 +520,7 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
         <span class="chip"><span class="dot"></span>Facilities · <span class="tamil">நவீன வசதிகள்</span></span>
         <h2>World-class infrastructure, <em>here in Salem.</em></h2>
       </div>
+      <div class="side"><a class="btn btn-ghost" href="facilities.html">Tour our facilities <svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></a></div>
     </div>
     <div class="fac-grid">
       <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20l9-9M13 11l6.5-6.5a2.1 2.1 0 0 1 3 3L16 14l-5 1z"/></svg></span><span><h3>Ultra-Modern Theatre Complex</h3><p>Laminar-flow theatres for advanced laparoscopic &amp; open surgery</p></span></div>
@@ -543,26 +530,7 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
       <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="7" rx="3.5" transform="rotate(-35 12 12.5)"/><path d="M9 8.5l5 7"/></svg></span><span><h3>24×7 Pharmacy</h3><p>In-house pharmacy, stocked and open at all hours</p></span></div>
       <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="16" cy="5" r="2.2"/><path d="M14 9l-4 3 2 4-4 5M10 12l-5-1M12 16l5 1 2 4"/></svg></span><span><h3>Physiotherapy</h3><p>Rehab from post-surgical recovery to sports injury</p></span></div>
     </div>
-    <div class="facgal-head"><span>See it for yourself &middot; <span class="tamil">நேரில் பாருங்கள்</span></span><i class="ln"></i></div>
-    <div class="facgal">
-      <figure class="w2">
-        <span class="fbadge">Laminar-Flow Theatre</span>
-        <img src="images/facility-laminar-theatre.jpg" alt="Laminar-flow operation theatre at A P Medical Center" loading="lazy">
-        <figcaption>Ultra-modern operation theatre<small>Laminar airflow keeps the surgical field sterile &mdash; infrastructure once found only in metro cities</small></figcaption>
-      </figure>
-      <figure>
-        <img src="images/facility-ot-equipment.jpg" alt="Anaesthesia workstation inside the theatre complex" loading="lazy">
-        <figcaption>Theatre complex<small>Advanced anaesthesia workstations</small></figcaption>
-      </figure>
-      <figure>
-        <img src="images/facility-icu.jpg" alt="Intensive care unit with monitored beds and nursing staff" loading="lazy">
-        <figcaption>Intensive Care Unit<small>Monitored beds, nursing round the clock</small></figcaption>
-      </figure>
-      <figure class="w2">
-        <img src="images/facility-ward.jpg" alt="Bright in-patient recovery ward at A P Medical Center" loading="lazy">
-        <figcaption>In-patient wards<small>Bright, calm spaces for recovery</small></figcaption>
-      </figure>
-    </div>
+    
   </div>
 </section>
 
@@ -827,7 +795,7 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
         <p class="tamil">உங்கள் நலமே எங்கள் நோக்கம்</p>
       </div>
       <div><h4>Care</h4><ul><li><a href="index.html#specialties">Specialties</a></li><li><a href="doctors.html">Our Doctors</a></li><li><a href="appointment.html">Book Appointment</a></li><li><a href="tel:04272779999">Emergency</a></li></ul></div>
-      <div><h4>Hospital</h4><ul><li><a href="index.html#excellence">Centres of Excellence</a></li><li><a href="index.html#facilities">Facilities</a></li><li><a href="index.html#stories">Patient Stories</a></li><li><a href="index.html#visit">Directions</a></li></ul></div>
+      <div><h4>Hospital</h4><ul><li><a href="index.html#excellence">Centres of Excellence</a></li><li><a href="facilities.html">Facilities</a></li><li><a href="index.html#stories">Patient Stories</a></li><li><a href="index.html#visit">Directions</a></li></ul></div>
       <div><h4>Reach Us</h4><ul><li><a href="tel:04272779999">0427-277 9999</a></li><li><a href="tel:+919940591616">+91 99405 91616</a></li><li><a href="https://wa.me/919940591616">WhatsApp</a></li><li><a href="index.html#visit">Google Maps</a></li></ul></div>
     </div>
     <div class="base"><span>© A P Medical Center 2026 · All rights reserved</span><span>Facebook · Instagram · YouTube</span></div>
