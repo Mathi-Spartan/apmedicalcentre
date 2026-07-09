@@ -335,6 +335,17 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 .scard.hl.gold .ic{background:rgba(58,42,14,.14);color:#3A2A0E}
 .scard.hl.gold .go{color:rgba(58,42,14,.45)}
 .scard:hover .ic{transform:scale(1.08) rotate(-4deg)}
+
+/* board of directors */
+.board{background:var(--pea-ghost)}
+.board .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:900px;margin:0 auto}
+.board .member{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 22px 28px;text-align:center;box-shadow:var(--shadow)}
+.board .ph{width:150px;height:180px;margin:0 auto 18px;border-radius:999px 999px 16px 16px;overflow:hidden;background:var(--pea-soft);box-shadow:inset 0 0 0 1px rgba(14,83,72,.15);display:flex;align-items:center;justify-content:center}
+.board .ph img{width:100%;height:100%;object-fit:cover;object-position:top}
+.board .ph b{font-family:'Instrument Serif',serif;font-size:44px;color:var(--pea)}
+.board .member h3{font-size:18px;color:var(--ink)}
+.board .member .role{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mari-deep);margin-top:6px}
+@media(max-width:800px){.board .trio{grid-template-columns:1fr;max-width:340px}}
 </style>
 </head>
 <body>
@@ -655,6 +666,31 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
         <div class="cta-line">
           <a class="btn btn-o" href="#visit">Get directions &amp; wayfinding</a>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="board" id="board">
+  <div class="wrap">
+    <div class="shead" style="justify-content:center;text-align:center">
+      <div>
+        <span class="chip"><span class="dot"></span>Leadership &middot; <span class="tamil">நிர்வாகம்</span></span>
+        <h2>The family behind <em>the hospital.</em></h2>
+      </div>
+    </div>
+    <div class="trio">
+      <div class="member">
+        <div class="ph"><img src="images/board/perumal.jpg" alt="Mr. A. Perumal"></div>
+        <h3>Mr. A. Perumal</h3><div class="role">Managing Director</div>
+      </div>
+      <div class="member">
+        <div class="ph"><img src="images/board/kathirvel.webp" alt="Mr. A. Kathirvel"></div>
+        <h3>Mr. A. Kathirvel</h3><div class="role">Director</div>
+      </div>
+      <div class="member">
+        <div class="ph"><img src="images/board/kamaraj.jpg" alt="Mr. A. Kamaraj"></div>
+        <h3>Mr. A. Kamaraj</h3><div class="role">Director</div>
       </div>
     </div>
   </div>
