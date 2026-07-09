@@ -450,6 +450,16 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
         msg('Something went wrong sending your request. Please try again, or call +91 99405 91616.', false);
       } else {
         msg('Request received! Our desk will confirm your slot by SMS or WhatsApp shortly.', true);
+        var wa = 'https://wa.me/919940591616?text=' + encodeURIComponent(
+          'Hello A P Medical Center, I just requested an appointment.\n' +
+          'Name: ' + name + '\nSpecialty: ' + spec + '\nDoctor: ' + docSel.value +
+          '\nDate: ' + date + (slotEl ? '\nTime: ' + slotEl.textContent.trim() : ''));
+        var m = $('f-msg');
+        var a = document.createElement('a');
+        a.href = wa; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = 'Continue on WhatsApp \u2192';
+        a.style.cssText = 'display:inline-block;margin-top:10px;font-weight:800;color:var(--pea-deep);text-decoration:underline';
+        m.appendChild(document.createElement('br')); m.appendChild(a);
         $('f-name').value = ''; $('f-mobile').value = ''; $('f-date').value = ''; $('f-reason').value = '';
         specSel.value = ''; specSel.dispatchEvent(new Event('change'));
         slots.forEach(function(x){ x.classList.remove('on'); });
