@@ -344,12 +344,18 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 
 /* health tips blog */
 .bgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.bcard{display:block;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px;transition:.2s;position:relative}
+.bcard{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 28px 22px;transition:.2s;position:relative;overflow:hidden}
+.bcard::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--bc);opacity:0;transition:.2s}
 .bcard:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--bc)}
-.bcat{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--bc);background:var(--bcs);border-radius:999px;padding:6px 12px;margin-bottom:14px}
-.bcard h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:23px;line-height:1.25;margin-bottom:10px;color:var(--ink)}
-.bcard p{font-size:14px;color:var(--muted);line-height:1.6}
-.bmeta{display:inline-flex;align-items:center;gap:7px;margin-top:16px;font-size:12.5px;font-weight:800;color:var(--bc)}
+.bcard:hover::before{opacity:1}
+.bcard:hover h3{color:var(--bc)}
+.bcard:hover .bmeta svg{transform:translateX(4px)}
+.bcat{align-self:flex-start;display:inline-block;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--bc);background:var(--bcs);border-radius:999px;padding:6px 12px;margin-bottom:16px}
+.bcard h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:23px;line-height:1.25;margin-bottom:10px;color:var(--ink);transition:color .2s}
+.bcard p{font-size:14px;color:var(--muted);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.bmeta{margin-top:auto;padding-top:18px;display:flex;align-items:center;justify-content:space-between;font-size:12.5px;font-weight:800;color:var(--bc);border-top:1px solid var(--line);margin-top:22px}
+.bcard p + .bmeta{margin-top:auto;padding-top:18px}
+.bmeta svg{transition:transform .2s}
 .bpost{max-width:720px;margin:0 auto}
 .bback{display:inline-block;font-weight:800;font-size:13.5px;color:var(--pea);margin-bottom:26px}
 .bpost h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,4vw,42px);line-height:1.15;margin:14px 0 16px}
@@ -360,6 +366,7 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 .bdisc{margin-top:34px;background:var(--pea-ghost);border:1px solid var(--line);border-radius:14px;padding:18px 22px;font-size:13.5px;color:var(--muted);line-height:1.6}
 .bdisc a{font-weight:800;color:var(--pea)}
 @media(max-width:800px){.bgrid{grid-template-columns:1fr}}
+:root{--sky:#41799F;--sky-soft:#E9F1F7;--peacock:#1F6E8C;--peacock-soft:#E6F1F5;--plum:#7D5798;--plum-soft:#F1EBF6}
 </style>
 </head>
 <body>
