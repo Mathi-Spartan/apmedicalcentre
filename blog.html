@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Facilities · Our Doctors · A P Medical Center, Salem</title>
+<title>Health Tips · Our Doctors · A P Medical Center, Salem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -341,6 +341,25 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 
 @media(max-width:960px){.fac-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.fac-grid{grid-template-columns:1fr}}
+
+/* health tips blog */
+.bgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.bcard{display:block;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px;transition:.2s;position:relative}
+.bcard:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--bc)}
+.bcat{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--bc);background:var(--bcs);border-radius:999px;padding:6px 12px;margin-bottom:14px}
+.bcard h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:23px;line-height:1.25;margin-bottom:10px;color:var(--ink)}
+.bcard p{font-size:14px;color:var(--muted);line-height:1.6}
+.bmeta{display:inline-flex;align-items:center;gap:7px;margin-top:16px;font-size:12.5px;font-weight:800;color:var(--bc)}
+.bpost{max-width:720px;margin:0 auto}
+.bback{display:inline-block;font-weight:800;font-size:13.5px;color:var(--pea);margin-bottom:26px}
+.bpost h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,4vw,42px);line-height:1.15;margin:14px 0 16px}
+.bpost .blead{font-size:17.5px;color:var(--muted);line-height:1.65;margin-bottom:26px;font-style:italic}
+.bpost p{font-size:15.5px;line-height:1.75;color:var(--ink);margin-bottom:16px}
+.bpost h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:22px;margin:26px 0 8px;color:var(--pea-deep)}
+.bpost strong{color:var(--pea-deep)}
+.bdisc{margin-top:34px;background:var(--pea-ghost);border:1px solid var(--line);border-radius:14px;padding:18px 22px;font-size:13.5px;color:var(--muted);line-height:1.6}
+.bdisc a{font-weight:800;color:var(--pea)}
+@media(max-width:800px){.bgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -361,67 +380,155 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
       <a href="index.html">Home</a>
       <a href="index.html#specialties">Specialties</a>
       <a href="doctors.html">Doctors</a>
-      <a href="facilities.html" class="on">Facilities</a>
-      <a href="blog.html">Health Tips</a><a href="index.html#visit">Visit</a>
+      <a href="facilities.html">Facilities</a>
+      <a href="blog.html" class="on">Health Tips</a><a href="index.html#visit">Visit</a>
     </nav>
     <button class="hamburger" aria-label="Menu" aria-expanded="false"><svg class="ico" viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><a class="btn btn-m" href="appointment.html">Book Appointment</a>
   </div>
 </header>
-<div class="mobnav"><a href="index.html">Home<span class="tamil">முகப்பு</span></a><a href="index.html#specialties">Specialties<span class="tamil">சிறப்பு பிரிவுகள்</span></a><a href="doctors.html" class="on">Doctors<span class="tamil">மருத்துவர்கள்</span></a><a href="facilities.html" class="on">Facilities<span class="tamil">வசதிகள்</span></a><a href="blog.html">Health Tips<span class="tamil">ஆரோக்கியம்</span></a><a href="index.html#visit">Visit<span class="tamil">வழி</span></a><a class="cta" href="appointment.html">Book Appointment</a></div>
+<div class="mobnav"><a href="index.html">Home<span class="tamil">முகப்பு</span></a><a href="index.html#specialties">Specialties<span class="tamil">சிறப்பு பிரிவுகள்</span></a><a href="doctors.html" class="on">Doctors<span class="tamil">மருத்துவர்கள்</span></a><a href="facilities.html">Facilities<span class="tamil">வசதிகள்</span></a><a href="blog.html" class="on">Health Tips<span class="tamil">ஆரோக்கியம்</span></a><a href="index.html#visit">Visit<span class="tamil">வழி</span></a><a class="cta" href="appointment.html">Book Appointment</a></div>
 
 <div class="phero">
   <div class="glow"></div>
   <div class="wrap">
-    <div class="tamil">நவீன வசதிகள்</div>
-    <h1>Built for <em>serious</em> medicine</h1>
-    <p>Laminar-flow theatres, ICU &amp; NICU, round-the-clock diagnostics and pharmacy — infrastructure that means you no longer have to travel to metro cities for advanced care.</p>
+    <div class="tamil">ஆரோக்கிய குறிப்புகள்</div>
+    <h1>Health tips, <em>simply told</em></h1>
+    <p>Short, practical reads from the specialties of A P Medical Center &mdash; written for families, not for textbooks.</p>
   </div>
 </div>
 
 <section style="padding-top:60px">
   <div class="wrap">
-<div class="facgal-head"><span>See it for yourself &middot; <span class="tamil">நேரில் பாருங்கள்</span></span><i class="ln"></i></div>
-    <div class="facgal">
-      <figure class="w2">
-        <span class="fbadge">Laminar-Flow Theatre</span>
-        <img src="images/facility-laminar-theatre.jpg" alt="Laminar-flow operation theatre at A P Medical Center" loading="lazy">
-        <figcaption>Ultra-modern operation theatre<small>Laminar airflow keeps the surgical field sterile &mdash; infrastructure once found only in metro cities</small></figcaption>
-      </figure>
-      <figure>
-        <img src="images/facility-ot-equipment.jpg" alt="Anaesthesia workstation inside the theatre complex" loading="lazy">
-        <figcaption>Theatre complex<small>Advanced anaesthesia workstations</small></figcaption>
-      </figure>
-      <figure>
-        <img src="images/facility-icu.jpg" alt="Intensive care unit with monitored beds and nursing staff" loading="lazy">
-        <figcaption>Intensive Care Unit<small>Monitored beds, nursing round the clock</small></figcaption>
-      </figure>
-      <figure class="w2">
-        <img src="images/facility-ward.jpg" alt="Bright in-patient recovery ward at A P Medical Center" loading="lazy">
-        <figcaption>In-patient wards<small>Bright, calm spaces for recovery</small></figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<section style="padding-top:24px">
-  <div class="wrap">
-    <div class="shead">
-      <div>
-        <span class="chip"><span class="dot"></span>Everything on campus &middot; <span class="tamil">அனைத்தும் ஒரே இடத்தில்</span></span>
-        <h2>One campus, <em>every essential.</em></h2>
+    <div id="bloglist">
+      <div class="bgrid">
+        <a class="bcard" href="#heart-habits" style="--bc:var(--rose);--bcs:var(--rose-soft)">
+      <span class="bcat">Cardiology</span>
+      <h3>Five everyday habits that quietly protect your heart</h3>
+      <p>Heart attacks in people under 45 are rising across India. The good news: most heart risk is built — or removed — by small daily habits.</p>
+      <span class="bmeta">3 min read <svg class="ico" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="bcard" href="#child-fever" style="--bc:var(--mari-deep);--bcs:var(--mari-soft)">
+      <span class="bcat">Paediatrics</span>
+      <h3>Fever in children: when to wait, when to rush</h3>
+      <p>Every parent knows the 2 AM panic. Here is the calm version of what paediatricians actually look for.</p>
+      <span class="bmeta">4 min read <svg class="ico" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="bcard" href="#stroke-befast" style="--bc:var(--plum);--bcs:var(--plum-soft)">
+      <span class="bcat">Neurosurgery</span>
+      <h3>BE FAST: the stroke checklist every family should know</h3>
+      <p>In a stroke, the treatments that prevent permanent damage work best in the first few hours. Recognising it instantly is a life skill.</p>
+      <span class="bmeta">3 min read <svg class="ico" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="bcard" href="#kidney-signs" style="--bc:var(--peacock);--bcs:var(--peacock-soft)">
+      <span class="bcat">Nephrology & Urology</span>
+      <h3>Your kidneys don’t complain until it’s late — six quiet signs</h3>
+      <p>Kidneys lose function silently; by the time pain appears, much damage is often done. These early signals deserve a blood test.</p>
+      <span class="bmeta">3 min read <svg class="ico" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="bcard" href="#knee-pain-40s" style="--bc:var(--sky);--bcs:var(--sky-soft)">
+      <span class="bcat">Orthopedics</span>
+      <h3>Knee pain in your 40s: protect the joint before it complains louder</h3>
+      <p>The knees that carry you at 70 are decided by what you do at 40. Most early knee pain responds to habits, not surgery.</p>
+      <span class="bmeta">3 min read <svg class="ico" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="bcard" href="#pregnancy-after-30" style="--bc:var(--mari-deep);--bcs:var(--mari-soft)">
+      <span class="bcat">Obstetrics & Fertility</span>
+      <h3>Planning a pregnancy after 30: what actually matters</h3>
+      <p>More couples in Tamil Nadu are starting families in their 30s. Most have healthy pregnancies — a little planning improves the odds further.</p>
+      <span class="bmeta">4 min read <svg class="ico" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="bcard" href="#acidity-alarm" style="--bc:var(--pea);--bcs:var(--pea-soft)">
+      <span class="bcat">Surgical Gastroenterology</span>
+      <h3>Frequent acidity? When “gas trouble” is more than gas</h3>
+      <p>Antacids are India’s favourite self-medication. Occasional heartburn is harmless — but some patterns deserve a proper look.</p>
+      <span class="bmeta">3 min read <svg class="ico" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a><a class="bcard" href="#snoring-apnea" style="--bc:var(--pea);--bcs:var(--pea-soft)">
+      <span class="bcat">Pulmonology</span>
+      <h3>Snoring loudly every night? It might be sleep apnea</h3>
+      <p>Loud snoring with daytime sleepiness is not a joke about tiredness — it can be a treatable breathing disorder that strains the heart.</p>
+      <span class="bmeta">3 min read <svg class="ico" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
       </div>
     </div>
-    <div class="fac-grid">
-      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20l9-9M13 11l6.5-6.5a2.1 2.1 0 0 1 3 3L16 14l-5 1z"/></svg></span><span><h3>Ultra-Modern Theatre Complex</h3><p>Laminar-flow theatres for advanced laparoscopic &amp; open surgery</p></span></div>
-      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="12" r="3.5"/></svg></span><span><h3>Endoscopy Unit</h3><p>Diagnostic &amp; therapeutic endoscopy, same-day reporting</p></span></div>
-      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 4 12 2.5-6h5"/></svg></span><span><h3>ICU &amp; NICU</h3><p>Round-the-clock intensive care for adults and newborns</p></span></div>
-      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M9 3v6L4 18a2.4 2.4 0 0 0 2 3.5h12A2.4 2.4 0 0 0 20 18L15 9V3"/><path d="M7 3h10M8 14h8"/></svg></span><span><h3>Laboratory &amp; Diagnostics</h3><p>Clinical lab, radiodiagnosis &amp; fetal ultrasound</p></span></div>
-      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="7" rx="3.5" transform="rotate(-35 12 12.5)"/><path d="M9 8.5l5 7"/></svg></span><span><h3>24×7 Pharmacy</h3><p>In-house pharmacy, stocked and open at all hours</p></span></div>
-      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="16" cy="5" r="2.2"/><path d="M14 9l-4 3 2 4-4 5M10 12l-5-1M12 16l5 1 2 4"/></svg></span><span><h3>Physiotherapy</h3><p>Rehab from post-surgical recovery to sports injury</p></span></div>
-    </div>
-    <div style="margin-top:52px;text-align:center">
-      <a class="btn btn-p" href="appointment.html" style="padding:16px 34px">Book an appointment</a>
-    </div>
+    <article class="bpost" id="post-heart-habits" hidden>
+      <a class="bback" href="#all">&larr; All health tips</a>
+      <span class="bcat" style="--bc:var(--rose);--bcs:var(--rose-soft)">Cardiology</span>
+      <h1>Five everyday habits that quietly protect your heart</h1>
+      <p class="blead">Heart attacks in people under 45 are rising across India. The good news: most heart risk is built — or removed — by small daily habits.</p>
+      <p>Cardiologists see a clear pattern: the patients who stay out of the cath lab are rarely the ones doing anything dramatic. They simply get a handful of small things right, every day.</p>
+<h3>1. Walk after meals</h3><p>A 15-minute walk after lunch or dinner blunts the blood-sugar spike that quietly damages arteries over years. It is the cheapest cardiac medicine we know.</p>
+<h3>2. Watch the salt you can't see</h3><p>Most sodium doesn't come from the salt tin — it comes from pickles, papads, packaged snacks and hotel food. Keeping these occasional keeps blood pressure kinder to your heart.</p>
+<h3>3. Sleep 7 hours, seriously</h3><p>Chronic short sleep raises blood pressure and stress hormones. Treat your bedtime like an appointment.</p>
+<h3>4. Know your numbers</h3><p>After 30, check blood pressure, sugar and cholesterol once a year. Heart disease whispers for a decade before it shouts — these three numbers are how you hear the whisper.</p>
+<h3>5. Don't ignore "gas pain" in the chest</h3><p>Heaviness, tightness or burning in the chest during exertion — even if it eases with rest — deserves an ECG, not an antacid. Many first heart attacks in young Indians were dismissed as gastric trouble the week before.</p>
+      <div class="bdisc">This article is general health information, not personal medical advice. For symptoms or concerns, please consult a doctor. <a href="appointment.html">Book a consult with our Cardiology team &rarr;</a></div>
+    </article><article class="bpost" id="post-child-fever" hidden>
+      <a class="bback" href="#all">&larr; All health tips</a>
+      <span class="bcat" style="--bc:var(--mari-deep);--bcs:var(--mari-soft)">Paediatrics</span>
+      <h1>Fever in children: when to wait, when to rush</h1>
+      <p class="blead">Every parent knows the 2 AM panic. Here is the calm version of what paediatricians actually look for.</p>
+      <p>Fever itself is not the enemy — it is the immune system doing its job. What matters is <em>how the child looks and behaves</em>, more than the number on the thermometer.</p>
+<h3>Usually safe to watch at home</h3><p>A child who is drinking fluids, passing urine normally, and plays or smiles between fever spikes can usually be managed with paracetamol in the correct weight-based dose, light clothing and plenty of fluids. Most viral fevers settle in 3–4 days.</p>
+<h3>See a doctor within a day</h3><p>Fever lasting more than three days, ear pain, painful urination, or a child who is eating and drinking noticeably less than usual.</p>
+<h3>Come to the emergency room now</h3><p>Any fever in a baby under 3 months. A child who is unusually drowsy or difficult to wake, breathing fast or with effort, having a seizure, showing a rash that doesn't fade when pressed, or not passing urine for 8+ hours. Trust your instinct — parents are usually right when they feel something is seriously wrong.</p>
+<h3>Two common mistakes</h3><p>Don't sponge with cold water or ice (it causes shivering, which raises temperature), and never give aspirin to children.</p>
+      <div class="bdisc">This article is general health information, not personal medical advice. For symptoms or concerns, please consult a doctor. <a href="appointment.html">Book a consult with our Paediatrics team &rarr;</a></div>
+    </article><article class="bpost" id="post-stroke-befast" hidden>
+      <a class="bback" href="#all">&larr; All health tips</a>
+      <span class="bcat" style="--bc:var(--plum);--bcs:var(--plum-soft)">Neurosurgery</span>
+      <h1>BE FAST: the stroke checklist every family should know</h1>
+      <p class="blead">In a stroke, the treatments that prevent permanent damage work best in the first few hours. Recognising it instantly is a life skill.</p>
+      <p>When a stroke begins, nearly two million brain cells are lost every minute. The single biggest factor in recovery is how fast the person reaches a hospital with stroke care. Memorise <strong>BE FAST</strong>:</p>
+<h3>B — Balance</h3><p>Sudden loss of balance or coordination.</p>
+<h3>E — Eyes</h3><p>Sudden blurred, double or lost vision in one or both eyes.</p>
+<h3>F — Face</h3><p>Ask them to smile. Does one side of the face droop?</p>
+<h3>A — Arms</h3><p>Ask them to raise both arms. Does one drift downward?</p>
+<h3>S — Speech</h3><p>Ask them to repeat a simple sentence. Is it slurred or strange?</p>
+<h3>T — Time</h3><p>If you see any one of these signs — even if it fades away — note the time it started and get to a hospital immediately. Do not wait to see if it improves; a symptom that vanishes can be a warning stroke, and the real one may follow.</p>
+<p>What not to do: don't give food, water or tablets (swallowing may be unsafe), and don't drive yourself if you are the one with symptoms.</p>
+      <div class="bdisc">This article is general health information, not personal medical advice. For symptoms or concerns, please consult a doctor. <a href="appointment.html">Book a consult with our Neurosurgery team &rarr;</a></div>
+    </article><article class="bpost" id="post-kidney-signs" hidden>
+      <a class="bback" href="#all">&larr; All health tips</a>
+      <span class="bcat" style="--bc:var(--peacock);--bcs:var(--peacock-soft)">Nephrology & Urology</span>
+      <h1>Your kidneys don’t complain until it’s late — six quiet signs</h1>
+      <p class="blead">Kidneys lose function silently; by the time pain appears, much damage is often done. These early signals deserve a blood test.</p>
+      <p>One in ten adults has some degree of chronic kidney disease, and most don't know. Diabetes and high blood pressure are the two biggest causes — if you have either, an annual kidney check (a simple creatinine blood test and urine test) is essential.</p>
+<h3>Signs worth checking</h3><p><strong>1. Morning puffiness</strong> around the eyes, or swelling in the feet by evening. <strong>2. Frothy urine</strong> — persistent foam can mean protein is leaking. <strong>3. Waking repeatedly at night to urinate</strong>, a change from your normal pattern. <strong>4. Unexplained tiredness or poor appetite</strong>. <strong>5. Itchy, dry skin</strong> without another cause. <strong>6. Rising blood pressure</strong> that suddenly becomes hard to control.</p>
+<h3>Protecting them is simple</h3><p>Drink water regularly through the day, keep sugar and blood pressure in range, don't pop painkillers (NSAIDs) casually — repeated self-medication for aches is a common, avoidable cause of kidney injury — and never ignore repeated urinary infections or stones.</p>
+      <div class="bdisc">This article is general health information, not personal medical advice. For symptoms or concerns, please consult a doctor. <a href="appointment.html">Book a consult with our Nephrology & Urology team &rarr;</a></div>
+    </article><article class="bpost" id="post-knee-pain-40s" hidden>
+      <a class="bback" href="#all">&larr; All health tips</a>
+      <span class="bcat" style="--bc:var(--sky);--bcs:var(--sky-soft)">Orthopedics</span>
+      <h1>Knee pain in your 40s: protect the joint before it complains louder</h1>
+      <p class="blead">The knees that carry you at 70 are decided by what you do at 40. Most early knee pain responds to habits, not surgery.</p>
+      <p>Indian knees work hard — floor sitting, squatting, stairs, and often a few extra kilos. Early stiffness or pain climbing stairs is the joint asking for help, not announcing the end.</p>
+<h3>What actually helps</h3><p><strong>Strengthen the muscles around the knee.</strong> The quadriceps are the knee's shock absorbers; simple straight-leg raises and wall sits done daily reduce pain more reliably than any supplement. <strong>Keep moving</strong> — cartilage has no blood supply and is nourished by movement; complete rest makes stiff knees stiffer. Walking, cycling and swimming are ideal. <strong>Mind the weight:</strong> every extra kilo of body weight adds roughly four kilos of load on the knee with each step — losing even 3–4 kg noticeably quiets a grumbling knee.</p>
+<h3>When to see an orthopedic doctor</h3><p>Swelling, a knee that locks or gives way, night pain, or pain that persists beyond a few weeks despite exercise. Modern options range from physiotherapy and injections to keyhole (arthroscopic) procedures — total replacement is the last step, not the first.</p>
+      <div class="bdisc">This article is general health information, not personal medical advice. For symptoms or concerns, please consult a doctor. <a href="appointment.html">Book a consult with our Orthopedics team &rarr;</a></div>
+    </article><article class="bpost" id="post-pregnancy-after-30" hidden>
+      <a class="bback" href="#all">&larr; All health tips</a>
+      <span class="bcat" style="--bc:var(--mari-deep);--bcs:var(--mari-soft)">Obstetrics & Fertility</span>
+      <h1>Planning a pregnancy after 30: what actually matters</h1>
+      <p class="blead">More couples in Tamil Nadu are starting families in their 30s. Most have healthy pregnancies — a little planning improves the odds further.</p>
+      <p>Fertility does decline gradually with age, but the difference between 30 and 35 is smaller than social media suggests. What matters more is entering pregnancy healthy and informed.</p>
+<h3>Before you conceive</h3><p>Start folic acid at least a month before trying — it dramatically reduces certain birth defects and is the single most evidence-backed step. Get thyroid, sugar and haemoglobin checked; silent thyroid imbalance and anaemia are common in Indian women and easy to correct. If you have irregular cycles, PCOS, or have been trying for over a year (six months if over 35), see a fertility specialist early — timely evaluation is often all a couple needs.</p>
+<h3>During pregnancy</h3><p>After 30, doctors watch a little more closely for blood pressure and gestational diabetes — both very manageable when caught early, which is exactly what regular antenatal visits are for. A detailed anomaly scan and, where indicated, fetal-medicine assessment give an early, accurate picture of the baby's development.</p>
+<h3>The honest reassurance</h3><p>The overwhelming majority of pregnancies after 30 — and after 35 — end with a healthy mother holding a healthy baby. Good care simply makes that outcome even more likely.</p>
+      <div class="bdisc">This article is general health information, not personal medical advice. For symptoms or concerns, please consult a doctor. <a href="appointment.html">Book a consult with our Obstetrics & Fertility team &rarr;</a></div>
+    </article><article class="bpost" id="post-acidity-alarm" hidden>
+      <a class="bback" href="#all">&larr; All health tips</a>
+      <span class="bcat" style="--bc:var(--pea);--bcs:var(--pea-soft)">Surgical Gastroenterology</span>
+      <h1>Frequent acidity? When “gas trouble” is more than gas</h1>
+      <p class="blead">Antacids are India’s favourite self-medication. Occasional heartburn is harmless — but some patterns deserve a proper look.</p>
+      <p>Burning after a late, spicy or heavy meal is ordinary reflux, and lifestyle change fixes most of it: eat dinner 2–3 hours before bed, reduce tea/coffee on an empty stomach, cut down smoking and alcohol, and lose a little belly weight — pressure on the stomach is a major reflux driver.</p>
+<h3>Red flags that need evaluation, not antacids</h3><p>Difficulty or pain while swallowing, food feeling stuck, vomiting blood or black stools, unintended weight loss, symptoms that wake you at night, new "acidity" starting after 50, or heartburn needing tablets more than twice a week for months. These warrant an endoscopy — a 10-minute daycare procedure that looks directly at the food pipe and stomach.</p>
+<h3>Why it matters</h3><p>Years of untreated reflux can injure the food-pipe lining, and stomach complaints occasionally hide ulcers or more serious disease. Checking early is quick; discovering late is not. If a problem does need surgery, modern laparoscopic (keyhole) techniques mean smaller cuts, less pain and a much faster return to normal life.</p>
+      <div class="bdisc">This article is general health information, not personal medical advice. For symptoms or concerns, please consult a doctor. <a href="appointment.html">Book a consult with our Surgical Gastroenterology team &rarr;</a></div>
+    </article><article class="bpost" id="post-snoring-apnea" hidden>
+      <a class="bback" href="#all">&larr; All health tips</a>
+      <span class="bcat" style="--bc:var(--pea);--bcs:var(--pea-soft)">Pulmonology</span>
+      <h1>Snoring loudly every night? It might be sleep apnea</h1>
+      <p class="blead">Loud snoring with daytime sleepiness is not a joke about tiredness — it can be a treatable breathing disorder that strains the heart.</p>
+      <p>In obstructive sleep apnea (OSA), the throat repeatedly closes during sleep — sometimes hundreds of times a night. Each pause jolts the body half-awake and spikes blood pressure. The person rarely remembers any of it; they just wake unrefreshed.</p>
+<h3>The pattern to recognise</h3><p>Loud, irregular snoring with silent pauses followed by a gasp (often the spouse notices first), morning headaches, dozing off while reading, watching TV or — dangerously — driving, poor concentration, and blood pressure that stays high despite medicines. Being overweight, having a thick neck, or diabetes raises the risk, but slim people get OSA too.</p>
+<h3>Why treat it</h3><p>Untreated apnea is strongly linked to hypertension, heart rhythm problems, stroke and road accidents. Treating it often transforms energy levels within weeks.</p>
+<h3>What testing looks like</h3><p>A sleep study — increasingly done in the comfort of your own home with a portable device — measures breathing overnight. Treatment ranges from weight loss and positional therapy to a CPAP device that keeps the airway gently open. Most patients say the same thing after starting treatment: "I forgot what a real morning felt like."</p>
+      <div class="bdisc">This article is general health information, not personal medical advice. For symptoms or concerns, please consult a doctor. <a href="appointment.html">Book a consult with our Pulmonology team &rarr;</a></div>
+    </article>
   </div>
 </section>
 
@@ -434,7 +541,7 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
         <p class="tamil">உங்கள் நலமே எங்கள் நோக்கம்</p>
       </div>
       <div><h4>Care</h4><ul><li><a href="index.html#specialties">Specialties</a></li><li><a href="doctors.html">Our Doctors</a></li><li><a href="appointment.html">Book Appointment</a></li><li><a href="tel:04272779999">Emergency</a></li></ul></div>
-      <div><h4>Hospital</h4><ul><li><a href="index.html#excellence">Centres of Excellence</a></li><li><a href="facilities.html" class="on">Facilities</a></li><li><a href="index.html#stories">Patient Stories</a></li><li><a href="index.html#visit">Directions</a></li></ul></div>
+      <div><h4>Hospital</h4><ul><li><a href="index.html#excellence">Centres of Excellence</a></li><li><a href="facilities.html">Facilities</a></li><li><a href="index.html#stories">Patient Stories</a></li><li><a href="index.html#visit">Directions</a></li></ul></div>
       <div><h4>Reach Us</h4><ul><li><a href="tel:04272779999">0427-277 9999</a></li><li><a href="tel:+919940591616">+91 99405 91616</a></li><li><a href="https://wa.me/919940591616">WhatsApp</a></li><li><a href="index.html#visit">Google Maps</a></li></ul></div>
     </div>
     <div class="base"><span>© A P Medical Center 2026 · All rights reserved</span><span>Facebook · Instagram · YouTube</span></div>
@@ -452,6 +559,22 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
     h.setAttribute('aria-expanded', open);
   });
   m.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ m.classList.remove('open'); }); });
+})();
+</script>
+
+<script>
+(function(){
+  var list = document.getElementById('bloglist');
+  var posts = document.querySelectorAll('.bpost');
+  function route(){
+    var h = location.hash.replace('#','');
+    var target = document.getElementById('post-' + h);
+    posts.forEach(function(p){ p.hidden = true; });
+    if (target){ list.hidden = true; target.hidden = false; window.scrollTo({top:0}); }
+    else { list.hidden = false; }
+  }
+  window.addEventListener('hashchange', route);
+  route();
 })();
 </script>
 </body>
