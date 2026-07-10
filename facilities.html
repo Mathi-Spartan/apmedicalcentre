@@ -341,6 +341,21 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 
 @media(max-width:960px){.fac-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.fac-grid{grid-template-columns:1fr}}
+
+/* motion: mosaic reveal + hover choreography */
+@media (prefers-reduced-motion: no-preference){
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.facgal figure img{transition:transform 1.15s cubic-bezier(.16,.7,.2,1),filter .6s ease}
+.facgal figure:hover img{transform:scale(1.07);filter:saturate(1.08)}
+.facgal figcaption{transition:padding-bottom .45s cubic-bezier(.2,.7,.2,1)}
+.facgal figcaption small{opacity:0;transform:translateY(7px);transition:opacity .4s .06s,transform .4s .06s}
+.facgal figure:hover figcaption small{opacity:1;transform:none}
+.facgal figure:hover figcaption{padding-bottom:22px}
+.facgal .fbadge{transition:transform .3s}
+.facgal figure:hover .fbadge{transform:translateY(-2px)}
+}
+@media (hover:none){.facgal figcaption small{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -452,6 +467,24 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
     h.setAttribute('aria-expanded', open);
   });
   m.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ m.classList.remove('open'); }); });
+})();
+</script>
+
+<script>
+(function(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  var els = document.querySelectorAll('.doc, .facgal figure');
+  els.forEach(function(el,i){ el.classList.add('rv'); el.style.transitionDelay = (i % 4) * 90 + 'ms'; });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      el.classList.add('in');
+      io.unobserve(el);
+      setTimeout(function(){ el.classList.remove('rv','in'); el.style.transitionDelay=''; }, 950);
+    });
+  }, {threshold:.15, rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(el){ io.observe(el); });
 })();
 </script>
 </body>

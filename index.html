@@ -449,6 +449,21 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 .pkinfo li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:50%;background:var(--mari)}
 .pkinfo small{font-size:12.5px;color:#9FC3BB}
 @media(max-width:800px){.pkcard{grid-template-columns:1fr}.pkcard figure{max-height:240px}}
+
+/* motion: reveal + doctor card choreography */
+@media (prefers-reduced-motion: no-preference){
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.doc{transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s}
+.doc:hover{transform:translateY(-8px);box-shadow:0 22px 48px -18px rgba(9,59,51,.28);border-color:var(--pea)}
+.doc .av::after{transition:opacity .3s}
+.doc:hover .av::after{opacity:1;animation:ringspin 10s linear infinite}
+.doc .av img{transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.doc:hover .av img{transform:scale(1.08)}
+.doc .btn.btn-o{transition:background .25s,color .25s,border-color .25s,transform .25s}
+.doc:hover .btn.btn-o{background:var(--pea);color:#fff;border-color:var(--pea)}
+@keyframes ringspin{to{transform:rotate(360deg)}}
+}
 </style>
 </head>
 <body>
@@ -920,6 +935,24 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
   wrap.addEventListener('mouseenter', function(){ clearInterval(timer); });
   wrap.addEventListener('mouseleave', auto);
   auto();
+})();
+</script>
+
+<script>
+(function(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  var els = document.querySelectorAll('.doc, .facgal figure');
+  els.forEach(function(el,i){ el.classList.add('rv'); el.style.transitionDelay = (i % 4) * 90 + 'ms'; });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      el.classList.add('in');
+      io.unobserve(el);
+      setTimeout(function(){ el.classList.remove('rv','in'); el.style.transitionDelay=''; }, 950);
+    });
+  }, {threshold:.15, rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(el){ io.observe(el); });
 })();
 </script>
 </body>
