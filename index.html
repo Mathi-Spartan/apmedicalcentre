@@ -365,7 +365,7 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 
 /* campus / getting here */
 .campus{padding-bottom:64px}
-.campus .duo{display:grid;grid-template-columns:1.55fr 1fr;gap:22px;align-items:stretch}
+.campus .duo{display:grid;grid-template-columns:1fr;gap:22px}
 .campus figure{position:relative;margin:0;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);min-height:280px}
 .campus figure img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
 .campus figure:hover img{transform:scale(1.03)}
@@ -404,6 +404,32 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 .osc.c-peacock .oi{background:var(--peacock)}.osc.c-peacock:hover{border-color:var(--peacock)}
 @media(max-width:960px){.onestop{grid-template-columns:1fr}.os-clusters{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.os-clusters{grid-template-columns:1fr}.os-nums{gap:18px}}
+
+/* hero building arch */
+.hero-arch{position:relative;border-radius:200px 200px var(--r) var(--r);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/4.6;max-width:440px;margin:0 auto}
+.hero-arch::after{content:"";position:absolute;inset:12px;border:1px solid rgba(232,161,61,.65);border-radius:190px 190px calc(var(--r) - 6px) calc(var(--r) - 6px);pointer-events:none}
+.hero-arch img{width:100%;height:100%;object-fit:cover;display:block}
+.ha-cap{position:absolute;left:0;right:0;bottom:0;padding:40px 20px 16px;background:linear-gradient(180deg,transparent,rgba(9,59,51,.8));color:#fff;font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:9px}
+.ha-cap .fdot{width:8px;height:8px;border-radius:50%;background:var(--mari)}
+/* pledge slider */
+.pslider{position:relative;display:grid;overflow:hidden}
+.pslide{grid-area:1/1;opacity:0;transform:translateX(36px);transition:opacity .55s ease,transform .55s ease;pointer-events:none}
+.pslide.on{opacity:1;transform:none;pointer-events:auto}
+.pslide.alt .cols{grid-template-columns:.85fr 1.15fr}
+.pslide.alt .arch{background:radial-gradient(120% 90% at 50% 0%,var(--mari) 0%,var(--mari-deep) 82%)}
+.pslide.alt .arch::before{border-color:rgba(9,59,51,.4)}
+.pslide.alt .arch .glow{background:radial-gradient(circle,rgba(14,83,72,.25) 0%,transparent 62%)}
+.pslide.alt .row .key{color:var(--pea)}
+.pnav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:34px}
+.pbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--pea);display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow);transition:.18s}
+.pbtn:hover{background:var(--pea);color:#fff}
+.pdots{display:flex;gap:8px}
+.pdots i{width:8px;height:8px;border-radius:50%;background:var(--line);transition:.25s;cursor:pointer}
+.pdots i.on{background:var(--mari);width:26px;border-radius:99px}
+/* tamil key overflow fix */
+.pledge .row{grid-template-columns:176px 1fr}
+.pledge .row .key{font-size:21px;overflow-wrap:break-word}
+@media(max-width:960px){.pslide.alt .cols{grid-template-columns:1fr}.pledge .row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -439,7 +465,7 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
       <div>
         <span class="tamil tamil-eyebrow">உங்கள் நலமே எங்கள் நோக்கம் — your health is our purpose</span>
         <h1>Salem's home for <em>world-class care.</em></h1>
-        <p class="lede">25+ specialties. 40+ consultant doctors. A 24×7 emergency that never sleeps. For over a decade, A P Medical Center has cared for Salem's families like our own.</p>
+        <p class="lede">31 departments. 42 consultant doctors. A 24×7 emergency that never sleeps. For over a decade, A P Medical Center has cared for Salem's families like our own.</p>
         <div class="actions">
           <a class="btn btn-p" href="appointment.html">Book an Appointment <svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></a>
           <a class="btn btn-o" href="doctors.html">Find a Doctor</a>
@@ -452,18 +478,12 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
         </div>
       </div>
       <div class="canvas">
-        <div class="inner">
-          <div class="glow"></div>
-          <div class="gridlines"></div>
-          <svg class="pulseline" viewBox="0 0 500 120" fill="none" aria-hidden="true">
-            <path d="M0,60 H120 L145,60 L165,18 L185,98 L205,60 H310 L335,60 L355,26 L372,88 L390,60 H500" stroke="rgba(232,161,61,.9)" stroke-width="3" stroke-linecap="round"/>
-          </svg>
-          <div class="core">
-            <svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="#F3D9A8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.3-9A5.2 5.2 0 0 1 12 6.5 5.2 5.2 0 0 1 21.3 11c-1.8 4.4-9.3 9-9.3 9z"/><path d="M7 12h3l1.2-2.8L13.5 15l1.3-3H17" stroke="#fff"/></svg>
-          </div>
+        <div class="hero-arch">
+          <img src="images/campus-building.jpg" alt="A P Medical Center campus, Saradha College Road, Salem">
+          <span class="ha-cap"><span class="fdot"></span>Saradha College Road, Salem</span>
         </div>
-        <div class="float f1"><div class="n">25+</div><div class="l">Medical specialties</div></div>
-        <div class="float f2"><div class="n">40+</div><div class="l">Consultant doctors</div></div>
+        <div class="float f1"><div class="n">31</div><div class="l">Departments</div></div>
+        <div class="float f2"><div class="n">42</div><div class="l">Consultant doctors</div></div>
         <div class="float f3"><div class="n">24×7</div><div class="l">Emergency care</div></div>
       </div>
     </div>
@@ -616,7 +636,9 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 
 <section class="pledge" id="commitment">
   <div class="wrap">
-    <div class="cols">
+    <div class="pslider">
+      <div class="pslide on">
+        <div class="cols">
       <div>
         <div class="shead" style="margin-bottom:36px">
           <div>
@@ -662,37 +684,9 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
         </div>
       </div>
     </div>
-    <div class="kural">
-      <div class="mark">அ</div>
-      <div>
-        <div class="ta">நோய்நாடி நோய்முதல் நாடி அதுதணிக்கும் வாய்நாடி வாய்ப்பச் செயல்.</div>
-        <div class="en">&ldquo;Diagnose the illness, trace its cause, seek the proper remedy &mdash; and apply it with skill.&rdquo;</div>
-        <div class="src">Thirukkural 948 &middot; மருந்து &middot; The chapter on Medicine</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="tests" id="stories" style="padding-top:0">
-  <div class="wrap">
-    <div class="shead">
-      <div>
-        <span class="chip"><span class="dot"></span>Patient Stories</span>
-        <h2>Families who <em>trusted us.</em></h2>
-      </div>
-    </div>
-    <div class="tgrid">
-      <div class="tcard"><span class="q">“</span><p>They cared for my father the way we would have — with patience, respect and real skill.</p><div class="who"><i>PF</i> Patient family · Alagapuram <span class="stars">★★★★★</span></div></div>
-      <div class="tcard"><span class="q">“</span><p>From the first fertility consultation to holding our baby — the team was with us at every step.</p><div class="who"><i>YP</i> Young parents · Fairlands <span class="stars">★★★★★</span></div></div>
-      <div class="tcard"><span class="q">“</span><p>Emergency at 2 a.m. — they were ready before our car reached the gate. That night we understood what 24×7 means.</p><div class="who"><i>PF</i> Patient family · Hasthampatti <span class="stars">★★★★★</span></div></div>
-    </div>
-  </div>
-</section>
-
-
-<section class="pledge alt" id="why-us">
-  <div class="wrap">
-    <div class="cols">
+      <div class="pslide alt">
+        <div class="cols">
       <div class="arch-fig">
         <div class="arch">
           <span class="glow"></span>
@@ -738,8 +732,42 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
         </div>
       </div>
     </div>
+      </div>
+    </div>
+    <div class="pnav">
+      <button class="pbtn prev" aria-label="Previous"><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <span class="pdots"><i class="on"></i><i></i></span>
+      <button class="pbtn next" aria-label="Next"><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+    <div class="kural">
+      <div class="mark">அ</div>
+      <div>
+        <div class="ta">நோய்நாடி நோய்முதல் நாடி அதுதணிக்கும் வாய்நாடி வாய்ப்பச் செயல்.</div>
+        <div class="en">&ldquo;Diagnose the illness, trace its cause, seek the proper remedy &mdash; and apply it with skill.&rdquo;</div>
+        <div class="src">Thirukkural 948 &middot; மருந்து &middot; The chapter on Medicine</div>
+      </div>
+    </div>
   </div>
 </section>
+
+<section class="tests" id="stories" style="padding-top:0">
+  <div class="wrap">
+    <div class="shead">
+      <div>
+        <span class="chip"><span class="dot"></span>Patient Stories</span>
+        <h2>Families who <em>trusted us.</em></h2>
+      </div>
+    </div>
+    <div class="tgrid">
+      <div class="tcard"><span class="q">“</span><p>They cared for my father the way we would have — with patience, respect and real skill.</p><div class="who"><i>PF</i> Patient family · Alagapuram <span class="stars">★★★★★</span></div></div>
+      <div class="tcard"><span class="q">“</span><p>From the first fertility consultation to holding our baby — the team was with us at every step.</p><div class="who"><i>YP</i> Young parents · Fairlands <span class="stars">★★★★★</span></div></div>
+      <div class="tcard"><span class="q">“</span><p>Emergency at 2 a.m. — they were ready before our car reached the gate. That night we understood what 24×7 means.</p><div class="who"><i>PF</i> Patient family · Hasthampatti <span class="stars">★★★★★</span></div></div>
+    </div>
+  </div>
+</section>
+
+
+
 
 <section class="board" id="board">
   <div class="wrap">
@@ -772,15 +800,11 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
     <div class="shead" style="margin-bottom:36px">
       <div>
         <span class="chip"><span class="dot"></span>Getting Here &middot; <span class="tamil">வருகை</span></span>
-        <h2>You&rsquo;ll know it <em>when you see it.</em></h2>
+        <h2>Parking is <em>never the problem.</em></h2>
       </div>
     </div>
     <div class="duo">
-      <figure>
-        <span class="badge">Our Campus</span>
-        <img src="images/campus-building.jpg" alt="A P Medical Center building on Saradha College Road, Salem" loading="lazy">
-        <figcaption><span class="fdot"></span><span>A P Medical Center<small>Saradha College Road, Near Alagapuram Police Station</small></span></figcaption>
-      </figure>
+      
       <figure>
         <img src="images/campus-parking.jpg" alt="Free on-campus parking with 24x7 ambulance bay at A P Medical Center" loading="lazy">
         <figcaption><span class="fdot"></span><span>Free on-campus parking<small>Two &amp; four-wheelers &middot; 24&times;7 ambulance bay</small></span></figcaption>
@@ -848,6 +872,28 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
     h.setAttribute('aria-expanded', open);
   });
   m.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ m.classList.remove('open'); }); });
+})();
+</script>
+
+<script>
+(function(){
+  var slides = document.querySelectorAll('.pslide');
+  var dots = document.querySelectorAll('.pdots i');
+  if (!slides.length) return;
+  var idx = 0, timer;
+  function go(n){
+    idx = (n + slides.length) % slides.length;
+    slides.forEach(function(s,i){ s.classList.toggle('on', i===idx); });
+    dots.forEach(function(d,i){ d.classList.toggle('on', i===idx); });
+  }
+  function auto(){ timer = setInterval(function(){ go(idx+1); }, 8000); }
+  document.querySelector('.pbtn.prev').addEventListener('click', function(){ clearInterval(timer); go(idx-1); auto(); });
+  document.querySelector('.pbtn.next').addEventListener('click', function(){ clearInterval(timer); go(idx+1); auto(); });
+  dots.forEach(function(d,i){ d.addEventListener('click', function(){ clearInterval(timer); go(i); auto(); }); });
+  var wrap = document.querySelector('.pslider');
+  wrap.addEventListener('mouseenter', function(){ clearInterval(timer); });
+  wrap.addEventListener('mouseleave', auto);
+  auto();
 })();
 </script>
 </body>
