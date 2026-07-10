@@ -464,6 +464,10 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 .doc:hover .btn.btn-o{background:var(--pea);color:#fff;border-color:var(--pea)}
 @keyframes ringspin{to{transform:rotate(360deg)}}
 }
+
+/* floating dept tooltip */
+#tipfloat{position:fixed;z-index:70;background:var(--ink);color:var(--paper);font-family:'Figtree';font-size:12.5px;font-weight:500;line-height:1.55;padding:10px 14px;border-radius:11px;max-width:270px;text-align:center;pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .18s,transform .18s;box-shadow:0 10px 28px -8px rgba(23,33,29,.35)}
+#tipfloat.show{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
@@ -547,14 +551,14 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
       <div class="side"><a class="btn btn-ghost" href="doctors.html">All 25+ specialties <svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></a></div>
     </div>
     <div class="spec-grid">
-      <a class="scard hl" href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20l9-9M13 11l6.5-6.5a2.1 2.1 0 0 1 3 3L16 14l-5 1z"/></svg></span><h3>Surgical Gastroenterology</h3><p>Advanced laparoscopic, HPB &amp; colorectal surgery</p></a>
-      <a class="scard hl gold" href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span><h3>Obstetrics &amp; Fertility</h3><p>Maternity, fertility &amp; newborn care</p></a>
-      <a class="scard t-rose" href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.3-9A5.2 5.2 0 0 1 12 6.5 5.2 5.2 0 0 1 21.3 11c-1.8 4.4-9.3 9-9.3 9z"/></svg></span><h3>Cardiology</h3><p>Preventive &amp; diagnostic heart care</p></a>
-      <a class="scard t-sky" href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M17 7l-10 10M15 4a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1 0 5M4 15a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 5 0"/></svg></span><h3>Orthopedics</h3><p>Joint care, arthroscopy &amp; sports medicine</p></a>
-      <a class="scard t-mari" href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span><h3>Paediatrics</h3><p>NICU and complete child care</p></a>
-      <a class="scard t-plum" href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 1 5.5A3 3 0 0 0 12 20a3 3 0 0 0 4-2.5A3 3 0 0 0 17 12a3 3 0 0 0-2-5 3 3 0 0 0-3-3z"/><path d="M12 4v16"/></svg></span><h3>Neurosurgery</h3><p>Neurology &amp; rapid stroke response</p></a>
-      <a class="scard t-peacock" href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M9 4C5.7 4 4 7 4 10.5S5.7 17 9 17c1 0 1.8-.3 2.4-.8M15 20c3.3 0 5-3 5-6.5S18.3 7 15 7c-1 0-1.8.3-2.4.8"/></svg></span><h3>Nephrology &amp; Urology</h3><p>Kidney care, dialysis &amp; andrology</p></a>
-      <a class="scard t-pea" href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M12 4v7M9 11c0-2-1-4-3-4S3 12 3 15s1 5 3 5 3-2 3-5v-4zM15 11c0-2 1-4 3-4s3 5 3 8-1 5-3 5-3-2-3-5v-4z"/></svg></span><h3>Pulmonology</h3><p>Respiratory &amp; sleep medicine</p></a>
+      <a class="scard hl" data-tip="Advanced surgery of the digestive system — stomach, liver, pancreas and intestines, done through keyhole techniques wherever possible." href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20l9-9M13 11l6.5-6.5a2.1 2.1 0 0 1 3 3L16 14l-5 1z"/></svg></span><h3>Surgical Gastroenterology</h3><p>Advanced laparoscopic, HPB &amp; colorectal surgery</p></a>
+      <a class="scard hl gold" data-tip="Pregnancy care, safe deliveries, fertility treatment and newborn support — one connected team for mother and baby." href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span><h3>Obstetrics &amp; Fertility</h3><p>Maternity, fertility &amp; newborn care</p></a>
+      <a class="scard t-rose" data-tip="Prevention, diagnosis and treatment of heart disease — ECG, echo and preventive heart checks." href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.3-9A5.2 5.2 0 0 1 12 6.5 5.2 5.2 0 0 1 21.3 11c-1.8 4.4-9.3 9-9.3 9z"/></svg></span><h3>Cardiology</h3><p>Preventive &amp; diagnostic heart care</p></a>
+      <a class="scard t-sky" data-tip="Bones and joints — fractures, joint replacements, keyhole (arthroscopic) surgery and sports injuries." href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M17 7l-10 10M15 4a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1 0 5M4 15a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 5 0"/></svg></span><h3>Orthopedics</h3><p>Joint care, arthroscopy &amp; sports medicine</p></a>
+      <a class="scard t-mari" data-tip="Complete medical care for babies, children and teenagers, backed by a newborn ICU." href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span><h3>Paediatrics</h3><p>NICU and complete child care</p></a>
+      <a class="scard t-plum" data-tip="Surgery of the brain, spine and nerves, with rapid response for strokes." href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 1 5.5A3 3 0 0 0 12 20a3 3 0 0 0 4-2.5A3 3 0 0 0 17 12a3 3 0 0 0-2-5 3 3 0 0 0-3-3z"/><path d="M12 4v16"/></svg></span><h3>Neurosurgery</h3><p>Neurology &amp; rapid stroke response</p></a>
+      <a class="scard t-peacock" data-tip="Kidney care including dialysis, plus urinary tract and men&rsquo;s reproductive health." href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M9 4C5.7 4 4 7 4 10.5S5.7 17 9 17c1 0 1.8-.3 2.4-.8M15 20c3.3 0 5-3 5-6.5S18.3 7 15 7c-1 0-1.8.3-2.4.8"/></svg></span><h3>Nephrology &amp; Urology</h3><p>Kidney care, dialysis &amp; andrology</p></a>
+      <a class="scard t-pea" data-tip="Lungs and breathing — asthma, TB, COPD and sleep-related breathing disorders." href="doctors.html"><span class="go"><svg class="ico" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 18L18 6M9 6h9v9"/></svg></span><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M12 4v7M9 11c0-2-1-4-3-4S3 12 3 15s1 5 3 5 3-2 3-5v-4zM15 11c0-2 1-4 3-4s3 5 3 8-1 5-3 5-3-2-3-5v-4z"/></svg></span><h3>Pulmonology</h3><p>Respiratory &amp; sleep medicine</p></a>
     </div>
   </div>
 </section>
@@ -593,14 +597,14 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
         <a class="btn" href="doctors.html">Find your doctor</a>
       </div>
       <div class="os-clusters">
-        <div class="osc c-mari"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span><span><h4>Mother &amp; Child</h4><p>Obstetrics &amp; fertility &middot; Fetal medicine &middot; Neonatology &middot; Paediatrics &amp; paediatric surgery</p></span></div>
-        <div class="osc c-rose"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.3-9A5.2 5.2 0 0 1 12 6.5 5.2 5.2 0 0 1 21.3 11c-1.8 4.4-9.3 9-9.3 9z"/></svg></span><span><h4>Heart, Lungs &amp; Vessels</h4><p>Cardiology &middot; Pulmonology &middot; Vascular surgery</p></span></div>
-        <div class="osc c-pea"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20l9-9M13 11l6.5-6.5a2.1 2.1 0 0 1 3 3L16 14l-5 1z"/></svg></span><span><h4>Digestion &amp; Surgery</h4><p>Surgical gastroenterology &middot; General &amp; plastic surgery &middot; Surgical oncology &middot; Oral &amp; maxillofacial</p></span></div>
-        <div class="osc c-plum"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3a5.5 5.5 0 0 1 5.5 5.5c0 2-1 3.2-1 5V17a4.5 4.5 0 0 1-9 0v-3.5c0-1.8-1-3-1-5A5.5 5.5 0 0 1 12 3z"/></svg></span><span><h4>Brain, Mind &amp; Nerves</h4><p>Neurosurgery &amp; stroke response &middot; Psychiatry &middot; Clinical psychology</p></span></div>
-        <div class="osc c-sky"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M17 7l-10 10M15 4a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1 0 5M4 15a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 5 0"/></svg></span><span><h4>Bones &amp; Movement</h4><p>Orthopedic surgery &middot; Arthroscopy &amp; sports medicine &middot; Physiotherapy</p></span></div>
-        <div class="osc c-peacock"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3c3 3.5 5 6.2 5 9a5 5 0 0 1-10 0c0-2.8 2-5.5 5-9z"/></svg></span><span><h4>Kidney &amp; Men&rsquo;s Health</h4><p>Nephrology &amp; dialysis &middot; Urology &amp; andrology</p></span></div>
-        <div class="osc c-mari"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span><span><h4>Skin, ENT &amp; Hormones</h4><p>Dermatology &middot; ENT surgery &middot; Endocrinology &amp; diabetology</p></span></div>
-        <div class="osc c-rose"><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 4 12 2.5-6h5"/></svg></span><span><h4>Everyday &amp; Emergency</h4><p>General medicine &middot; 24&times;7 emergency &amp; critical care &middot; Geriatrics &middot; Diagnostics &amp; imaging</p></span></div>
+        <div class="osc c-mari" data-tip="From planning a pregnancy to your child&rsquo;s teenage years — one connected team for the whole journey."><span class="oi"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span><span><h4>Mother &amp; Child</h4><p>Obstetrics &amp; fertility &middot; Fetal medicine &middot; Neonatology &middot; Paediatrics &amp; paediatric surgery</p></span></div>
+        <div class="osc c-rose" data-tip="Chest pain, breathlessness, blood pressure and circulation — care for the body&rsquo;s engine room."><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.3-9A5.2 5.2 0 0 1 12 6.5 5.2 5.2 0 0 1 21.3 11c-1.8 4.4-9.3 9-9.3 9z"/></svg></span><span><h4>Heart, Lungs &amp; Vessels</h4><p>Cardiology &middot; Pulmonology &middot; Vascular surgery</p></span></div>
+        <div class="osc c-pea" data-tip="Stomach, liver and intestinal problems — and the modern surgical care they sometimes need."><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20l9-9M13 11l6.5-6.5a2.1 2.1 0 0 1 3 3L16 14l-5 1z"/></svg></span><span><h4>Digestion &amp; Surgery</h4><p>Surgical gastroenterology &middot; General &amp; plastic surgery &middot; Surgical oncology &middot; Oral &amp; maxillofacial</p></span></div>
+        <div class="osc c-plum" data-tip="From headaches to strokes — and mental health treated with the same seriousness as physical health."><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3a5.5 5.5 0 0 1 5.5 5.5c0 2-1 3.2-1 5V17a4.5 4.5 0 0 1-9 0v-3.5c0-1.8-1-3-1-5A5.5 5.5 0 0 1 12 3z"/></svg></span><span><h4>Brain, Mind &amp; Nerves</h4><p>Neurosurgery &amp; stroke response &middot; Psychiatry &middot; Clinical psychology</p></span></div>
+        <div class="osc c-sky" data-tip="Fractures, joint pain and sports injuries — getting you moving comfortably again."><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M17 7l-10 10M15 4a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1 0 5M4 15a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 5 0"/></svg></span><span><h4>Bones &amp; Movement</h4><p>Orthopedic surgery &middot; Arthroscopy &amp; sports medicine &middot; Physiotherapy</p></span></div>
+        <div class="osc c-peacock" data-tip="Kidney function, stones and dialysis, plus men&rsquo;s urological health."><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3c3 3.5 5 6.2 5 9a5 5 0 0 1-10 0c0-2.8 2-5.5 5-9z"/></svg></span><span><h4>Kidney &amp; Men&rsquo;s Health</h4><p>Nephrology &amp; dialysis &middot; Urology &amp; andrology</p></span></div>
+        <div class="osc c-mari" data-tip="Skin conditions, ear-nose-throat problems, thyroid and diabetes care."><span class="oi"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span><span><h4>Skin, ENT &amp; Hormones</h4><p>Dermatology &middot; ENT surgery &middot; Endocrinology &amp; diabetology</p></span></div>
+        <div class="osc c-rose" data-tip="From fevers and checkups to genuine emergencies — the hospital&rsquo;s front door, open 24&times;7."><span class="oi"><svg class="ico" viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 4 12 2.5-6h5"/></svg></span><span><h4>Everyday &amp; Emergency</h4><p>General medicine &middot; 24&times;7 emergency &amp; critical care &middot; Geriatrics &middot; Diagnostics &amp; imaging</p></span></div>
       </div>
     </div>
   </div>
@@ -953,6 +957,30 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
     });
   }, {threshold:.15, rootMargin:'0px 0px -6% 0px'});
   els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+<script>
+(function(){
+  if (matchMedia('(hover: none)').matches) return;
+  var tip = document.createElement('div'); tip.id = 'tipfloat'; document.body.appendChild(tip);
+  function show(el){
+    tip.textContent = el.dataset.tip;
+    var r = el.getBoundingClientRect();
+    tip.style.left = Math.max(8, Math.min(innerWidth - 278, r.left + r.width/2 - 135)) + 'px';
+    tip.style.top = (r.top - 10) + 'px';
+    tip.style.transform = 'translateY(-100%)';
+    tip.classList.add('show');
+  }
+  var active = null;
+  function hide(){ active = null; tip.classList.remove('show'); }
+  document.querySelectorAll('[data-tip]').forEach(function(el){
+    el.addEventListener('mouseenter', function(){ active = el; show(el); });
+    el.addEventListener('mouseleave', hide);
+    el.addEventListener('focus', function(){ active = el; show(el); }, true);
+    el.addEventListener('blur', hide, true);
+  });
+  addEventListener('scroll', function(){ if (active) show(active); }, {passive:true});
 })();
 </script>
 </body>
