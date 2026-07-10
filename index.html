@@ -405,12 +405,7 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 @media(max-width:960px){.onestop{grid-template-columns:1fr}.os-clusters{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.os-clusters{grid-template-columns:1fr}.os-nums{gap:18px}}
 
-/* hero building arch */
-.hero-arch{position:relative;border-radius:200px 200px var(--r) var(--r);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/4.6;max-width:440px;margin:0 auto}
-.hero-arch::after{content:"";position:absolute;inset:12px;border:1px solid rgba(232,161,61,.65);border-radius:190px 190px calc(var(--r) - 6px) calc(var(--r) - 6px);pointer-events:none}
-.hero-arch img{width:100%;height:100%;object-fit:cover;display:block}
-.ha-cap{position:absolute;left:0;right:0;bottom:0;padding:40px 20px 16px;background:linear-gradient(180deg,transparent,rgba(9,59,51,.8));color:#fff;font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:9px}
-.ha-cap .fdot{width:8px;height:8px;border-radius:50%;background:var(--mari)}
+
 /* pledge slider */
 .pslider{position:relative;display:grid;overflow:hidden}
 .pslide{grid-area:1/1;opacity:0;transform:translateX(36px);transition:opacity .55s ease,transform .55s ease;pointer-events:none}
@@ -430,6 +425,30 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 .pledge .row{grid-template-columns:176px 1fr}
 .pledge .row .key{font-size:21px;overflow-wrap:break-word}
 @media(max-width:960px){.pslide.alt .cols{grid-template-columns:1fr}.pledge .row{grid-template-columns:1fr}}
+
+/* hero side: photo card + stat pills */
+.hero-side{position:relative}
+.hero-side::before{content:"";position:absolute;top:-30px;right:-18px;width:170px;height:130px;border:2px solid var(--mari);border-bottom:none;border-radius:999px 999px 0 0;opacity:.65;pointer-events:none}
+.hero-shot{position:relative;border-radius:var(--r);overflow:hidden;box-shadow:0 30px 70px -30px rgba(9,59,51,.45);aspect-ratio:16/10}
+.hero-shot img{width:100%;height:100%;object-fit:cover;display:block}
+.ha-cap{position:absolute;left:0;right:0;bottom:0;padding:40px 18px 14px;background:linear-gradient(180deg,transparent,rgba(9,59,51,.8));color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;gap:9px}
+.ha-cap .fdot{width:8px;height:8px;border-radius:50%;background:var(--mari)}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.hero-stats > div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow)}
+.hero-stats b{display:block;font-family:'Instrument Serif',serif;font-weight:400;font-size:27px;line-height:1;color:var(--pea)}
+.hero-stats span{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-top:4px;display:block}
+@media(max-width:600px){.hero-stats{gap:8px}.hero-stats > div{padding:12px 10px}.hero-side::before{display:none}}
+/* parking split card */
+.pkcard{display:grid;grid-template-columns:1.35fr 1fr;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);background:linear-gradient(155deg,var(--pea),var(--pea-deep))}
+.pkcard figure{margin:0;min-height:280px;max-height:340px}
+.pkcard figure img{width:100%;height:100%;object-fit:cover;display:block}
+.pkinfo{padding:34px 34px 30px;color:#fff;display:flex;flex-direction:column;justify-content:center}
+.pkinfo h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:26px;margin-bottom:16px}
+.pkinfo ul{list-style:none;margin:0 0 18px;padding:0}
+.pkinfo li{position:relative;padding-left:22px;font-size:14.5px;line-height:1.6;color:#CDE2DC;margin-bottom:9px}
+.pkinfo li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:50%;background:var(--mari)}
+.pkinfo small{font-size:12.5px;color:#9FC3BB}
+@media(max-width:800px){.pkcard{grid-template-columns:1fr}.pkcard figure{max-height:240px}}
 </style>
 </head>
 <body>
@@ -477,14 +496,16 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
           <div><span class="stars">★★★★★</span><br><b>Trusted by thousands of families</b> across Salem district</div>
         </div>
       </div>
-      <div class="canvas">
-        <div class="hero-arch">
+      <div class="hero-side">
+        <div class="hero-shot">
           <img src="images/campus-building.jpg" alt="A P Medical Center campus, Saradha College Road, Salem">
           <span class="ha-cap"><span class="fdot"></span>Saradha College Road, Salem</span>
         </div>
-        <div class="float f1"><div class="n">31</div><div class="l">Departments</div></div>
-        <div class="float f2"><div class="n">42</div><div class="l">Consultant doctors</div></div>
-        <div class="float f3"><div class="n">24×7</div><div class="l">Emergency care</div></div>
+        <div class="hero-stats">
+          <div><b>31</b><span>Departments</span></div>
+          <div><b>42</b><span>Consultant doctors</span></div>
+          <div><b>24&times;7</b><span>Emergency care</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -803,12 +824,17 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
         <h2>Parking is <em>never the problem.</em></h2>
       </div>
     </div>
-    <div class="duo">
-      
-      <figure>
-        <img src="images/campus-parking.jpg" alt="Free on-campus parking with 24x7 ambulance bay at A P Medical Center" loading="lazy">
-        <figcaption><span class="fdot"></span><span>Free on-campus parking<small>Two &amp; four-wheelers &middot; 24&times;7 ambulance bay</small></span></figcaption>
-      </figure>
+    <div class="pkcard">
+      <figure><img src="images/campus-parking.jpg" alt="Free on-campus parking at A P Medical Center with 24x7 ambulance bay" loading="lazy"></figure>
+      <div class="pkinfo">
+        <h3>Free on-campus parking</h3>
+        <ul>
+          <li>Separate bays for two &amp; four-wheelers</li>
+          <li>Dedicated 24&times;7 ambulance bay</li>
+          <li>Patient drop-off right at the entrance</li>
+        </ul>
+        <small>Saradha College Road, Near Alagapuram Police Station</small>
+      </div>
     </div>
   </div>
 </section>
