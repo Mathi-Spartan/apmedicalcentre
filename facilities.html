@@ -356,6 +356,17 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 .facgal figure:hover .fbadge{transform:translateY(-2px)}
 }
 @media (hover:none){.facgal figcaption small{opacity:1;transform:none}}
+
+/* facility slide-up explanation panels */
+.fac{position:relative;overflow:hidden}
+.fac-x{position:absolute;inset:0;background:var(--fx);color:#fff;border-radius:inherit;padding:24px 26px;transform:translateY(101%);transition:transform .45s cubic-bezier(.3,.7,.2,1);display:flex;flex-direction:column;justify-content:center}
+.fac-x h3{color:#fff;font-size:16px;margin-bottom:8px}
+.fac-x p{color:rgba(255,255,255,.88);font-size:13.5px;line-height:1.6}
+@media (hover:hover){
+.fac:hover .fac-x,.fac:focus-within .fac-x{transform:translateY(0)}
+.fac:hover{border-color:var(--fx);box-shadow:var(--shadow)}
+}
+@media (hover:none){.fac-x{display:none}}
 </style>
 </head>
 <body>
@@ -427,12 +438,12 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
       </div>
     </div>
     <div class="fac-grid">
-      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20l9-9M13 11l6.5-6.5a2.1 2.1 0 0 1 3 3L16 14l-5 1z"/></svg></span><span><h3>Ultra-Modern Theatre Complex</h3><p>Laminar-flow theatres for advanced laparoscopic &amp; open surgery</p></span></div>
-      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="12" r="3.5"/></svg></span><span><h3>Endoscopy Unit</h3><p>Diagnostic &amp; therapeutic endoscopy, same-day reporting</p></span></div>
-      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 4 12 2.5-6h5"/></svg></span><span><h3>ICU &amp; NICU</h3><p>Round-the-clock intensive care for adults and newborns</p></span></div>
-      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M9 3v6L4 18a2.4 2.4 0 0 0 2 3.5h12A2.4 2.4 0 0 0 20 18L15 9V3"/><path d="M7 3h10M8 14h8"/></svg></span><span><h3>Laboratory &amp; Diagnostics</h3><p>Clinical lab, radiodiagnosis &amp; fetal ultrasound</p></span></div>
-      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="7" rx="3.5" transform="rotate(-35 12 12.5)"/><path d="M9 8.5l5 7"/></svg></span><span><h3>24×7 Pharmacy</h3><p>In-house pharmacy, stocked and open at all hours</p></span></div>
-      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="16" cy="5" r="2.2"/><path d="M14 9l-4 3 2 4-4 5M10 12l-5-1M12 16l5 1 2 4"/></svg></span><span><h3>Physiotherapy</h3><p>Rehab from post-surgical recovery to sports injury</p></span></div>
+      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20l9-9M13 11l6.5-6.5a2.1 2.1 0 0 1 3 3L16 14l-5 1z"/></svg></span><span><h3>Ultra-Modern Theatre Complex</h3><p>Laminar-flow theatres for advanced laparoscopic &amp; open surgery</p></span><div class="fac-x" style="--fx:var(--pea)"><h3>Ultra-Modern Theatre Complex</h3><p>Laminar airflow keeps the surgical field sterile through every operation &mdash; the standard used in top metro hospitals. Advanced laparoscopic and open surgeries happen here with modern anaesthesia workstations.</p></div></div>
+      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="12" r="3.5"/></svg></span><span><h3>Endoscopy Unit</h3><p>Diagnostic &amp; therapeutic endoscopy, same-day reporting</p></span><div class="fac-x" style="--fx:var(--mari-deep)"><h3>Endoscopy Unit</h3><p>A camera-guided look inside the food pipe, stomach and colon &mdash; a short daycare procedure with same-day reporting, for everything from persistent acidity to preventive screening.</p></div></div>
+      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 4 12 2.5-6h5"/></svg></span><span><h3>ICU &amp; NICU</h3><p>Round-the-clock intensive care for adults and newborns</p></span><div class="fac-x" style="--fx:var(--rose)"><h3>ICU &amp; NICU</h3><p>Monitored critical-care beds for adults and a dedicated newborn ICU &mdash; specialist teams and nursing awake round the clock, every day of the year.</p></div></div>
+      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M9 3v6L4 18a2.4 2.4 0 0 0 2 3.5h12A2.4 2.4 0 0 0 20 18L15 9V3"/><path d="M7 3h10M8 14h8"/></svg></span><span><h3>Laboratory &amp; Diagnostics</h3><p>Clinical lab, radiodiagnosis &amp; fetal ultrasound</p></span><div class="fac-x" style="--fx:var(--peacock)"><h3>Laboratory &amp; Diagnostics</h3><p>Clinical lab, X-ray, ultrasound and fetal scanning under one roof &mdash; so your tests, reports and doctor&rsquo;s review can happen in a single visit.</p></div></div>
+      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="7" rx="3.5" transform="rotate(-35 12 12.5)"/><path d="M9 8.5l5 7"/></svg></span><span><h3>24×7 Pharmacy</h3><p>In-house pharmacy, stocked and open at all hours</p></span><div class="fac-x" style="--fx:var(--plum)"><h3>24×7 Pharmacy</h3><p>Stocked and open at all hours &mdash; including the emergency medicine you need at 3 AM. You never leave with a prescription unfilled.</p></div></div>
+      <div class="fac"><span class="ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="16" cy="5" r="2.2"/><path d="M14 9l-4 3 2 4-4 5M10 12l-5-1M12 16l5 1 2 4"/></svg></span><span><h3>Physiotherapy</h3><p>Rehab from post-surgical recovery to sports injury</p></span><div class="fac-x" style="--fx:var(--sky)"><h3>Physiotherapy</h3><p>Guided rehabilitation from post-surgical recovery to sports injury &mdash; regaining strength and confident movement, session by session.</p></div></div>
     </div>
     <div style="margin-top:52px;text-align:center">
       <a class="btn btn-p" href="appointment.html" style="padding:16px 34px">Book an appointment</a>
@@ -473,7 +484,7 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 <script>
 (function(){
   if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
-  var els = document.querySelectorAll('.doc, .facgal figure');
+  var els = document.querySelectorAll('.facgal figure, .fac');
   els.forEach(function(el,i){ el.classList.add('rv'); el.style.transitionDelay = (i % 4) * 90 + 'ms'; });
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
