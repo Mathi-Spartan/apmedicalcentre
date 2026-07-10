@@ -337,6 +337,24 @@ nav.main a:not(.on):hover{background:transparent}
 .topbar b{color:var(--mari)}
 .topbar .pulse i{box-shadow:0 0 0 0 rgba(255,138,115,.6);animation:blink 1.8s infinite,ping 1.8s infinite}
 @keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,138,115,.55)}70%{box-shadow:0 0 0 7px rgba(255,138,115,0)}100%{box-shadow:0 0 0 0 rgba(255,138,115,0)}}
+
+:root{--sky:#41799F;--sky-soft:#E9F1F7;--peacock:#1F6E8C;--peacock-soft:#E6F1F5;--plum:#7D5798;--plum-soft:#F1EBF6}
+/* doctor portrait bloom */
+@media (prefers-reduced-motion: no-preference){
+.rv{opacity:0;transform:translateY(24px);transition:opacity .65s cubic-bezier(.2,.7,.2,1),transform .65s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.doc{position:relative;transition:transform .3s cubic-bezier(.3,.7,.2,1),box-shadow .3s,border-color .3s}
+.doc:hover{transform:translateY(-6px);box-shadow:0 24px 50px -20px rgba(9,59,51,.3);border-color:var(--dc,var(--pea));z-index:6}
+.doc .av{transition:transform .5s cubic-bezier(.34,1.45,.5,1)}
+.doc:hover .av{transform:scale(1.32) translateY(-5px);z-index:2}
+.doc .av img{transition:transform .5s ease}
+.doc:hover .av img{transform:scale(1.06)}
+.doc .av::after{transition:opacity .3s}
+.doc:hover .av::after{opacity:1;animation:ringspin 9s linear infinite}
+.doc .spec{display:inline-block;transition:background .3s,color .3s,padding .3s,transform .35s cubic-bezier(.34,1.5,.5,1);border-radius:999px}
+.doc:hover .spec{background:var(--dc,var(--pea));color:#fff;padding:5px 14px;transform:scale(1.06)}
+@keyframes ringspin{to{transform:rotate(360deg)}}
+}
 </style>
 </head>
 <body>
@@ -763,6 +781,36 @@ nav.main a:not(.on):hover{background:transparent}
   }
   addEventListener('scroll', onScroll, {passive:true});
   onScroll();
+})();
+</script>
+
+<script>
+(function(){
+  // specialty family -> jewel tint
+  var map = [
+    [/gastro/i,'var(--pea)'],[/obstet|fertil|fetal|gyn/i,'var(--mari-deep)'],
+    [/neonat|paed/i,'var(--mari-deep)'],[/cardio|pulmo|vascular/i,'var(--rose)'],
+    [/neuro|psych/i,'var(--plum)'],[/nephro|urolog/i,'var(--peacock)'],
+    [/ortho|arthro|sports/i,'var(--sky)'],[/derma|ent|endocrin|diabet/i,'var(--mari-deep)'],
+    [/emergency|palliat|anaesth|general|radio|oncol|plastic|maxillo/i,'var(--pea)']
+  ];
+  document.querySelectorAll('.doc').forEach(function(card){
+    var s = card.querySelector('.spec');
+    if (!s) return;
+    var t = s.textContent;
+    for (var i=0;i<map.length;i++){ if (map[i][0].test(t)) { card.style.setProperty('--dc', map[i][1]); break; } }
+  });
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  var els = document.querySelectorAll('.doc');
+  els.forEach(function(el,i){ el.classList.add('rv'); el.style.transitionDelay = (i % 4) * 80 + 'ms'; });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var el = e.target; el.classList.add('in'); io.unobserve(el);
+      setTimeout(function(){ el.classList.remove('rv','in'); el.style.transitionDelay=''; }, 900);
+    });
+  }, {threshold:.12, rootMargin:'0px 0px -5% 0px'});
+  els.forEach(function(el){ io.observe(el); });
 })();
 </script>
 </body>
