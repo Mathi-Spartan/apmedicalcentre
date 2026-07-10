@@ -368,6 +368,27 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 }
 @media (hover:none){.fac-x{display:none}}
 :root{--sky:#41799F;--sky-soft:#E9F1F7;--peacock:#1F6E8C;--peacock-soft:#E6F1F5;--plum:#7D5798;--plum-soft:#F1EBF6}
+
+/* modern header behavior */
+header{transition:box-shadow .35s ease,background .35s ease}
+header .wrap{transition:height .35s cubic-bezier(.3,.7,.2,1)}
+.brand .mark{transition:transform .35s cubic-bezier(.3,.7,.2,1)}
+body.hdr-scrolled header{background:rgba(250,248,243,.78);backdrop-filter:blur(16px) saturate(1.5);box-shadow:0 8px 30px -18px rgba(23,33,29,.25)}
+body.hdr-scrolled header .wrap{height:62px}
+body.hdr-scrolled .brand .mark{transform:scale(.88)}
+/* nav underline animation */
+nav.main a{position:relative}
+nav.main a:not(.on)::after{content:"";position:absolute;left:16px;right:16px;bottom:5px;height:2px;background:var(--mari);border-radius:2px;transform:scaleX(0);transform-origin:center;transition:transform .3s cubic-bezier(.3,.7,.2,1)}
+nav.main a:not(.on):hover::after{transform:scaleX(1)}
+nav.main a:not(.on):hover{background:transparent}
+/* CTA choreography */
+.btn-m{transition:transform .25s cubic-bezier(.3,.7,.2,1),box-shadow .25s,background .25s}
+.btn-m:hover{transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(201,127,30,.55);background:var(--mari-deep);color:#fff}
+/* topbar polish */
+.topbar{letter-spacing:.01em}
+.topbar b{color:var(--mari)}
+.topbar .pulse i{box-shadow:0 0 0 0 rgba(255,138,115,.6);animation:blink 1.8s infinite,ping 1.8s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,138,115,.55)}70%{box-shadow:0 0 0 7px rgba(255,138,115,0)}100%{box-shadow:0 0 0 0 rgba(255,138,115,0)}}
 </style>
 </head>
 <body>
@@ -497,6 +518,22 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
     });
   }, {threshold:.15, rootMargin:'0px 0px -6% 0px'});
   els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+<script>
+(function(){
+  var ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      document.body.classList.toggle('hdr-scrolled', scrollY > 24);
+      ticking = false;
+    });
+  }
+  addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
 })();
 </script>
 </body>
