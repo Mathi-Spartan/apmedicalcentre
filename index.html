@@ -481,6 +481,19 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 @keyframes ringspin{to{transform:rotate(360deg)}}
 }
 
+/* hero: our doctors rotator */
+.ha-docs{position:absolute;top:14px;right:14px;z-index:5;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(14,83,72,.14);border-radius:16px;padding:8px 14px 8px 9px;box-shadow:0 10px 30px -12px rgba(9,59,51,.28)}
+.ha-docs .hd-label{position:absolute;top:-9px;left:12px;display:flex;align-items:center;gap:5px;background:var(--pea);color:#fff;font-family:'Figtree';font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:99px}
+.ha-docs .hd-dot{width:6px;height:6px;border-radius:50%;background:#7BE3A6;animation:hdPulse 1.8s ease-in-out infinite}
+@keyframes hdPulse{0%,100%{box-shadow:0 0 0 0 rgba(123,227,166,.6)}50%{box-shadow:0 0 0 5px rgba(123,227,166,0)}}
+.ha-docs .hd-face{width:44px;height:44px;border-radius:50%;overflow:hidden;flex:none;box-shadow:inset 0 0 0 2px rgba(14,83,72,.18)}
+.ha-docs .hd-face img{width:100%;height:100%;object-fit:cover;object-position:top;transition:opacity .45s ease,transform .45s ease}
+.ha-docs .hd-meta{display:flex;flex-direction:column;line-height:1.25;transition:opacity .45s ease,transform .45s ease}
+.ha-docs .hd-meta b{font-family:'Figtree';font-size:12.5px;font-weight:800;color:var(--ink)}
+.ha-docs .hd-meta span{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--pea)}
+.ha-docs.fading .hd-face img,.ha-docs.fading .hd-meta{opacity:0;transform:translateY(4px)}
+@media (max-width:640px){.ha-docs{top:10px;right:10px;padding:6px 10px 6px 7px}.ha-docs .hd-face{width:36px;height:36px}.ha-docs .hd-meta b{font-size:11px}.ha-docs .hd-meta span{font-size:9px}}
+
 /* floating dept tooltip */
 #tipfloat{position:fixed;z-index:70;background:var(--ink);color:var(--paper);font-family:'Figtree';font-size:12.5px;font-weight:500;line-height:1.55;padding:10px 14px;border-radius:11px;max-width:270px;text-align:center;pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .18s,transform .18s;box-shadow:0 10px 28px -8px rgba(23,33,29,.35)}
 #tipfloat.show{opacity:1;transform:translateY(0)}
@@ -567,6 +580,11 @@ nav.main a:not(.on):hover{background:transparent}
         <div class="hero-shot">
           <img src="images/campus-building.jpg" alt="A P Medical Center campus, Saradha College Road, Salem">
           <span class="ha-cap"><span class="fdot"></span>Saradha College Road, Salem</span>
+          <div class="ha-docs" id="haDocs">
+            <span class="hd-label"><span class="hd-dot"></span>Our doctors</span>
+            <div class="hd-face"><img id="hdImg" src="images/doctors/dr-shankar-narayanan.jpg" alt="Doctor at A P Medical Center"></div>
+            <div class="hd-meta"><b id="hdName">Dr. A. P. Shankar Narayanan</b><span id="hdSpec">Surgical Gastroenterology</span></div>
+          </div>
         </div>
         <div class="hero-stats">
           <div><b>31</b><span>Departments</span></div>
@@ -1045,6 +1063,39 @@ nav.main a:not(.on):hover{background:transparent}
   }
   addEventListener('scroll', onScroll, {passive:true});
   onScroll();
+})();
+</script>
+<script>
+(function(){
+  var docs=[
+    ["dr-shankar-narayanan.jpg","Dr. A. P. Shankar Narayanan","Surgical Gastroenterology"],
+    ["dr-kirana-selvi.jpg","Dr. G. Kirana Selvi","Obstetrics · Fertility"],
+    ["dr-suresh-perumal.jpg","Dr. Suresh Perumal","Sports Medicine"],
+    ["dr-dinesh.jpg","Dr. K. Dinesh","Paediatrics"],
+    ["dr-justin.jpg","Dr. P. Justin","Anaesthesiology"],
+    ["dr-anjankumar.jpg","Dr. S. Anjankumar","ENT Surgery"],
+    ["dr-rathna-maheswari.png","Dr. K. S. Sri Rathna Maheswari","Dermatology"],
+    ["dr-sathiskumar.png","Dr. V. Sathiskumar","General Medicine"],
+    ["dr-kavya.jpg","Dr. Kavya","Nephrology"],
+    ["dr-divya.png","Dr. G. Divya","Obstetrics & Gynecology"],
+    ["dr-madhumitha.png","Dr. M. Madhumitha Arunkarthick","Obstetrics & Gynecology"],
+    ["dr-narendran.jpg","Dr. P. Narendran","Orthopedic Surgery"],
+    ["dr-karthikeyan.png","Dr. R. Karthikeyan","Psychiatry"],
+    ["dr-samundram.jpg","Dr. S. Samundram","Pulmonology"],
+    ["dr-sivaranjanie.jpg","Dr. S. Sivaranjanie","Radiodiagnosis · Fetal Medicine"],
+    ["dr-babu-rangarajan.png","Dr. Babu Rangarajan","Clinical Psychology"]
+  ];
+  var box=document.getElementById('haDocs');if(!box)return;
+  var img=document.getElementById('hdImg'),nm=document.getElementById('hdName'),sp=document.getElementById('hdSpec'),i=0;
+  docs.forEach(function(d){(new Image()).src='images/doctors/'+d[0];});
+  setInterval(function(){
+    box.classList.add('fading');
+    setTimeout(function(){
+      i=(i+1)%docs.length;
+      img.src='images/doctors/'+docs[i][0];nm.textContent=docs[i][1];sp.textContent=docs[i][2];
+      box.classList.remove('fading');
+    },450);
+  },3000);
 })();
 </script>
 </body>
