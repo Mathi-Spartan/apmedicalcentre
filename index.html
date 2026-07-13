@@ -507,8 +507,30 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 #docModal{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:20px}
 #docModal.open{display:flex}
 #docModal .dm-bg{position:absolute;inset:0;background:rgba(23,33,29,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-#docModal .dm-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:26px;max-width:430px;width:100%;padding:34px 30px 30px;text-align:center;box-shadow:0 30px 80px -20px rgba(9,59,51,.4);animation:dmPop .5s cubic-bezier(.34,1.6,.4,1)}
-@keyframes dmPop{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:none}}
+#docModal .dm-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:26px;max-width:430px;width:100%;padding:40px 30px 30px;text-align:center;box-shadow:0 30px 80px -20px rgba(9,59,51,.4);overflow:hidden}
+#docModal.open .dm-card{animation:dmPop .55s cubic-bezier(.34,1.6,.4,1)}
+#docModal.closing .dm-card{animation:dmOut .25s ease forwards}
+#docModal.closing .dm-bg{animation:dmFade .25s ease forwards}
+@keyframes dmPop{from{opacity:0;transform:translateY(22px) scale(.93)}to{opacity:1;transform:none}}
+@keyframes dmOut{to{opacity:0;transform:translateY(16px) scale(.96)}}
+@keyframes dmFade{to{opacity:0}}
+#docModal .ecg{position:absolute;top:0;left:0;width:100%;height:34px;pointer-events:none}
+#docModal .ecg path{fill:none;stroke:var(--mari);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:520;stroke-dashoffset:520;opacity:0}
+#docModal.open .ecg path{animation:ecgDraw 1.1s ease-out .15s forwards,ecgDim 1s ease 1.3s forwards}
+@keyframes ecgDraw{0%{stroke-dashoffset:520;opacity:1}100%{stroke-dashoffset:0;opacity:1}}
+@keyframes ecgDim{to{opacity:.28;stroke-width:1}}
+#docModal .dm-ph{position:relative}
+#docModal .dm-ph::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid transparent;border-top-color:var(--pea);border-right-color:var(--pea)}
+#docModal.open .dm-ph::after{animation:ringDraw .9s cubic-bezier(.4,.2,.2,1) .2s forwards}
+@keyframes ringDraw{from{transform:rotate(-220deg);opacity:0}to{transform:rotate(0);opacity:1;border-color:rgba(14,83,72,.35)}}
+#docModal .cas{opacity:0;transform:translateY(14px)}
+#docModal.open .cas{animation:casUp .55s cubic-bezier(.34,1.7,.4,1) forwards}
+@keyframes casUp{to{opacity:1;transform:none}}
+#docModal .dm-tags span{opacity:0;transform:scale(.6)}
+#docModal.open .dm-tags span{animation:tagPop .5s cubic-bezier(.34,2,.4,1) forwards}
+#docModal.open .btn{animation:casUp .55s cubic-bezier(.34,1.7,.4,1) forwards,btnBreathe .7s ease 1.25s 1}
+@keyframes tagPop{to{opacity:1;transform:scale(1)}}
+@keyframes btnBreathe{50%{transform:scale(1.035)}}
 #docModal .dm-x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;cursor:pointer;transition:transform .3s}
 #docModal .dm-x:hover{transform:rotate(90deg)}
 #docModal .dm-ph{width:110px;height:110px;border-radius:50%;overflow:hidden;margin:0 auto 16px;box-shadow:inset 0 0 0 2px rgba(14,83,72,.18),0 12px 30px -12px rgba(9,59,51,.35)}
@@ -1135,14 +1157,14 @@ nav.main a:not(.on):hover{background:transparent}
     dinesh:{img:"dr-dinesh.jpg",n:"Dr. K. Dinesh",sp:"Paediatrics",exp:"12+ years experience",q:"M.D (Paediatrics), PGPN (Boston, USA)",bio:"Consultant Paediatrician with postgraduate training in paediatric nutrition (PGPN, Boston). Cares for infants, children and adolescents across everyday illness, growth and nutrition.",tags:["General paediatrics","Paediatric nutrition"]}
   };
   var m=document.createElement('div');m.id='docModal';
-  m.innerHTML='<div class="dm-bg"></div><div class="dm-card"><button class="dm-x" aria-label="Close">&#10005;</button><div class="dm-ph"><img alt=""></div><h3></h3><div class="dm-spec"></div><div><span class="dm-exp"></span></div><p class="dm-bio"></p><div class="dm-tags"></div><div class="dm-qual"></div><a class="btn" href="appointment.html">Book consult</a></div>';
+  m.innerHTML='<div class="dm-bg"></div><div class="dm-card"><svg class="ecg" viewBox="0 0 430 34" preserveAspectRatio="none"><path d="M0 22 H130 L150 22 L162 8 L172 30 L182 14 L192 22 H430"/></svg><button class="dm-x" aria-label="Close">&#10005;</button><div class="dm-ph cas" style="animation-delay:.12s"><img alt=""></div><h3 class="cas" style="animation-delay:.24s"></h3><div class="dm-spec cas" style="animation-delay:.3s"></div><div class="cas" style="animation-delay:.36s"><span class="dm-exp"></span></div><p class="dm-bio cas" style="animation-delay:.44s"></p><div class="dm-tags"></div><div class="dm-qual cas" style="animation-delay:.72s"></div><a class="btn cas" style="animation-delay:.8s" href="appointment.html">Book consult</a></div>';
   document.body.appendChild(m);
-  function close(){m.classList.remove('open');document.body.style.overflow=''}
+  function close(){m.classList.add('closing');setTimeout(function(){m.classList.remove('open');m.classList.remove('closing');document.body.style.overflow=''},240)}
   m.querySelector('.dm-bg').addEventListener('click',close);
   m.querySelector('.dm-x').addEventListener('click',close);
   document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
   document.querySelectorAll('.doc[data-doc]').forEach(function(card){
-    var pill=document.createElement('span');pill.className='vp';pill.textContent='Profile';card.appendChild(pill);
+    var pill=document.createElement('span');pill.className='vp';pill.innerHTML='<span class="tamil">\u0b85\u0bb1\u0bbf\u0b95</span> \u00b7 Meet';card.appendChild(pill);
     card.addEventListener('click',function(e){
       if(e.target.closest('.btn'))return;
       var d=D[card.dataset.doc];if(!d)return;
@@ -1153,8 +1175,8 @@ nav.main a:not(.on):hover{background:transparent}
       m.querySelector('.dm-exp').textContent=d.exp;
       m.querySelector('.dm-bio').textContent=d.bio;
       m.querySelector('.dm-qual').textContent=d.q;
-      m.querySelector('.dm-tags').innerHTML=d.tags.map(function(t){return '<span>'+t+'</span>'}).join('');
-      m.classList.add('open');document.body.style.overflow='hidden';
+      m.querySelector('.dm-tags').innerHTML=d.tags.map(function(t,i){return '<span style="animation-delay:'+(0.52+i*0.09)+'s">'+t+'</span>'}).join('');
+      m.classList.remove('open');void m.offsetWidth;m.classList.add('open');document.body.style.overflow='hidden';
     });
   });
 })();
