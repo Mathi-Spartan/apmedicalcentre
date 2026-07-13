@@ -495,8 +495,14 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 @media (max-width:640px){.ha-docs{top:10px;right:10px;padding:6px 10px 6px 7px}.ha-docs .hd-face{width:36px;height:36px}.ha-docs .hd-meta b{font-size:11px}.ha-docs .hd-meta span{font-size:9px}}
 
 /* doctor profile pill + modal */
-.doc .vp{position:absolute;left:50%;bottom:70px;transform:translate(-50%,8px) scale(.9);opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);font-family:'Figtree';font-size:11.5px;font-weight:700;letter-spacing:.03em;padding:6px 13px;border-radius:99px;transition:opacity .35s ease,transform .45s cubic-bezier(.34,1.8,.4,1);white-space:nowrap;z-index:4}
-.doc[data-doc]:hover .vp{opacity:1;transform:translate(-50%,0) scale(1);pointer-events:auto}
+.doc .vp{position:absolute;top:12px;right:12px;display:inline-flex;align-items:center;gap:6px;opacity:0;transform:translateY(-6px) rotate(4deg) scale(.85);pointer-events:none;background:rgba(255,255,255,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--pea);border:1px solid rgba(14,83,72,.22);font-family:'Figtree';font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:7px 12px;border-radius:99px;box-shadow:0 8px 22px -10px rgba(9,59,51,.35);transition:opacity .3s ease,transform .5s cubic-bezier(.34,1.9,.4,1);white-space:nowrap;z-index:4;overflow:hidden}
+.doc .vp::before{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.85),transparent);transform:skewX(-18deg)}
+.doc .vp::after{content:"\2197";font-size:12px;transition:transform .3s cubic-bezier(.34,1.9,.4,1)}
+.doc[data-doc]:hover .vp{opacity:1;transform:translateY(0) rotate(0) scale(1);pointer-events:auto}
+.doc[data-doc]:hover .vp::before{animation:vpShine .9s ease .25s 1}
+.doc .vp:hover{color:#fff;background:var(--pea);border-color:var(--pea)}
+.doc .vp:hover::after{transform:translate(2px,-2px)}
+@keyframes vpShine{from{left:-70%}to{left:130%}}
 .doc[data-doc]{cursor:pointer}
 #docModal{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:20px}
 #docModal.open{display:flex}
@@ -1136,7 +1142,7 @@ nav.main a:not(.on):hover{background:transparent}
   m.querySelector('.dm-x').addEventListener('click',close);
   document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
   document.querySelectorAll('.doc[data-doc]').forEach(function(card){
-    var pill=document.createElement('span');pill.className='vp';pill.textContent='View profile \u2192';card.appendChild(pill);
+    var pill=document.createElement('span');pill.className='vp';pill.textContent='Profile';card.appendChild(pill);
     card.addEventListener('click',function(e){
       if(e.target.closest('.btn'))return;
       var d=D[card.dataset.doc];if(!d)return;
