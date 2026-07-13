@@ -494,6 +494,28 @@ footer .fbrand{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;ma
 .ha-docs.fading .hd-face img,.ha-docs.fading .hd-meta{opacity:0;transform:translateY(4px)}
 @media (max-width:640px){.ha-docs{top:10px;right:10px;padding:6px 10px 6px 7px}.ha-docs .hd-face{width:36px;height:36px}.ha-docs .hd-meta b{font-size:11px}.ha-docs .hd-meta span{font-size:9px}}
 
+/* doctor profile pill + modal */
+.doc .vp{position:absolute;left:50%;bottom:70px;transform:translate(-50%,8px) scale(.9);opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);font-family:'Figtree';font-size:11.5px;font-weight:700;letter-spacing:.03em;padding:6px 13px;border-radius:99px;transition:opacity .35s ease,transform .45s cubic-bezier(.34,1.8,.4,1);white-space:nowrap;z-index:4}
+.doc[data-doc]:hover .vp{opacity:1;transform:translate(-50%,0) scale(1);pointer-events:auto}
+.doc[data-doc]{cursor:pointer}
+#docModal{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:20px}
+#docModal.open{display:flex}
+#docModal .dm-bg{position:absolute;inset:0;background:rgba(23,33,29,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+#docModal .dm-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:26px;max-width:430px;width:100%;padding:34px 30px 30px;text-align:center;box-shadow:0 30px 80px -20px rgba(9,59,51,.4);animation:dmPop .5s cubic-bezier(.34,1.6,.4,1)}
+@keyframes dmPop{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:none}}
+#docModal .dm-x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;cursor:pointer;transition:transform .3s}
+#docModal .dm-x:hover{transform:rotate(90deg)}
+#docModal .dm-ph{width:110px;height:110px;border-radius:50%;overflow:hidden;margin:0 auto 16px;box-shadow:inset 0 0 0 2px rgba(14,83,72,.18),0 12px 30px -12px rgba(9,59,51,.35)}
+#docModal .dm-ph img{width:100%;height:100%;object-fit:cover;object-position:top}
+#docModal h3{font-family:'Figtree';font-weight:800;font-size:19px}
+#docModal .dm-spec{color:var(--rose);font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;margin:5px 0 3px}
+#docModal .dm-exp{display:inline-block;background:var(--pea-soft);color:var(--pea);font-size:12px;font-weight:800;padding:3px 12px;border-radius:99px;margin:6px 0 12px}
+#docModal .dm-bio{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:14px}
+#docModal .dm-tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-bottom:18px}
+#docModal .dm-tags span{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--paper);border:1px solid var(--line);color:var(--ink);padding:5px 11px;border-radius:99px}
+#docModal .dm-qual{font-size:11.5px;color:var(--muted);margin-bottom:16px}
+#docModal .btn{width:100%}
+
 /* floating dept tooltip */
 #tipfloat{position:fixed;z-index:70;background:var(--ink);color:var(--paper);font-family:'Figtree';font-size:12.5px;font-weight:500;line-height:1.55;padding:10px 14px;border-radius:11px;max-width:270px;text-align:center;pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .18s,transform .18s;box-shadow:0 10px 28px -8px rgba(23,33,29,.35)}
 #tipfloat.show{opacity:1;transform:translateY(0)}
@@ -708,28 +730,28 @@ nav.main a:not(.on):hover{background:transparent}
     </div>
     <div class="doc-grid">
       
-      <div class="doc">
+      <div class="doc" data-doc="shankar">
         <div class="av"><b>SN</b><img src="images/doctors/dr-shankar-narayanan.jpg" alt="Dr. A. P. Shankar Narayanan"><span class="plus"><svg class="ico" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></span></div>
         <h3>Dr. A. P. Shankar Narayanan</h3><div class="spec">Surgical Gastroenterology</div>
         <div class="qual">M.S, M.Ch (SGE), FMAS, Fellow HPB &amp; Colorectal</div>
         <a class="btn btn-o" href="appointment.html">Book consult</a>
       </div>
       
-      <div class="doc">
+      <div class="doc" data-doc="kirana">
         <div class="av"><b>KS</b><img src="images/doctors/dr-kirana-selvi.jpg" alt="Dr. G. Kirana Selvi"><span class="plus"><svg class="ico" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></span></div>
         <h3>Dr. G. Kirana Selvi</h3><div class="spec">Obstetrics &amp; Fertility</div>
         <div class="qual">M.S (OG), DRM (Germany), FAMS, FICS</div>
         <a class="btn btn-o" href="appointment.html">Book consult</a>
       </div>
       
-      <div class="doc">
+      <div class="doc" data-doc="sureshp">
         <div class="av"><b>SP</b><img src="images/doctors/dr-suresh-perumal.jpg" alt="Dr. Suresh Perumal"><span class="plus"><svg class="ico" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></span></div>
         <h3>Dr. Suresh Perumal</h3><div class="spec">Sports Medicine</div>
         <div class="qual">M.S (Ortho), M.Ch (Ortho)</div>
         <a class="btn btn-o" href="appointment.html">Book consult</a>
       </div>
       
-      <div class="doc">
+      <div class="doc" data-doc="dinesh">
         <div class="av"><b>DI</b><img src="images/doctors/dr-dinesh.jpg" alt="Dr. K. Dinesh"><span class="plus"><svg class="ico" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></span></div>
         <h3>Dr. K. Dinesh</h3><div class="spec">Paediatrics</div>
         <div class="qual">M.D (Paed), PGPN (Boston, USA)</div>
@@ -1097,6 +1119,47 @@ nav.main a:not(.on):hover{background:transparent}
     },450);
   },3000);
 })();
+</script>
+<script>
+(function(){
+  var D={
+    shankar:{img:"dr-shankar-narayanan.jpg",n:"Dr. A. P. Shankar Narayanan",sp:"Surgical Gastroenterology",exp:"16+ years experience",q:"M.S, M.Ch (SGE), FMAS, DMAS, FIAGES, FICS, Fellow in HPB & Colorectal Surgery",bio:"Consultant Surgical Gastroenterologist trained in advanced laparoscopic and gastrointestinal surgery, with fellowship training in hepato-pancreato-biliary (HPB) and colorectal surgery.",tags:["Laparoscopic GI surgery","HPB surgery","Colorectal surgery"]},
+    kirana:{img:"dr-kirana-selvi.jpg",n:"Dr. G. Kirana Selvi",sp:"Obstetrics & Fertility",exp:"10+ years experience",q:"M.S (OG), DRM (Germany), FAMS, CCGDM, FICS",bio:"Consultant Obstetrician & Gynaecologist with reproductive medicine training in Germany (DRM). Focus areas include high-risk pregnancy care, fertility treatment and minimally invasive gynaecological surgery.",tags:["High-risk pregnancy","Fertility treatment","Minimally invasive gynae surgery"]},
+    sureshp:{img:"dr-suresh-perumal.jpg",n:"Dr. Suresh Perumal",sp:"Arthroscopy & Sports Medicine",exp:"16+ years experience",q:"M.S (Ortho), M.Ch (Ortho)",bio:"Consultant Orthopaedic Surgeon focusing on arthroscopic (keyhole) joint surgery and sports injury care, helping athletes and active patients return to confident movement.",tags:["Arthroscopy","Sports injuries","Joint preservation"]},
+    dinesh:{img:"dr-dinesh.jpg",n:"Dr. K. Dinesh",sp:"Paediatrics",exp:"12+ years experience",q:"M.D (Paediatrics), PGPN (Boston, USA)",bio:"Consultant Paediatrician with postgraduate training in paediatric nutrition (PGPN, Boston). Cares for infants, children and adolescents across everyday illness, growth and nutrition.",tags:["General paediatrics","Paediatric nutrition"]}
+  };
+  var m=document.createElement('div');m.id='docModal';
+  m.innerHTML='<div class="dm-bg"></div><div class="dm-card"><button class="dm-x" aria-label="Close">&#10005;</button><div class="dm-ph"><img alt=""></div><h3></h3><div class="dm-spec"></div><div><span class="dm-exp"></span></div><p class="dm-bio"></p><div class="dm-tags"></div><div class="dm-qual"></div><a class="btn" href="appointment.html">Book consult</a></div>';
+  document.body.appendChild(m);
+  function close(){m.classList.remove('open');document.body.style.overflow=''}
+  m.querySelector('.dm-bg').addEventListener('click',close);
+  m.querySelector('.dm-x').addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+  document.querySelectorAll('.doc[data-doc]').forEach(function(card){
+    var pill=document.createElement('span');pill.className='vp';pill.textContent='View profile \u2192';card.appendChild(pill);
+    card.addEventListener('click',function(e){
+      if(e.target.closest('.btn'))return;
+      var d=D[card.dataset.doc];if(!d)return;
+      m.querySelector('.dm-ph img').src='images/doctors/'+d.img;
+      m.querySelector('.dm-ph img').alt=d.n;
+      m.querySelector('h3').textContent=d.n;
+      m.querySelector('.dm-spec').textContent=d.sp;
+      m.querySelector('.dm-exp').textContent=d.exp;
+      m.querySelector('.dm-bio').textContent=d.bio;
+      m.querySelector('.dm-qual').textContent=d.q;
+      m.querySelector('.dm-tags').innerHTML=d.tags.map(function(t){return '<span>'+t+'</span>'}).join('');
+      m.classList.add('open');document.body.style.overflow='hidden';
+    });
+  });
+})();
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"Physician","name":"Dr. A. P. Shankar Narayanan","medicalSpecialty":"Gastroenterologic Surgery","worksFor":{"@type":"Hospital","name":"A P Medical Center","address":"Saradha College Road, Salem, Tamil Nadu 636016"},"image":"https://apmedicalcentre.vercel.app/images/doctors/dr-shankar-narayanan.jpg"},
+{"@type":"Physician","name":"Dr. G. Kirana Selvi","medicalSpecialty":"Obstetrics and Gynaecology","worksFor":{"@type":"Hospital","name":"A P Medical Center","address":"Saradha College Road, Salem, Tamil Nadu 636016"},"image":"https://apmedicalcentre.vercel.app/images/doctors/dr-kirana-selvi.jpg"},
+{"@type":"Physician","name":"Dr. Suresh Perumal","medicalSpecialty":"Orthopedic Surgery","worksFor":{"@type":"Hospital","name":"A P Medical Center","address":"Saradha College Road, Salem, Tamil Nadu 636016"},"image":"https://apmedicalcentre.vercel.app/images/doctors/dr-suresh-perumal.jpg"},
+{"@type":"Physician","name":"Dr. K. Dinesh","medicalSpecialty":"Pediatrics","worksFor":{"@type":"Hospital","name":"A P Medical Center","address":"Saradha College Road, Salem, Tamil Nadu 636016"},"image":"https://apmedicalcentre.vercel.app/images/doctors/dr-dinesh.jpg"}
+]}
 </script>
 </body>
 </html>
