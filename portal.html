@@ -381,9 +381,9 @@ function loadAll(){loadInbox();loadDay();loadBlocks();loadTimings();if(isAdmin)l
 
 function loadInbox(){
   var now=new Date().toISOString(),p30=new Date(Date.now()-30*864e5).toISOString();
-  var q1=sb.from('appointments').select('*,doctors(full_name)').eq('status','pending').order('slot_start');
-  var q2=sb.from('appointments').select('*,doctors(full_name)').eq('status','confirmed').gte('slot_start',now).order('slot_start');
-  var q3=sb.from('appointments').select('*,doctors(full_name)').in('status',['completed','rejected','cancelled_by_doctor','cancelled_by_patient','rescheduled','no_show']).gte('slot_start',p30).order('slot_start',{ascending:false}).limit(40);
+  var q1=sb.from('appointments').select('id,booking_ref,patient_name,patient_phone,reason,slot_start,slot_end,status,doctor_id,doctors!appointments_doctor_id_fkey(full_name)').eq('status','pending').order('slot_start');
+  var q2=sb.from('appointments').select('id,booking_ref,patient_name,patient_phone,reason,slot_start,slot_end,status,doctor_id,doctors!appointments_doctor_id_fkey(full_name)').eq('status','confirmed').gte('slot_start',now).order('slot_start');
+  var q3=sb.from('appointments').select('id,booking_ref,patient_name,patient_phone,reason,slot_start,slot_end,status,doctor_id,doctors!appointments_doctor_id_fkey(full_name)').in('status',['completed','rejected','cancelled_by_doctor','cancelled_by_patient','rescheduled','no_show']).gte('slot_start',p30).order('slot_start',{ascending:false}).limit(40);
   if(!isAdmin){q1=q1.eq('doctor_id',me.id);q2=q2.eq('doctor_id',me.id);q3=q3.eq('doctor_id',me.id);}
   Promise.all([q1,q2,q3]).then(([r1,r2,r3])=>{
     cache.pending=r1.data||[];cache.upcoming=r2.data||[];cache.past=r3.data||[];
@@ -501,7 +501,7 @@ $('dayToday').addEventListener('click',()=>{$('dayDate').value=todayK();loadDay(
 function loadDay(){
   var day=$('dayDate').value;if(!day)return;
   var from=new Date(day+'T00:00:00+05:30').toISOString(),to=new Date(day+'T23:59:59+05:30').toISOString();
-  var q=sb.from('appointments').select('*,doctors(full_name)').gte('slot_start',from).lte('slot_start',to).in('status',['pending','confirmed']).order('slot_start');
+  var q=sb.from('appointments').select('id,booking_ref,patient_name,patient_phone,reason,slot_start,slot_end,status,doctor_id,doctors!appointments_doctor_id_fkey(full_name)').gte('slot_start',from).lte('slot_start',to).in('status',['pending','confirmed']).order('slot_start');
   if(!isAdmin)q=q.eq('doctor_id',me.id);
   var bq=sb.from('slot_blocks').select('*').eq('doctor_id',me.id).lte('start_at',to).gte('end_at',from).order('start_at');
   Promise.all([q,bq]).then(([r,br])=>{
