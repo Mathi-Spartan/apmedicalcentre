@@ -249,10 +249,23 @@ document.querySelectorAll('.tab').forEach(function(t){
 function loadReqs(){
   var q=sb.from('appointments').select('*, doctors(full_name)').eq('status','pending').order('slot_start');
   if(!isAdmin) q=q.eq('doctor_id',me.id);
-  q.then(function(r){
+  var q2=sb.from('appointments_legacy').select('*').eq('status','new').order('created_at',{ascending:false});
+  if(!isAdmin) q2=q2.eq('doctor', me.full_name);
+  Promise.all([q,q2]).then(function(rr){
+    var r=rr[0], legacy=rr[1].data||[];
     var box=$('p-reqs');var rows=r.data||[];
-    $('nReq').style.display=rows.length?'grid':'none';$('nReq').textContent=rows.length;
-    if(!rows.length){box.innerHTML='<div class="empty"><div class="big">\u2728</div>No pending requests \u2014 all caught up.</div>';return;}
+    $('nReq').style.display=(rows.length+legacy.length)?'grid':'none';$('nReq').textContent=rows.length+legacy.length;
+    var lHtml='';
+    if(legacy.length){
+      lHtml='<div class="sect">Call-back requests (no fixed slot \u2014 desk to phone the patient)</div>'
+        +legacy.map(function(a){
+          return '<div class="acard"><div class="t"><b>'+esc(a.preferred_time||'\u2014')+'</b><span>'+esc(a.preferred_date||'any day')+'</span></div>'
+            +'<div class="p"><b>'+esc(a.full_name)+'</b><span>'+esc(a.mobile)+' \u00b7 '+esc(a.doctor||a.specialty)+'</span>'
+            +(a.reason?'<span class="rs">\u201c'+esc(a.reason)+'\u201d</span>':'')+'</div>'
+            +'<div class="acts"><button class="b ok sp" onclick="legacyDone(\''+a.id+'\')">Mark handled</button></div></div>';
+        }).join('');
+    }
+    if(!rows.length){box.innerHTML=(lHtml||'<div class="empty"><div class="big">\u2728</div>No pending requests \u2014 all caught up.</div>');return;}
     box.innerHTML=rows.map(function(a){
       return '<div class="acard"><div class="t"><b>'+fmtT(a.slot_start)+'</b><span>'+fmtD(a.slot_start)+'</span></div>'
         +'<div class="p"><b>'+esc(a.patient_name)+'</b><span>'+esc(a.patient_phone)+(isAdmin?' \u00b7 '+esc(a.doctors.full_name):'')+'</span>'
@@ -260,9 +273,15 @@ function loadReqs(){
         +'<span class="ref">'+a.booking_ref+'</span>'
         +'<div class="acts"><button class="b ok sp" onclick="setStatus(\''+a.id+'\',\'confirmed\')">Accept</button>'
         +'<button class="b no sp" onclick="setStatus(\''+a.id+'\',\'rejected\')">Reject</button></div></div>';
-    }).join('');
+    }).join('')+lHtml;
   });
 }
+window.legacyDone=function(id){
+  sb.from('appointments_legacy').update({status:'handled'}).eq('id',id).then(function(r){
+    if(r.error)return toast('Could not update');
+    toast('Marked handled');loadReqs();
+  });
+};
 window.setStatus=function(id,st){
   sb.from('appointments').update({status:st}).eq('id',id).then(function(r){
     if(r.error){toast('Update failed \u2014 try again');return;}
