@@ -8,116 +8,163 @@
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#FAF8F3; --card:#FFFFFF; --ink:#17211D; --muted:#5F6E67;
+  --paper:#F7F8F6; --card:#FFFFFF; --ink:#17211D; --muted:#5F6E67; --faint:#8A968F;
   --pea:#0E5348; --pea-deep:#093B33; --pea-soft:#E3EFEB; --pea-ghost:#F0F6F4;
-  --mari:#E8A13D; --mari-deep:#C97F1E; --mari-soft:#FBF0DC;
+  --mari:#E8A13D; --mari-deep:#996A10; --mari-soft:#FBF0DC;
   --rose:#B4544C; --rose-soft:#F9ECE9;
-  --line:#E7E3D8; --shadow:0 1px 2px rgba(23,33,29,.05),0 12px 32px -12px rgba(23,33,29,.14);
-  --r:20px;
+  --blue:#3B6FA8; --blue-soft:#E8F0FA;
+  --lav:#6F5BB5; --lav-soft:#EFEAF9;
+  --teal:#1D8A78; --teal-soft:#E1F4F0;
+  --line:#E6E9E6; --shadow:0 1px 2px rgba(23,33,29,.04),0 10px 28px -14px rgba(23,33,29,.12);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Figtree',sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:'Instrument Serif',serif;font-weight:400}
+h1,h2{font-family:'Instrument Serif',serif;font-weight:400}
 button{font-family:inherit;cursor:pointer}
-.sp{transition:transform .45s cubic-bezier(.34,1.8,.4,1),box-shadow .35s ease,border-color .3s,background .2s,color .2s}
-.sp:hover{transform:translateY(-2px)}
+input,select{font-family:inherit}
+.sp{transition:transform .4s cubic-bezier(.34,1.8,.4,1),box-shadow .3s,background .18s,color .18s,border-color .18s}
+.sp:hover{transform:translateY(-1px)}
 .sp:active{transform:scale(.97)}
 
-/* ---- login ---- */
+/* login */
 #login{min-height:100vh;display:grid;place-items:center;padding:20px;background:
-  radial-gradient(600px 400px at 85% -10%,rgba(232,161,61,.12),transparent 60%),
-  radial-gradient(700px 500px at -10% 110%,rgba(14,83,72,.10),transparent 60%),var(--paper)}
-#login .card{width:100%;max-width:400px;background:var(--card);border:1px solid var(--line);border-radius:26px;padding:40px 34px;box-shadow:var(--shadow);animation:rise .6s cubic-bezier(.34,1.6,.4,1)}
-@keyframes rise{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
-#login .mark{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--pea),var(--pea-deep));display:grid;place-items:center;color:#F3D9A8;font-family:'Instrument Serif';font-size:24px;margin-bottom:18px}
-#login h1{font-size:28px;margin-bottom:4px}#login h1 em{color:var(--pea);font-style:italic}
-#login .sub{color:var(--muted);font-size:13.5px;margin-bottom:26px}
-.field{margin-bottom:14px}
-.field label{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-.field input,.field select{width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:13px;font-family:inherit;font-size:14.5px;background:var(--paper);transition:border-color .2s,box-shadow .2s}
-.field input:focus,.field select:focus{outline:none;border-color:var(--pea);box-shadow:0 0 0 4px var(--pea-soft)}
-.btnp{width:100%;padding:14px;border:none;border-radius:13px;background:var(--pea);color:#fff;font-size:15px;font-weight:700}
+  radial-gradient(700px 420px at 88% -8%,rgba(232,161,61,.13),transparent 60%),
+  radial-gradient(760px 520px at -8% 108%,rgba(14,83,72,.11),transparent 60%),var(--paper)}
+#login .card{width:100%;max-width:396px;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:38px 34px;box-shadow:var(--shadow);animation:rise .55s cubic-bezier(.34,1.6,.4,1)}
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+#login .mark{width:50px;height:50px;border-radius:15px;background:linear-gradient(135deg,var(--pea),var(--pea-deep));display:grid;place-items:center;color:#F3D9A8;font-family:'Instrument Serif';font-size:23px;margin-bottom:16px}
+#login h1{font-size:27px}#login h1 em{color:var(--pea)}
+#login .sub{color:var(--muted);font-size:13px;margin:2px 0 24px}
+.fl{display:block;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:13px 0 5px}
+.fi{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:14.5px;background:var(--paper)}
+.fi:focus{outline:none;border-color:var(--pea);box-shadow:0 0 0 4px var(--pea-soft)}
+.btnp{width:100%;margin-top:20px;padding:13px;border:none;border-radius:12px;background:var(--pea);color:#fff;font-size:14.5px;font-weight:800}
 .btnp:hover{background:var(--pea-deep)}
 .btnp:disabled{opacity:.6;cursor:wait}
-.err{display:none;background:var(--rose-soft);color:var(--rose);border-radius:12px;padding:11px 14px;font-size:13.5px;font-weight:600;margin-bottom:14px}
+.err{display:none;background:var(--rose-soft);color:var(--rose);border-radius:11px;padding:10px 13px;font-size:13px;font-weight:700;margin-top:14px}
 
-/* ---- app shell ---- */
+/* shell */
 #app{display:none;min-height:100vh}
-.topbar{position:sticky;top:0;z-index:20;background:rgba(250,248,243,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:14px 22px;display:flex;align-items:center;gap:14px}
-.topbar .mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--pea),var(--pea-deep));display:grid;place-items:center;color:#F3D9A8;font-family:'Instrument Serif';font-size:17px;flex:none}
-.topbar .who b{display:block;font-size:14.5px;font-weight:800}
-.topbar .who span{font-size:11.5px;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
-.topbar .adm{background:var(--mari-soft);color:var(--mari-deep);font-size:10px;font-weight:800;letter-spacing:.08em;padding:3px 9px;border-radius:99px;margin-left:6px;vertical-align:2px}
-.topbar .out{margin-left:auto;background:none;border:1.5px solid var(--line);border-radius:11px;padding:9px 16px;font-size:13px;font-weight:700;color:var(--muted)}
-.topbar .out:hover{border-color:var(--rose);color:var(--rose)}
-.tabs{display:flex;gap:6px;padding:16px 22px 0;max-width:1080px;margin:0 auto;flex-wrap:wrap}
-.tab{border:1.5px solid var(--line);background:var(--card);border-radius:99px;padding:10px 18px;font-size:13.5px;font-weight:700;color:var(--muted);position:relative}
-.tab.on{background:var(--pea);border-color:var(--pea);color:#fff}
-.tab .n{position:absolute;top:-7px;right:-4px;background:var(--mari);color:#3A2A0E;font-size:10.5px;font-weight:800;min-width:19px;height:19px;border-radius:99px;display:grid;place-items:center;padding:0 5px;animation:pip 2.4s ease infinite}
-@keyframes pip{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
-.page{max-width:1080px;margin:0 auto;padding:20px 22px 80px}
-.pane{display:none;animation:fade .4s ease}
+.shell{display:flex;min-height:100vh}
+.rail{position:sticky;top:0;height:100vh;flex:0 0 68px;background:var(--card);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:16px 0;gap:6px;z-index:30}
+.rail .mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--pea),var(--pea-deep));display:grid;place-items:center;color:#F3D9A8;font-family:'Instrument Serif';font-size:17px;margin-bottom:16px}
+.ric{width:44px;height:44px;border-radius:13px;border:none;background:none;color:var(--faint);display:grid;place-items:center;position:relative}
+.ric svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ric:hover{background:var(--paper);color:var(--ink)}
+.ric.on{background:var(--pea-soft);color:var(--pea)}
+.ric .dot{position:absolute;top:7px;right:7px;width:8px;height:8px;border-radius:50%;background:var(--mari);display:none;animation:pip 2.2s ease infinite}
+@keyframes pip{50%{transform:scale(1.25)}}
+.ric .tip{position:absolute;left:56px;top:50%;transform:translateY(-50%) translateX(-4px);background:var(--ink);color:#fff;font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.2s}
+.ric:hover .tip{opacity:1;transform:translateY(-50%) translateX(0)}
+.rail .me{margin-top:auto;width:38px;height:38px;border-radius:50%;background:var(--pea-soft);color:var(--pea);display:grid;place-items:center;font-size:12.5px;font-weight:800;border:none}
+.main{flex:1;min-width:0}
+.hdr{position:sticky;top:0;z-index:20;background:rgba(247,248,246,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:16px 26px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.hdr h2{font-size:25px}
+.hdr .sub{font-size:12px;color:var(--faint);margin-top:1px}
+.hdr .right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.bt{border:1.5px solid var(--line);background:var(--card);border-radius:10px;padding:9px 15px;font-size:13px;font-weight:700;color:var(--ink)}
+.bt:hover{border-color:var(--pea);color:var(--pea)}
+.bt.pri{background:var(--pea);border-color:var(--pea);color:#fff}
+.bt.pri:hover{background:var(--pea-deep)}
+.bt.dng{color:var(--rose)}
+.bt.dng:hover{border-color:var(--rose);background:var(--rose-soft)}
+.content{padding:22px 26px 90px;max-width:1060px}
+.pane{display:none;animation:fade .35s ease}
 .pane.on{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.empty{text-align:center;color:var(--muted);padding:60px 20px;font-size:14.5px}
-.empty .big{font-size:40px;margin-bottom:10px}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* ---- cards / rows ---- */
-.acard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;box-shadow:0 1px 2px rgba(23,33,29,.04);animation:fade .45s ease both}
-.acard .t{min-width:118px}
-.acard .t b{display:block;font-size:17px;font-weight:800}
-.acard .t span{font-size:11.5px;color:var(--muted);font-weight:700;letter-spacing:.05em;text-transform:uppercase}
-.acard .p{flex:1;min-width:170px}
-.acard .p b{display:block;font-size:15px;font-weight:800}
-.acard .p span{font-size:13px;color:var(--muted)}
-.acard .p .rs{display:block;font-size:12.5px;color:var(--muted);margin-top:3px;font-style:italic}
-.acard .ref{font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--pea);background:var(--pea-ghost);padding:4px 10px;border-radius:99px}
-.st{font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:5px 11px;border-radius:99px}
-.st.pending{background:var(--mari-soft);color:var(--mari-deep)}
-.st.confirmed{background:var(--pea-soft);color:var(--pea-deep)}
-.st.rejected,.st.cancelled_by_doctor,.st.cancelled_by_patient{background:var(--rose-soft);color:var(--rose)}
-.st.rescheduled{background:#EDEAF7;color:#5B4A9E}
-.acts{display:flex;gap:8px;flex-wrap:wrap}
-.b{border-radius:11px;padding:10px 16px;font-size:13px;font-weight:800;border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
-.b.ok{background:var(--pea);border-color:var(--pea);color:#fff}
-.b.ok:hover{background:var(--pea-deep)}
-.b.no{color:var(--rose);border-color:var(--rose-soft);background:var(--rose-soft)}
-.b.no:hover{border-color:var(--rose)}
-.b.gh:hover{border-color:var(--pea);color:var(--pea)}
-.dsel{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
-.dsel input[type=date],.dsel select{padding:11px 14px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:14px;background:var(--card)}
-.sect{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:22px 0 10px}
+/* stat cards */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-bottom:18px}
+.stat{border-radius:16px;padding:15px 17px;position:relative;overflow:hidden;animation:fade .4s ease both}
+.stat b{display:block;font-size:26px;font-weight:800;line-height:1.1}
+.stat span{font-size:12px;font-weight:700}
+.stat .ic{position:absolute;right:12px;top:12px;opacity:.85}
+.stat .ic svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.stat.s1{background:var(--mari-soft);color:var(--mari-deep)}
+.stat.s2{background:var(--pea-soft);color:var(--pea-deep)}
+.stat.s3{background:var(--blue-soft);color:var(--blue)}
+.stat.s4{background:var(--lav-soft);color:var(--lav)}
 
-/* ---- blocks / timings ---- */
-.bform{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;align-items:end;margin-bottom:18px}
+/* filters + search */
+.fbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.fp{border:1.5px solid var(--line);background:var(--card);color:var(--muted);font-size:12.5px;font-weight:700;padding:8px 15px;border-radius:99px}
+.fp.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.fp .c{opacity:.7;margin-left:4px}
+.srch{margin-left:auto;display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--card);border-radius:99px;padding:8px 15px;min-width:220px}
+.srch svg{width:15px;height:15px;fill:none;stroke:var(--faint);stroke-width:2;stroke-linecap:round}
+.srch input{border:none;background:none;outline:none;font-size:13px;flex:1;color:var(--ink)}
+
+/* rows */
+.dgroup{font-size:10.5px;font-weight:800;letter-spacing:.09em;color:var(--faint);margin:18px 2px 8px;text-transform:uppercase}
+.rows{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 1px 2px rgba(23,33,29,.03)}
+.row{display:flex;align-items:center;gap:13px;padding:13px 16px 13px 0;border-bottom:1px solid var(--line);animation:fade .4s ease both;position:relative}
+.row:last-child{border-bottom:none}
+.row:hover{background:var(--paper)}
+.edge{width:4px;align-self:stretch;flex:none}
+.edge.pending{background:var(--mari)}.edge.confirmed{background:var(--pea)}.edge.callback{background:var(--rose)}
+.edge.past{background:var(--line)}
+.tm{min-width:64px}
+.tm b{display:block;font-size:15px;font-weight:800}
+.tm span{font-size:10.5px;color:var(--faint);font-weight:700}
+.av2{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:12.5px;font-weight:800;flex:none}
+.pinfo{flex:1;min-width:0}
+.pinfo b{display:block;font-size:14.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pinfo span{font-size:12px;color:var(--faint);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:4px 11px;border-radius:99px;flex:none}
+.pill.pending{background:var(--mari-soft);color:var(--mari-deep)}
+.pill.confirmed{background:var(--pea-soft);color:var(--pea-deep)}
+.pill.rejected,.pill.cancelled_by_doctor,.pill.cancelled_by_patient{background:var(--rose-soft);color:var(--rose)}
+.pill.rescheduled{background:var(--lav-soft);color:var(--lav)}
+.pill.completed{background:var(--teal-soft);color:var(--teal)}
+.ract{display:flex;gap:7px;align-items:center;flex:none}
+.rb{border-radius:9px;padding:8px 14px;font-size:12.5px;font-weight:800;border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
+.rb.ok{background:var(--pea);border-color:var(--pea);color:#fff}
+.rb.ok:hover{background:var(--pea-deep)}
+.rb.no{color:var(--rose)}
+.rb.no:hover{border-color:var(--rose);background:var(--rose-soft)}
+.rb.gh:hover{border-color:var(--pea);color:var(--pea)}
+.rb.yes{background:var(--rose);border-color:var(--rose);color:#fff}
+.cfm{font-size:12px;color:var(--rose);font-weight:800}
+.empty{text-align:center;color:var(--faint);padding:56px 20px;font-size:14px;background:var(--card);border:1px dashed var(--line);border-radius:16px}
+.empty svg{width:110px;height:30px;margin-bottom:10px}
+.empty svg path{fill:none;stroke:var(--pea);stroke-width:2;stroke-linecap:round;opacity:.5}
+
+/* generic card blocks (blocks/timings/account) */
+.gcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px}
+.gform{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;align-items:end}
 .timrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:8px}
 .timrow b{width:44px;font-size:13px;font-weight:800}
-.timrow .sess{font-size:13.5px;background:var(--pea-ghost);color:var(--pea-deep);font-weight:700;padding:6px 12px;border-radius:99px;display:inline-flex;gap:8px;align-items:center}
-.timrow .sess button{border:none;background:none;color:var(--rose);font-weight:800;font-size:13px}
+.sess{font-size:13px;background:var(--pea-ghost);color:var(--pea-deep);font-weight:700;padding:6px 12px;border-radius:99px;display:inline-flex;gap:8px;align-items:center}
+.sess button{border:none;background:none;color:var(--rose);font-weight:800;font-size:13px}
 .timrow .add{margin-left:auto}
-
-/* ---- roster ---- */
-.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-.rcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-.rcard b{display:block;font-size:14.5px;font-weight:800}
-.rcard .sp2{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px}
-.rcard .row{display:flex;justify-content:space-between;font-size:12.5px;padding:3px 0;color:var(--muted)}
-.rcard .row b{display:inline;font-size:12.5px}
-.rcard .chip{font-size:10.5px;font-weight:800;border-radius:99px;padding:2px 8px}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:12px}
+.rcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;animation:fade .4s ease both}
+.rcard b{display:block;font-size:14px;font-weight:800}
+.rcard .s2t{font-size:10.5px;color:var(--faint);font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px}
+.rcard .rr{display:flex;justify-content:space-between;font-size:12.5px;padding:3px 0;color:var(--muted)}
+.chip{font-size:10.5px;font-weight:800;border-radius:99px;padding:2px 9px}
 .chip.g{background:var(--pea-soft);color:var(--pea-deep)}.chip.y{background:var(--mari-soft);color:var(--mari-deep)}.chip.r{background:var(--rose-soft);color:var(--rose)}
 
-/* ---- modal ---- */
-#modal{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:18px}
+/* modal + toast */
+#modal{position:fixed;inset:0;z-index:60;display:none;place-items:center;padding:18px}
 #modal.open{display:grid}
 #modal .bg{position:absolute;inset:0;background:rgba(23,33,29,.45);backdrop-filter:blur(4px)}
-#modal .mc{position:relative;background:var(--card);border-radius:22px;max-width:440px;width:100%;padding:28px;box-shadow:var(--shadow);animation:rise .45s cubic-bezier(.34,1.6,.4,1);max-height:86vh;overflow:auto}
-#modal h3{font-size:22px;margin-bottom:14px}
+#modal .mc{position:relative;background:var(--card);border-radius:20px;max-width:440px;width:100%;padding:26px;box-shadow:var(--shadow);animation:rise .4s cubic-bezier(.34,1.6,.4,1);max-height:86vh;overflow:auto}
+#modal h2{font-size:23px;margin-bottom:14px}
 .mslots{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:8px 0 14px}
-.ms{padding:9px 4px;text-align:center;border:1.5px solid var(--line);border-radius:11px;font-size:12.5px;font-weight:700;cursor:pointer}
+.ms{padding:9px 4px;text-align:center;border:1.5px solid var(--line);border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer}
 .ms.on{background:var(--pea);color:#fff;border-color:var(--pea)}
-.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);background:var(--ink);color:#fff;font-size:13.5px;font-weight:700;padding:13px 22px;border-radius:99px;transition:transform .5s cubic-bezier(.34,1.6,.4,1);z-index:60}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,80px);background:var(--ink);color:#fff;font-size:13.5px;font-weight:700;padding:13px 22px;border-radius:99px;transition:transform .45s cubic-bezier(.34,1.6,.4,1);z-index:70}
 .toast.show{transform:translate(-50%,0)}
-@media(max-width:640px){.acard .t{min-width:90px}.page{padding:16px 14px 80px}}
+@media(max-width:760px){
+  .rail{flex:0 0 58px}
+  .content{padding:16px 12px 90px}
+  .hdr{padding:12px 14px}
+  .tm{min-width:52px}
+  .pinfo span{white-space:normal}
+  .srch{min-width:100%;order:9}
+  .ric .tip{display:none}
+}
 </style>
 </head>
 <body>
@@ -127,62 +174,105 @@ button{font-family:inherit;cursor:pointer}
     <div class="mark">ௐ</div>
     <h1>Doctor <em>portal.</em></h1>
     <div class="sub">A P Medical Center · appointments &amp; schedules</div>
+    <label class="fl">Email</label><input class="fi" type="email" id="lemail" autocomplete="username" placeholder="your.name@apmedicalcenter.com">
+    <label class="fl">Password</label><input class="fi" type="password" id="lpass" autocomplete="current-password" placeholder="••••••••••">
     <div class="err" id="lerr"></div>
-    <div class="field"><label>Email</label><input type="email" id="lemail" autocomplete="username" placeholder="your.name@apmedicalcenter.com"></div>
-    <div class="field"><label>Password</label><input type="password" id="lpass" autocomplete="current-password" placeholder="••••••••••"></div>
     <button class="btnp sp" id="lbtn">Sign in</button>
   </div>
 </div>
 
-<div id="app">
-  <div class="topbar">
+<div id="app"><div class="shell">
+  <div class="rail">
     <div class="mark">ௐ</div>
-    <div class="who"><b id="uName">—</b><span id="uSpec">—</span></div>
-    <button class="out sp" id="btnOut">Sign out</button>
+    <button class="ric on" data-pane="inbox" aria-label="Inbox">
+      <svg viewBox="0 0 24 24"><path d="M4 13h4l2 3h4l2-3h4M5 6h14l2 7v5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-5z"/></svg>
+      <span class="dot" id="railDot"></span><span class="tip">Inbox</span>
+    </button>
+    <button class="ric" data-pane="cal" aria-label="My day">
+      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+      <span class="tip">My day</span>
+    </button>
+    <button class="ric" data-pane="blocks" aria-label="Block time">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <span class="tip">Block time</span>
+    </button>
+    <button class="ric" data-pane="timings" aria-label="My timings">
+      <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="18" cy="18" r="3"/></svg>
+      <span class="tip">My timings</span>
+    </button>
+    <button class="ric" data-pane="roster" id="ricRoster" style="display:none" aria-label="Roster">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5M14.5 14.4c2.6.3 5 1.9 5 4.6"/></svg>
+      <span class="tip">Roster</span>
+    </button>
+    <button class="ric" data-pane="acct" aria-label="Account">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.5-2-3.5-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.5 2 1.5A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.5 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.5-2-1.5c.1-.4.1-.8.1-1.2z"/></svg>
+      <span class="tip">Account</span>
+    </button>
+    <button class="me" id="meAv" title="Sign out">--</button>
   </div>
-  <div class="tabs" id="tabs">
-    <button class="tab on" data-pane="reqs">Requests<span class="n" id="nReq" style="display:none">0</span></button>
-    <button class="tab" data-pane="sched">My schedule</button>
-    <button class="tab" data-pane="blocks">Block time</button>
-    <button class="tab" data-pane="timings">My timings</button>
-    <button class="tab" data-pane="roster" id="tabRoster" style="display:none">Roster</button>
-    <button class="tab" data-pane="acct">Account</button>
-  </div>
-  <div class="page">
-    <div class="pane on" id="p-reqs"></div>
-    <div class="pane" id="p-sched">
-      <div class="dsel"><input type="date" id="schDate"><button class="b gh sp" id="schToday">Today</button></div>
-      <div id="schedList"></div>
+
+  <div class="main">
+    <div class="hdr">
+      <div><h2 id="hTitle">Inbox</h2><div class="sub" id="hSub">—</div></div>
+      <div class="right" id="hActs"></div>
     </div>
-    <div class="pane" id="p-blocks">
-      <div class="bform">
-        <div class="field"><label>Date</label><input type="date" id="bDate"></div>
-        <div class="field"><label>From</label><input type="time" id="bFrom" value="10:00"></div>
-        <div class="field"><label>To</label><input type="time" id="bTo" value="12:00"></div>
-        <div class="field"><label>Category</label><select id="bCat"><option value="surgery">Surgery</option><option value="rounds">Rounds</option><option value="procedure">Procedure</option><option value="personal">Personal</option><option value="other">Other</option></select></div>
-        <div class="field"><label>Note (private)</label><input type="text" id="bNote" placeholder="optional"></div>
-        <button class="b ok sp" id="bAdd">Block it</button>
+    <div class="content">
+
+      <div class="pane on" id="p-inbox">
+        <div class="stats" id="stats"></div>
+        <div class="fbar">
+          <button class="fp on" data-f="pending">Pending<span class="c" id="cPend"></span></button>
+          <button class="fp" data-f="upcoming">Upcoming<span class="c" id="cUp"></span></button>
+          <button class="fp" data-f="callbacks">Call-backs<span class="c" id="cCb"></span></button>
+          <button class="fp" data-f="past">Past 30 days</button>
+          <div class="srch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="srch" placeholder="Search patient, phone or ref"></div>
+        </div>
+        <div id="inboxList"></div>
       </div>
-      <div class="sect">Upcoming blocks</div>
-      <div id="blockList"></div>
-    </div>
-    <div class="pane" id="p-timings">
-      <p style="font-size:13.5px;color:var(--muted);margin-bottom:14px">Your weekly consulting sessions. Patients can book 30-minute slots inside these windows. Changes apply immediately.</p>
-      <div id="timList"></div>
-    </div>
-    <div class="pane" id="p-roster">
-      <div class="dsel"><input type="date" id="roDate"><button class="b gh sp" id="roToday">Today</button><span style="font-size:12.5px;color:var(--muted)" id="roSum"></span></div>
-      <div class="rgrid" id="rosterGrid"></div>
-    </div>
-    <div class="pane" id="p-acct">
-      <div class="bform" style="max-width:420px">
-        <div class="field" style="grid-column:1/-1"><label>New password</label><input type="password" id="np1" autocomplete="new-password"></div>
-        <div class="field" style="grid-column:1/-1"><label>Repeat new password</label><input type="password" id="np2" autocomplete="new-password"></div>
-        <button class="b ok sp" id="npBtn" style="grid-column:1/-1">Change password</button>
+
+      <div class="pane" id="p-cal">
+        <div class="fbar"><input type="date" class="fi" style="width:auto" id="schDate"><button class="bt sp" id="schToday">Today</button></div>
+        <div id="schedList"></div>
       </div>
+
+      <div class="pane" id="p-blocks">
+        <div class="gcard"><div class="gform">
+          <div><label class="fl">Date</label><input class="fi" type="date" id="bDate"></div>
+          <div><label class="fl">From</label><input class="fi" type="time" id="bFrom" value="10:00"></div>
+          <div><label class="fl">To</label><input class="fi" type="time" id="bTo" value="12:00"></div>
+          <div><label class="fl">Category</label><select class="fi" id="bCat"><option value="surgery">Surgery</option><option value="rounds">Rounds</option><option value="procedure">Procedure</option><option value="personal">Personal</option><option value="other">Other</option></select></div>
+          <div><label class="fl">Note (private)</label><input class="fi" type="text" id="bNote" placeholder="optional"></div>
+          <button class="bt pri sp" id="bAdd">Block it</button>
+        </div></div>
+        <div class="dgroup">Upcoming blocks</div>
+        <div id="blockList"></div>
+      </div>
+
+      <div class="pane" id="p-timings">
+        <p style="font-size:13.5px;color:var(--muted);margin-bottom:14px">Your weekly consulting sessions — patients book 30-minute slots inside these windows. Changes apply immediately.</p>
+        <div id="timList"></div>
+      </div>
+
+      <div class="pane" id="p-roster">
+        <div class="fbar"><input type="date" class="fi" style="width:auto" id="roDate"><button class="bt sp" id="roToday">Today</button><span style="font-size:12.5px;color:var(--faint)" id="roSum"></span></div>
+        <div class="rgrid" id="rosterGrid"></div>
+      </div>
+
+      <div class="pane" id="p-acct">
+        <div class="gcard" style="max-width:420px">
+          <label class="fl">New password</label><input class="fi" type="password" id="np1" autocomplete="new-password">
+          <label class="fl">Repeat new password</label><input class="fi" type="password" id="np2" autocomplete="new-password">
+          <button class="bt pri sp" id="npBtn" style="margin-top:16px;width:100%">Change password</button>
+        </div>
+        <div class="gcard" style="max-width:420px;display:flex;justify-content:space-between;align-items:center">
+          <div><b style="font-size:14px" id="acWho">—</b><div style="font-size:12px;color:var(--faint)" id="acMail">—</div></div>
+          <button class="bt dng sp" id="btnOut">Sign out</button>
+        </div>
+      </div>
+
     </div>
   </div>
-</div>
+</div></div>
 
 <div id="modal"><div class="bg"></div><div class="mc" id="mc"></div></div>
 <div class="toast" id="toast"></div>
@@ -192,29 +282,33 @@ button{font-family:inherit;cursor:pointer}
 (function(){
 var sb = supabase.createClient('https://rjceujscaepqyxdlmqyp.supabase.co','sb_publishable_OmWwOc2efyaKNiWjwVPO-A_bZRfLT0i');
 var $=function(id){return document.getElementById(id)};
-var me=null, isAdmin=false, allDocs=[];
-var TZ='Asia/Kolkata';
+var me=null,isAdmin=false,allDocs=[],TZ='Asia/Kolkata';
+var AV=[['var(--pea-soft)','var(--pea-deep)'],['var(--blue-soft)','var(--blue)'],['var(--lav-soft)','var(--lav)'],['var(--mari-soft)','var(--mari-deep)'],['var(--teal-soft)','var(--teal)']];
+function avc(n){var h=0;for(var i=0;i<n.length;i++)h=(h*31+n.charCodeAt(i))>>>0;return AV[h%AV.length]}
+function ini(n){return n.split(/\s+/).filter(function(x){return /^[A-Za-z]/.test(x)}).slice(0,2).map(function(x){return x[0].toUpperCase()}).join('')||'PT'}
 function fmtT(iso){return new Date(iso).toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:TZ})}
-function fmtD(iso){return new Date(iso).toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',timeZone:TZ})}
-function todayISO(){var d=new Date().toLocaleDateString('en-CA',{timeZone:TZ});return d}
+function fmtD(iso){return new Date(iso).toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',timeZone:TZ})}
+function fmtDs(iso){return new Date(iso).toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',timeZone:TZ})}
+function dkey(iso){return new Date(iso).toLocaleDateString('en-CA',{timeZone:TZ})}
+function todayISO(){return new Date().toLocaleDateString('en-CA',{timeZone:TZ})}
 function toast(t){var e=$('toast');e.textContent=t;e.classList.add('show');setTimeout(function(){e.classList.remove('show')},2800)}
 function esc(s){var d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML}
+var EMPTY='<div class="empty"><svg viewBox="0 0 110 30"><path d="M0 18 H30 L38 18 L44 6 L50 26 L56 12 L62 18 H110"><animate attributeName="d" dur="3.5s" repeatCount="indefinite" values="M0 18 H30 L38 18 L44 6 L50 26 L56 12 L62 18 H110;M0 18 H30 L38 18 L44 17 L50 19 L56 18 L62 18 H110;M0 18 H30 L38 18 L44 6 L50 26 L56 12 L62 18 H110"/></path></svg><br>All caught up — nothing needs your attention.</div>';
 
-/* ---------- auth ---------- */
+/* auth */
 $('lbtn').addEventListener('click',doLogin);
 $('lpass').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
 function doLogin(){
-  var b=$('lbtn');b.disabled=true;b.textContent='Signing in\u2026';$('lerr').style.display='none';
-  sb.auth.signInWithPassword({email:$('lemail').value.trim(),password:$('lpass').value})
-    .then(function(r){
-      b.disabled=false;b.textContent='Sign in';
-      if(r.error){$('lerr').textContent='Sign-in failed \u2014 check your email and password.';$('lerr').style.display='block';return;}
-      boot();
-    });
+  var b=$('lbtn');b.disabled=true;b.textContent='Signing in…';$('lerr').style.display='none';
+  sb.auth.signInWithPassword({email:$('lemail').value.trim(),password:$('lpass').value}).then(function(r){
+    b.disabled=false;b.textContent='Sign in';
+    if(r.error){$('lerr').textContent='Sign-in failed — check your email and password.';$('lerr').style.display='block';return;}
+    boot();
+  });
 }
 $('btnOut').addEventListener('click',function(){sb.auth.signOut().then(function(){location.reload()})});
-
-sb.auth.getSession().then(function(r){ if(r.data.session) boot(); });
+$('meAv').addEventListener('click',function(){showPane('acct')});
+sb.auth.getSession().then(function(r){if(r.data.session)boot()});
 
 function boot(){
   sb.from('doctors').select('*').then(function(r){
@@ -225,106 +319,169 @@ function boot(){
       me=allDocs.find(function(d){return d.auth_user_id===uid});
       if(!me){$('lerr').textContent='No doctor profile linked to this account.';$('lerr').style.display='block';sb.auth.signOut();return;}
       isAdmin=!!me.is_admin;
-      $('uName').innerHTML=esc(me.full_name)+(isAdmin?'<span class="adm">Admin</span>':'');
-      $('uSpec').textContent=me.specialty;
-      if(isAdmin)$('tabRoster').style.display='';
+      $('meAv').textContent=ini(me.full_name.replace(/^Dr\.?\s*/,''));
+      $('acWho').textContent=me.full_name;$('acMail').textContent=u.data.user.email;
+      if(isAdmin)$('ricRoster').style.display='';
       $('login').style.display='none';$('app').style.display='block';
-      $('schDate').value=todayISO();$('roDate').value=todayISO();
-      var t=todayISO();$('bDate').min=t;$('schDate').min=t;
-      loadReqs();loadSched();loadBlocks();loadTimings();if(isAdmin)loadRoster();
+      var t=todayISO();$('schDate').value=t;$('roDate').value=t;$('bDate').min=t;
+      setHdr('inbox');
+      loadInbox();loadSched();loadBlocks();loadTimings();if(isAdmin)loadRoster();
     });
   });
 }
 
-/* ---------- tabs ---------- */
-document.querySelectorAll('.tab').forEach(function(t){
-  t.addEventListener('click',function(){
-    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on')});
-    document.querySelectorAll('.pane').forEach(function(x){x.classList.remove('on')});
-    t.classList.add('on');$('p-'+t.dataset.pane).classList.add('on');
+/* nav */
+var TITLES={inbox:['Inbox','Requests and call-backs that need action'],cal:['My day','Confirmed and pending visits'],blocks:['Block time','Hide slots for surgery and other duties'],timings:['My timings','Weekly consulting sessions'],roster:['Roster','Whole-hospital day at a glance'],acct:['Account','Password and session']};
+function setHdr(p){$('hTitle').textContent=TITLES[p][0];$('hSub').textContent=(isAdmin&&p==='inbox'?'Admin view · all doctors — ':'')+TITLES[p][1];}
+function showPane(p){
+  document.querySelectorAll('.ric').forEach(function(x){x.classList.toggle('on',x.dataset.pane===p)});
+  document.querySelectorAll('.pane').forEach(function(x){x.classList.remove('on')});
+  $('p-'+p).classList.add('on');setHdr(p);
+}
+document.querySelectorAll('.ric').forEach(function(b){b.addEventListener('click',function(){showPane(b.dataset.pane)})});
+
+/* inbox */
+var CACHE={pending:[],upcoming:[],callbacks:[],past:[]};
+var curF='pending';
+document.querySelectorAll('.fp').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.fp').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');curF=b.dataset.f;renderInbox();
   });
 });
+$('srch').addEventListener('input',renderInbox);
 
-/* ---------- requests ---------- */
-function loadReqs(){
-  var q=sb.from('appointments').select('*, doctors(full_name)').eq('status','pending').order('slot_start');
-  if(!isAdmin) q=q.eq('doctor_id',me.id);
-  var q2=sb.from('appointments_legacy').select('*').eq('status','new').order('created_at',{ascending:false});
-  if(!isAdmin) q2=q2.eq('doctor', me.full_name);
-  Promise.all([q,q2]).then(function(rr){
-    var r=rr[0], legacy=rr[1].data||[];
-    var box=$('p-reqs');var rows=r.data||[];
-    $('nReq').style.display=(rows.length+legacy.length)?'grid':'none';$('nReq').textContent=rows.length+legacy.length;
-    var lHtml='';
-    if(legacy.length){
-      lHtml='<div class="sect">Call-back requests (no fixed slot \u2014 desk to phone the patient)</div>'
-        +legacy.map(function(a){
-          return '<div class="acard"><div class="t"><b>'+esc(a.preferred_time||'\u2014')+'</b><span>'+esc(a.preferred_date||'any day')+'</span></div>'
-            +'<div class="p"><b>'+esc(a.full_name)+'</b><span>'+esc(a.mobile)+' \u00b7 '+esc(a.doctor||a.specialty)+'</span>'
-            +(a.reason?'<span class="rs">\u201c'+esc(a.reason)+'\u201d</span>':'')+'</div>'
-            +'<div class="acts"><button class="b ok sp" onclick="legacyDone(\''+a.id+'\')">Mark handled</button></div></div>';
-        }).join('');
-    }
-    if(!rows.length){box.innerHTML=(lHtml||'<div class="empty"><div class="big">\u2728</div>No pending requests \u2014 all caught up.</div>');return;}
-    box.innerHTML=rows.map(function(a){
-      return '<div class="acard"><div class="t"><b>'+fmtT(a.slot_start)+'</b><span>'+fmtD(a.slot_start)+'</span></div>'
-        +'<div class="p"><b>'+esc(a.patient_name)+'</b><span>'+esc(a.patient_phone)+(isAdmin?' \u00b7 '+esc(a.doctors.full_name):'')+'</span>'
-        +(a.reason?'<span class="rs">\u201c'+esc(a.reason)+'\u201d</span>':'')+'</div>'
-        +'<span class="ref">'+a.booking_ref+'</span>'
-        +'<div class="acts"><button class="b ok sp" onclick="setStatus(\''+a.id+'\',\'confirmed\')">Accept</button>'
-        +'<button class="b no sp" onclick="setStatus(\''+a.id+'\',\'rejected\')">Reject</button></div></div>';
-    }).join('')+lHtml;
+function loadInbox(){
+  var now=new Date().toISOString();
+  var past30=new Date(Date.now()-30*864e5).toISOString();
+  var q1=sb.from('appointments').select('*, doctors(full_name)').eq('status','pending').order('slot_start');
+  var q2=sb.from('appointments').select('*, doctors(full_name)').eq('status','confirmed').gte('slot_start',now).order('slot_start');
+  var q3=sb.from('appointments_legacy').select('*').eq('status','new').order('created_at',{ascending:false});
+  var q4=sb.from('appointments').select('*, doctors(full_name)').in('status',['completed','rejected','cancelled_by_doctor','cancelled_by_patient','no_show','rescheduled']).gte('slot_start',past30).order('slot_start',{ascending:false}).limit(60);
+  if(!isAdmin){q1=q1.eq('doctor_id',me.id);q2=q2.eq('doctor_id',me.id);q3=q3.eq('doctor',me.full_name);q4=q4.eq('doctor_id',me.id);}
+  Promise.all([q1,q2,q3,q4]).then(function(r){
+    CACHE.pending=r[0].data||[];CACHE.upcoming=r[1].data||[];CACHE.callbacks=r[2].data||[];CACHE.past=r[3].data||[];
+    var n=CACHE.pending.length+CACHE.callbacks.length;
+    $('railDot').style.display=n?'block':'none';
+    $('cPend').textContent=CACHE.pending.length?CACHE.pending.length:'';
+    $('cUp').textContent=CACHE.upcoming.length?CACHE.upcoming.length:'';
+    $('cCb').textContent=CACHE.callbacks.length?CACHE.callbacks.length:'';
+    var tk=todayISO();
+    var todayC=CACHE.upcoming.filter(function(a){return dkey(a.slot_start)===tk}).length;
+    var weekC=CACHE.upcoming.filter(function(a){return (new Date(a.slot_start)-Date.now())<7*864e5}).length;
+    $('stats').innerHTML=
+      stat('s1',CACHE.pending.length,'Awaiting your decision','M12 8v4l2.5 2.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z')+
+      stat('s2',todayC,'Confirmed today','M5 13l4 4L19 7')+
+      stat('s3',weekC,'Confirmed this week','M8 3v4M16 3v4M3 10h18M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z')+
+      stat('s4',CACHE.callbacks.length,'Call-backs for the desk','M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2');
+    renderInbox();
   });
 }
+function stat(cls,n,label,path){return '<div class="stat '+cls+'"><span class="ic"><svg viewBox="0 0 24 24"><path d="'+path+'"/></svg></span><b>'+n+'</b><span>'+label+'</span></div>'}
+
+function matches(a,t){
+  if(!t)return true;t=t.toLowerCase();
+  return (a.patient_name||a.full_name||'').toLowerCase().indexOf(t)>-1
+    ||(a.patient_phone||a.mobile||'').indexOf(t)>-1
+    ||(a.booking_ref||'').toLowerCase().indexOf(t)>-1;
+}
+function renderInbox(){
+  var t=$('srch').value.trim();
+  var box=$('inboxList');
+  if(curF==='callbacks'){
+    var cbs=CACHE.callbacks.filter(function(a){return matches(a,t)});
+    box.innerHTML=cbs.length?'<div class="rows">'+cbs.map(cbRow).join('')+'</div>':EMPTY;return;
+  }
+  var list=CACHE[curF].filter(function(a){return matches(a,t)});
+  if(!list.length){box.innerHTML=EMPTY;return;}
+  var groups={},order=[];
+  list.forEach(function(a){var k=dkey(a.slot_start);if(!groups[k]){groups[k]=[];order.push(k)}groups[k].push(a)});
+  box.innerHTML=order.map(function(k){
+    return '<div class="dgroup">'+fmtD(groups[k][0].slot_start)+' · '+groups[k].length+'</div><div class="rows">'
+      +groups[k].map(function(a){return apRow(a)}).join('')+'</div>';
+  }).join('');
+  if(curF==='pending'&&CACHE.callbacks.length&&!t){
+    var cbs2=CACHE.callbacks;
+    box.innerHTML+='<div class="dgroup" style="color:var(--rose)">Call-backs · desk phones the patient · '+cbs2.length+'</div><div class="rows">'+cbs2.map(cbRow).join('')+'</div>';
+  }
+}
+function apRow(a){
+  var c=avc(a.patient_name),edge=curF==='past'?'past':a.status;
+  var acts='';
+  if(a.status==='pending')acts='<button class="rb ok sp" onclick="setStatus(\''+a.id+'\',\'confirmed\')">Accept</button><button class="rb no sp" onclick="askRej(this,\''+a.id+'\')">Decline</button>';
+  else if(a.status==='confirmed')acts='<button class="rb gh sp" onclick="openResched(\''+a.id+'\')">Reschedule</button><button class="rb no sp" onclick="askRej(this,\''+a.id+'\',\'cancelled_by_doctor\')">Cancel</button>';
+  return '<div class="row"><div class="edge '+edge+'"></div>'
+    +'<div class="tm"><b>'+fmtT(a.slot_start).replace(/\s?(am|pm)/i,'')+'</b><span>'+fmtT(a.slot_start).match(/am|pm/i)[0].toUpperCase()+' · 30m</span></div>'
+    +'<div class="av2" style="background:'+c[0]+';color:'+c[1]+'">'+ini(a.patient_name)+'</div>'
+    +'<div class="pinfo"><b>'+esc(a.patient_name)+'</b><span>'+(a.reason?esc(a.reason)+' · ':'')+esc(a.patient_phone)+' · '+a.booking_ref+(isAdmin?' · '+esc(a.doctors.full_name):'')+'</span></div>'
+    +'<span class="pill '+a.status+'">'+a.status.replace(/_/g,' ')+'</span>'
+    +'<div class="ract">'+acts+'</div></div>';
+}
+function cbRow(a){
+  var c=['var(--rose-soft)','var(--rose)'];
+  return '<div class="row"><div class="edge callback"></div>'
+    +'<div class="tm"><span style="font-size:10.5px;color:var(--faint);font-weight:700">prefers</span><b style="font-size:12.5px">'+esc(a.preferred_time||'—')+'</b><span>'+esc(a.preferred_date||'any day')+'</span></div>'
+    +'<div class="av2" style="background:'+c[0]+';color:'+c[1]+'">'+ini(a.full_name)+'</div>'
+    +'<div class="pinfo"><b>'+esc(a.full_name)+'</b><span>'+esc(a.doctor||a.specialty)+(a.reason?' · '+esc(a.reason):'')+'</span></div>'
+    +'<div class="ract"><a class="rb gh sp" style="text-decoration:none" href="tel:+91'+esc((a.mobile||'').replace(/^\+91/,''))+'">Call</a>'
+    +'<button class="rb ok sp" onclick="legacyDone(\''+a.id+'\')">Handled</button></div></div>';
+}
+window.askRej=function(btn,id,st){
+  st=st||'rejected';
+  var wrap=btn.parentNode;
+  wrap.innerHTML='<span class="cfm">'+(st==='rejected'?'Decline?':'Cancel visit?')+'</span>'
+    +'<button class="rb yes sp" onclick="setStatus(\''+id+'\',\''+st+'\')">Yes</button>'
+    +'<button class="rb gh sp" onclick="loadInboxG()">No</button>';
+};
+window.loadInboxG=function(){loadInbox()};
+window.setStatus=function(id,st){
+  sb.from('appointments').update({status:st}).eq('id',id).then(function(r){
+    if(r.error){toast('Update failed — try again');return;}
+    toast(st==='confirmed'?'Accepted — desk will call the patient':'Marked '+st.replace(/_/g,' '));
+    loadInbox();loadSched();if(isAdmin)loadRoster();
+  });
+};
 window.legacyDone=function(id){
   sb.from('appointments_legacy').update({status:'handled'}).eq('id',id).then(function(r){
     if(r.error)return toast('Could not update');
-    toast('Marked handled');loadReqs();
-  });
-};
-window.setStatus=function(id,st){
-  sb.from('appointments').update({status:st}).eq('id',id).then(function(r){
-    if(r.error){toast('Update failed \u2014 try again');return;}
-    toast(st==='confirmed'?'Accepted \u2014 desk will call the patient':'Request '+st.replace(/_/g,' '));
-    loadReqs();loadSched();if(isAdmin)loadRoster();
+    toast('Marked handled');loadInbox();
   });
 };
 
-/* ---------- my schedule ---------- */
+/* my day */
 $('schDate').addEventListener('change',loadSched);
 $('schToday').addEventListener('click',function(){$('schDate').value=todayISO();loadSched()});
 function loadSched(){
-  var day=$('schDate').value; if(!day)return;
-  var from=new Date(day+'T00:00:00+05:30').toISOString(), to=new Date(day+'T23:59:59+05:30').toISOString();
-  var q=sb.from('appointments').select('*, doctors(full_name)').gte('slot_start',from).lte('slot_start',to)
-        .in('status',['pending','confirmed']).order('slot_start');
-  if(!isAdmin) q=q.eq('doctor_id',me.id);
+  var day=$('schDate').value;if(!day)return;
+  var from=new Date(day+'T00:00:00+05:30').toISOString(),to=new Date(day+'T23:59:59+05:30').toISOString();
+  var q=sb.from('appointments').select('*, doctors(full_name)').gte('slot_start',from).lte('slot_start',to).in('status',['pending','confirmed']).order('slot_start');
+  if(!isAdmin)q=q.eq('doctor_id',me.id);
   q.then(function(r){
     var rows=r.data||[];var box=$('schedList');
-    if(!rows.length){box.innerHTML='<div class="empty"><div class="big">\ud83c\udf3f</div>Nothing booked for this day.</div>';return;}
-    box.innerHTML=rows.map(function(a){
-      return '<div class="acard"><div class="t"><b>'+fmtT(a.slot_start)+'</b><span>'+fmtD(a.slot_start)+'</span></div>'
-        +'<div class="p"><b>'+esc(a.patient_name)+'</b><span>'+esc(a.patient_phone)+(isAdmin?' \u00b7 '+esc(a.doctors.full_name):'')+'</span></div>'
-        +'<span class="st '+a.status+'">'+a.status.replace(/_/g,' ')+'</span>'
-        +'<div class="acts"><button class="b gh sp" onclick="openResched(\''+a.id+'\')">Reschedule</button>'
-        +'<button class="b no sp" onclick="setStatus(\''+a.id+'\',\'cancelled_by_doctor\')">Cancel</button></div></div>';
-    }).join('');
+    if(!rows.length){box.innerHTML=EMPTY;return;}
+    box.innerHTML='<div class="rows">'+rows.map(function(a){
+      return '<div class="row"><div class="edge '+a.status+'"></div>'
+        +'<div class="tm"><b>'+fmtT(a.slot_start).replace(/\s?(am|pm)/i,'')+'</b><span>'+fmtT(a.slot_start).match(/am|pm/i)[0].toUpperCase()+' · 30m</span></div>'
+        +'<div class="av2" style="background:'+avc(a.patient_name)[0]+';color:'+avc(a.patient_name)[1]+'">'+ini(a.patient_name)+'</div>'
+        +'<div class="pinfo"><b>'+esc(a.patient_name)+'</b><span>'+esc(a.patient_phone)+(isAdmin?' · '+esc(a.doctors.full_name):'')+'</span></div>'
+        +'<span class="pill '+a.status+'">'+a.status+'</span>'
+        +'<div class="ract"><button class="rb gh sp" onclick="openResched(\''+a.id+'\')">Reschedule</button>'
+        +'<button class="rb no sp" onclick="askRej(this,\''+a.id+'\',\'cancelled_by_doctor\')">Cancel</button></div></div>';
+    }).join('')+'</div>';
   });
 }
 
-/* ---------- reschedule ---------- */
+/* reschedule */
 window.openResched=function(id){
   sb.from('appointments').select('*').eq('id',id).single().then(function(r){
     if(r.error)return toast('Could not load appointment');
-    var a=r.data;
-    var mc=$('mc');
-    mc.innerHTML='<h3>Reschedule '+esc(a.patient_name)+'</h3>'
-      +'<div class="field"><label>New date</label><input type="date" id="rsDate" min="'+todayISO()+'"></div>'
-      +'<div id="rsSlots" style="font-size:13px;color:var(--muted)">Pick a date to see free slots.</div>'
-      +'<div class="acts" style="justify-content:flex-end"><button class="b gh sp" onclick="closeModal()">Close</button>'
-      +'<button class="b ok sp" id="rsGo" disabled>Move appointment</button></div>';
+    var a=r.data,mc=$('mc'),chosen=null;
+    mc.innerHTML='<h2>Reschedule '+esc(a.patient_name)+'</h2>'
+      +'<label class="fl">New date</label><input class="fi" type="date" id="rsDate" min="'+todayISO()+'">'
+      +'<div id="rsSlots" style="font-size:13px;color:var(--faint);margin-top:10px">Pick a date to see free slots.</div>'
+      +'<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px"><button class="bt sp" onclick="closeModal()">Close</button>'
+      +'<button class="bt pri sp" id="rsGo" disabled>Move appointment</button></div>';
     $('modal').classList.add('open');
-    var chosen=null;
     $('rsDate').addEventListener('change',function(){
       sb.rpc('get_available_slots',{p_doctor:a.doctor_id,p_day:$('rsDate').value}).then(function(res){
         var list=res.data||[];
@@ -341,8 +498,8 @@ window.openResched=function(id){
         slot_start:chosen.s,slot_end:chosen.e,status:'confirmed',rescheduled_from:a.id}).then(function(ins){
         if(ins.error){toast('That slot may have just been taken');return;}
         sb.from('appointments').update({status:'rescheduled'}).eq('id',a.id).then(function(){
-          closeModal();toast('Rescheduled \u2014 desk should call '+a.patient_phone);
-          loadSched();loadReqs();if(isAdmin)loadRoster();
+          closeModal();toast('Rescheduled — desk should call '+a.patient_phone);
+          loadInbox();loadSched();if(isAdmin)loadRoster();
         });
       });
     });
@@ -350,8 +507,9 @@ window.openResched=function(id){
 };
 window.closeModal=function(){$('modal').classList.remove('open')};
 document.querySelector('#modal .bg').addEventListener('click',closeModal);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
 
-/* ---------- blocks ---------- */
+/* blocks */
 $('bAdd').addEventListener('click',function(){
   var d=$('bDate').value,f=$('bFrom').value,t=$('bTo').value;
   if(!d||!f||!t||f>=t)return toast('Check date and time range');
@@ -360,24 +518,24 @@ $('bAdd').addEventListener('click',function(){
     end_at:new Date(d+'T'+t+':00+05:30').toISOString(),
     category:$('bCat').value,note:$('bNote').value||null}).then(function(r){
       if(r.error)return toast('Could not save block');
-      toast('Time blocked \u2014 slots hidden from patients');$('bNote').value='';loadBlocks();
+      toast('Time blocked — slots hidden from patients');$('bNote').value='';loadBlocks();
   });
 });
 function loadBlocks(){
-  sb.from('slot_blocks').select('*').eq('doctor_id',me.id).gte('end_at',new Date().toISOString()).order('start_at')
-    .then(function(r){
-      var rows=r.data||[];var box=$('blockList');
-      if(!rows.length){box.innerHTML='<div class="empty">No upcoming blocks.</div>';return;}
-      box.innerHTML=rows.map(function(b){
-        return '<div class="acard"><div class="t"><b>'+fmtT(b.start_at)+'\u2013'+fmtT(b.end_at)+'</b><span>'+fmtD(b.start_at)+'</span></div>'
-          +'<div class="p"><b style="text-transform:capitalize">'+b.category+'</b>'+(b.note?'<span>'+esc(b.note)+'</span>':'')+'</div>'
-          +'<div class="acts"><button class="b no sp" onclick="delBlock(\''+b.id+'\')">Remove</button></div></div>';
-      }).join('');
+  sb.from('slot_blocks').select('*').eq('doctor_id',me.id).gte('end_at',new Date().toISOString()).order('start_at').then(function(r){
+    var rows=r.data||[];var box=$('blockList');
+    if(!rows.length){box.innerHTML='<div class="empty">No upcoming blocks.</div>';return;}
+    box.innerHTML='<div class="rows">'+rows.map(function(b){
+      return '<div class="row"><div class="edge callback" style="background:var(--lav)"></div>'
+        +'<div class="tm"><b style="font-size:13px">'+fmtT(b.start_at)+'</b><span>to '+fmtT(b.end_at)+'</span></div>'
+        +'<div class="pinfo"><b style="text-transform:capitalize">'+b.category+'</b><span>'+fmtDs(b.start_at)+(b.note?' · '+esc(b.note):'')+'</span></div>'
+        +'<div class="ract"><button class="rb no sp" onclick="delBlock(\''+b.id+'\')">Remove</button></div></div>';
+    }).join('')+'</div>';
   });
 }
 window.delBlock=function(id){sb.from('slot_blocks').delete().eq('id',id).then(function(){toast('Block removed');loadBlocks()})};
 
-/* ---------- timings editor ---------- */
+/* timings */
 var DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 function loadTimings(){
   sb.from('doctor_schedules').select('*').eq('doctor_id',me.id).order('weekday').order('start_time').then(function(r){
@@ -385,37 +543,34 @@ function loadTimings(){
     rows.forEach(function(s){(byDay[s.weekday]=byDay[s.weekday]||[]).push(s)});
     box.innerHTML=[1,2,3,4,5,6,0].map(function(w){
       var sess=(byDay[w]||[]).map(function(s){
-        return '<span class="sess">'+s.start_time.slice(0,5)+'\u2013'+s.end_time.slice(0,5)
-          +'<button onclick="delSess(\''+s.id+'\')" title="Remove">\u2715</button></span>';
+        return '<span class="sess">'+s.start_time.slice(0,5)+'–'+s.end_time.slice(0,5)
+          +'<button onclick="delSess(\''+s.id+'\')" title="Remove">✕</button></span>';
       }).join(' ');
-      return '<div class="timrow"><b>'+DAYS[w]+'</b>'+(sess||'<span style="font-size:13px;color:var(--muted)">No sessions \u2014 patients can\u2019t book</span>')
-        +'<button class="b gh sp add" onclick="addSess('+w+')">+ Add session</button></div>';
+      return '<div class="timrow"><b>'+DAYS[w]+'</b>'+(sess||'<span style="font-size:13px;color:var(--faint)">No sessions — patients can\u2019t book</span>')
+        +'<button class="bt sp add" onclick="addSess('+w+')">+ Add session</button></div>';
     }).join('');
   });
 }
-window.delSess=function(id){
-  sb.from('doctor_schedules').delete().eq('id',id).then(function(){toast('Session removed');loadTimings()});
-};
+window.delSess=function(id){sb.from('doctor_schedules').delete().eq('id',id).then(function(){toast('Session removed');loadTimings()})};
 window.addSess=function(w){
   var mc=$('mc');
-  mc.innerHTML='<h3>Add session \u00b7 '+DAYS[w]+'</h3>'
-    +'<div class="bform" style="border:none;padding:0;margin:0 0 16px">'
-    +'<div class="field"><label>From</label><input type="time" id="tsF" value="10:00"></div>'
-    +'<div class="field"><label>To</label><input type="time" id="tsT" value="14:00"></div></div>'
-    +'<div class="acts" style="justify-content:flex-end"><button class="b gh sp" onclick="closeModal()">Close</button>'
-    +'<button class="b ok sp" id="tsGo">Add</button></div>';
+  mc.innerHTML='<h2>Add session · '+DAYS[w]+'</h2>'
+    +'<div class="gform"><div><label class="fl">From</label><input class="fi" type="time" id="tsF" value="10:00"></div>'
+    +'<div><label class="fl">To</label><input class="fi" type="time" id="tsT" value="14:00"></div></div>'
+    +'<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px"><button class="bt sp" onclick="closeModal()">Close</button>'
+    +'<button class="bt pri sp" id="tsGo">Add</button></div>';
   $('modal').classList.add('open');
   $('tsGo').addEventListener('click',function(){
     var f=$('tsF').value,t=$('tsT').value;
     if(!f||!t||f>=t)return toast('End must be after start');
     sb.from('doctor_schedules').insert({doctor_id:me.id,weekday:w,start_time:f,end_time:t,slot_minutes:30}).then(function(r){
       if(r.error)return toast('Could not add session');
-      closeModal();toast('Session added \u2014 bookable immediately');loadTimings();
+      closeModal();toast('Session added — bookable immediately');loadTimings();
     });
   });
 };
 
-/* ---------- admin roster ---------- */
+/* roster */
 $('roDate').addEventListener('change',loadRoster);
 $('roToday').addEventListener('click',function(){$('roDate').value=todayISO();loadRoster()});
 function loadRoster(){
@@ -423,27 +578,29 @@ function loadRoster(){
   var from=new Date(day+'T00:00:00+05:30').toISOString(),to=new Date(day+'T23:59:59+05:30').toISOString();
   Promise.all([
     sb.from('appointments').select('doctor_id,status').gte('slot_start',from).lte('slot_start',to).in('status',['pending','confirmed']),
-    sb.from('slot_blocks').select('doctor_id,category,start_at,end_at').lte('start_at',to).gte('end_at',from)
+    sb.from('slot_blocks').select('doctor_id,category').lte('start_at',to).gte('end_at',from)
   ]).then(function(res){
     var appts=res[0].data||[],blocks=res[1].data||[];
-    var g=$('rosterGrid');
     var tot={p:0,c:0};
-    g.innerHTML=allDocs.slice().sort(function(a,b){return a.full_name.localeCompare(b.full_name)}).map(function(d){
+    $('rosterGrid').innerHTML=allDocs.slice().sort(function(a,b){return a.full_name.localeCompare(b.full_name)}).map(function(d,i){
       var mine=appts.filter(function(a){return a.doctor_id===d.id});
       var p=mine.filter(function(a){return a.status==='pending'}).length;
       var c=mine.filter(function(a){return a.status==='confirmed'}).length;
       tot.p+=p;tot.c+=c;
       var bl=blocks.filter(function(b){return b.doctor_id===d.id});
-      return '<div class="rcard sp"><b>'+esc(d.full_name)+'</b><div class="sp2">'+esc(d.specialty)+'</div>'
-        +'<div class="row"><span>Pending</span><span class="chip y">'+p+'</span></div>'
-        +'<div class="row"><span>Confirmed</span><span class="chip g">'+c+'</span></div>'
-        +'<div class="row"><span>Blocks</span><span class="chip '+(bl.length?'r':'g')+'">'+(bl.length? bl.map(function(b){return b.category}).join(', '):'none')+'</span></div></div>';
+      var col=avc(d.full_name);
+      return '<div class="rcard sp" style="animation-delay:'+(i*0.015)+'s"><div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">'
+        +'<div class="av2" style="background:'+col[0]+';color:'+col[1]+'">'+ini(d.full_name.replace(/^Dr\.?\s*/,''))+'</div>'
+        +'<div style="min-width:0"><b>'+esc(d.full_name)+'</b><div class="s2t">'+esc(d.specialty)+'</div></div></div>'
+        +'<div class="rr"><span>Pending</span><span class="chip y">'+p+'</span></div>'
+        +'<div class="rr"><span>Confirmed</span><span class="chip g">'+c+'</span></div>'
+        +'<div class="rr"><span>Blocks</span><span class="chip '+(bl.length?'r':'g')+'">'+(bl.length?bl.map(function(b){return b.category}).join(', '):'none')+'</span></div></div>';
     }).join('');
-    $('roSum').textContent=tot.p+' pending \u00b7 '+tot.c+' confirmed across the hospital';
+    $('roSum').textContent=tot.p+' pending · '+tot.c+' confirmed across the hospital';
   });
 }
 
-/* ---------- account ---------- */
+/* account */
 $('npBtn').addEventListener('click',function(){
   var a=$('np1').value,b=$('np2').value;
   if(a.length<8)return toast('Password must be at least 8 characters');
