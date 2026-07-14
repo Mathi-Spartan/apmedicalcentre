@@ -948,6 +948,10 @@ function doSubmit(withWA){
   var name=(document.getElementById('f-name').value||'').trim();
   var phone=getPhone();
   var reason=(document.getElementById('f-reason').value||'').trim();
+  var ageRaw=parseInt(document.getElementById('f-age').value||'',10);
+  var age=(!isNaN(ageRaw)&&ageRaw>0&&ageRaw<=120)?ageRaw:null;
+  var genderRaw=(document.getElementById('f-gender').value||'').trim();
+  var gender=genderRaw?genderRaw.toLowerCase():null;  // DB expects lowercase: male/female/other
   var docEntry = dbDocs[selDocName];
   var wb=document.getElementById('wa-btn'), db=document.getElementById('direct-btn');
   wb.disabled=true; db.disabled=true; wb.textContent='Sending…';
@@ -967,7 +971,7 @@ function doSubmit(withWA){
   }
 
   if(docEntry && selSlotStart){
-    sb.rpc('request_appointment',{p_doctor:docEntry.id,p_slot_start:selSlotStart,p_name:name,p_phone:phone,p_reason:reason||null}).then(function(res){
+    sb.rpc('request_appointment',{p_doctor:docEntry.id,p_slot_start:selSlotStart,p_name:name,p_phone:phone,p_age:age,p_gender:gender,p_reason:reason||null}).then(function(res){
       if(res.error){
         var t=res.error.message||'';
         if(t.indexOf('SLOT_UNAVAILABLE')>-1){msg('That slot was just taken — please go back and pick another.',false);}
@@ -983,7 +987,8 @@ function doSubmit(withWA){
   } else {
     sb.from('appointments_legacy').insert({
       full_name:name,mobile:phone,specialty:selSpec,doctor:selDocName||'Any available doctor',
-      preferred_date:selDate,preferred_time:selSlot,reason:reason||null
+      preferred_date:selDate,preferred_time:selSlot,reason:reason||null,
+      age:age,gender:gender
     }).then(function(res){
       if(res.error){fail();return;}
       success('APT-'+Math.floor(Math.random()*90000+10000),selDate+' '+selSlot);
