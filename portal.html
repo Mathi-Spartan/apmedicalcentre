@@ -415,7 +415,7 @@ function boot(){
       $('ava').style.background=c[0];$('ava').style.color=c[1];
       if(isAdmin)$('ribRoster').style.display='';
       $('login').style.display='none';$('app').style.display='block';
-      var td=todayK();$('dayDate').value=td;$('roDate').value=td;$('bDate').min=td;
+      var td=todayK();if($('roDate'))$('roDate').value=td;if($('bDate'))$('bDate').min=td;
       $('acctInfo').innerHTML=`<div class="ava" style="background:${c[0]};color:${c[1]};width:52px;height:52px;font-size:15px;border-radius:50%;display:grid;place-items:center;font-weight:800;flex:none">${ini(me.full_name)}</div><div><b style="font-size:15px;display:block">${esc(me.full_name)}</b><div style="font-size:12.5px;color:var(--faint)">${esc(me.specialty)}</div><button class="btn dng" id="btnOut" style="margin-top:10px;font-size:12.5px;padding:7px 13px">Sign out</button></div>`;
       document.getElementById('btnOut').addEventListener('click',()=>sb.auth.signOut().then(()=>location.reload()));
       go('inbox');loadAll();
@@ -424,7 +424,7 @@ function boot(){
 }
 
 /* ── NAV ── */
-var HDRS={inbox:['Inbox',()=>'Requests that need your decision'+(isAdmin?' — all doctors':'')],day:['My day',()=>fDL($('dayDate').value+'T00:00:00')],blocks:['Block time',()=>'Hide slots from patients for surgery or other duties'],timings:['My timings',()=>'Weekly consulting sessions — patients see 30-minute slots inside these windows'],roster:['Hospital roster',()=>'Every doctor\'s pending and confirmed visits for the selected day'],acct:['Account',()=>'Password and session']};
+var HDRS={inbox:['Inbox',()=>'Requests that need your decision'+(isAdmin?' — all doctors':'')],day:['Calendar',()=>'Your appointments — day and week views'],blocks:['Block time',()=>'Hide slots from patients for surgery or other duties'],timings:['My timings',()=>'Weekly consulting sessions — patients see 30-minute slots inside these windows'],roster:['Hospital roster',()=>'Every doctor\'s pending and confirmed visits for the selected day'],acct:['Account',()=>'Password and session']};
 function go(p){
   document.querySelectorAll('.rib').forEach(b=>b.classList.toggle('on',b.dataset.p===p));
   document.querySelectorAll('.pane').forEach(x=>x.classList.remove('on'));
@@ -770,26 +770,8 @@ window.closeModal=function(){$('modal').classList.remove('open')};
 document.querySelector('#modal .mbg').addEventListener('click',closeModal);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
-/* ── MY DAY ── */
-$('dayDate').addEventListener('change',loadDay);
-$('dayToday').addEventListener('click',()=>{$('dayDate').value=todayK();loadDay();});
-function loadDay(){
-  var day=$('dayDate').value;if(!day)return;
-  var from=new Date(day+'T00:00:00+05:30').toISOString(),to=new Date(day+'T23:59:59+05:30').toISOString();
-  var q=sb.from('appointments').select('id,booking_ref,patient_name,patient_phone,reason,slot_start,slot_end,status,doctor_id,doctors!appointments_doctor_id_fkey(full_name)').gte('slot_start',from).lte('slot_start',to).in('status',['pending','confirmed']).order('slot_start');
-  if(!isAdmin)q=q.eq('doctor_id',me.id);
-  var bq=sb.from('slot_blocks').select('*').eq('doctor_id',me.id).lte('start_at',to).gte('end_at',from).order('start_at');
-  Promise.all([q,bq]).then(([r,br])=>{
-    var rows=r.data||[],blocks=br.data||[],box=$('dayBody');
-    if(!rows.length&&!blocks.length){box.innerHTML=`<div style="padding:40px 0">${EMPTY_ECG}<p style="text-align:center;color:var(--faint);font-size:14px">Nothing scheduled for this day.</p></div>`;return;}
-    var all=[...rows.map(a=>({t:a.slot_start,type:'appt',d:a})),...blocks.map(b=>({t:b.start_at,type:'block',d:b}))].sort((x,y)=>x.t.localeCompare(y.t));
-    box.innerHTML='<div>'+all.map(item=>{
-      if(item.type==='block'){var b=item.d;return`<div class="dayrow"><div class="dtime"><b>${fT(b.start_at)}</b><span>${fT(b.end_at)}</span></div><div class="dbar blocked"></div><div class="dcontent"><b style="text-transform:capitalize">${b.category}</b><span>${b.note||'Blocked'}</span></div></div>`;}
-      var a=item.d,c=pal(a.patient_name);
-      return`<div class="dayrow"><div class="dtime"><b>${fT(a.slot_start)}</b><span>30 min</span></div><div class="dbar ${a.status}"></div><div class="dcontent" style="flex:1"><b>${esc(a.patient_name)}</b><span>${esc(a.patient_phone)}${isAdmin?' · '+esc(a.doctors&&a.doctors.full_name):''}</span></div><span class="pill ${a.status}" style="font-size:10px">${a.status.replace(/_/g,' ')}</span><button class="ab gh" style="font-size:12px;padding:7px 12px" onclick="openResched('${a.id}')">Reschedule</button><button class="ab no" style="font-size:12px;padding:7px 12px" onclick="askReject(document.querySelector('[onclick*=\\'${a.id}\\']'),\\'${a.id}\\',\\'cancelled_by_doctor\\')">Cancel</button></div>`;
-    }).join('')+'</div>';
-  });
-}
+/* ── MY DAY — now handled by calendar; stub kept for loadAll() compatibility ── */
+function loadDay(){ if(typeof renderCalendar==='function' && me) renderCalendar(); }
 
 /* ── BLOCKS ── */
 $('bSave').addEventListener('click',()=>{
