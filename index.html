@@ -59,6 +59,26 @@ nav.main{display:flex;gap:6px;font-weight:600;font-size:14.5px;color:var(--muted
 nav.main a{padding:9px 14px;border-radius:999px;transition:.2s}
 nav.main a:hover{color:var(--pea);background:var(--pea-ghost)}
 nav.main a.on{color:var(--pea);background:var(--pea-soft)}
+nav.main a.dlog{color:var(--muted);opacity:.75;font-size:13.5px}
+nav.main a.dlog:hover{opacity:1}
+#dlModal{position:fixed;inset:0;z-index:95;display:none;align-items:center;justify-content:center;padding:20px}
+#dlModal.open{display:flex}
+#dlModal .bg{position:absolute;inset:0;background:rgba(23,33,29,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+#dlModal .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:24px;max-width:380px;width:100%;padding:34px 30px;box-shadow:0 30px 80px -20px rgba(9,59,51,.4);animation:dmPop .5s cubic-bezier(.34,1.6,.4,1);overflow:hidden}
+#dlModal .ecg2{position:absolute;top:0;left:0;width:100%;height:30px;pointer-events:none}
+#dlModal .ecg2 path{fill:none;stroke:var(--mari);stroke-width:2;stroke-linecap:round;stroke-dasharray:480;stroke-dashoffset:480;opacity:0}
+#dlModal.open .ecg2 path{animation:ecgDraw 1s ease-out .1s forwards,ecgDim .9s ease 1.15s forwards}
+#dlModal h3{font-size:24px;margin:6px 0 2px}
+#dlModal .sub{font-size:13px;color:var(--muted);margin-bottom:18px}
+#dlModal label{display:block;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:12px 0 5px}
+#dlModal input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:14.5px;background:var(--paper);box-sizing:border-box}
+#dlModal input:focus{outline:none;border-color:var(--pea);box-shadow:0 0 0 4px var(--pea-soft)}
+#dlModal .go{width:100%;margin-top:18px;padding:13px;border:none;border-radius:12px;background:var(--pea);color:#fff;font-family:inherit;font-size:14.5px;font-weight:800;cursor:pointer;transition:background .2s,transform .35s cubic-bezier(.34,1.8,.4,1)}
+#dlModal .go:hover{background:var(--pea-deep);transform:translateY(-2px)}
+#dlModal .go:disabled{opacity:.6}
+#dlModal .er{display:none;background:var(--rose-soft);color:var(--rose);border-radius:10px;padding:9px 12px;font-size:12.5px;font-weight:700;margin-top:12px}
+#dlModal .x{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;cursor:pointer;transition:transform .3s}
+#dlModal .x:hover{transform:rotate(90deg)}
 
 /* hero */
 .hero{position:relative;overflow:hidden;padding:84px 0 96px}
@@ -620,12 +640,12 @@ nav.main a:not(.on):hover{background:transparent}
       <a href="index.html#specialties">Specialties</a>
       <a href="doctors.html">Doctors</a>
       <a href="facilities.html">Facilities</a>
-      <a href="blog.html">Health Tips</a><a href="index.html#visit">Visit</a>
+      <a href="blog.html">Health Tips</a><a href="index.html#visit">Visit</a><a href="#" id="dlogin" class="dlog">ௐ Doctor login</a>
     </nav>
     <button class="hamburger" aria-label="Menu" aria-expanded="false"><svg class="ico" viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><a class="btn btn-m" href="appointment.html">Book Appointment</a>
   </div>
 </header>
-<div class="mobnav"><a href="index.html" class="on">Home<span class="tamil">முகப்பு</span></a><a href="index.html#specialties">Specialties<span class="tamil">சிறப்பு பிரிவுகள்</span></a><a href="doctors.html">Doctors<span class="tamil">மருத்துவர்கள்</span></a><a href="facilities.html">Facilities<span class="tamil">வசதிகள்</span></a><a href="blog.html">Health Tips<span class="tamil">ஆரோக்கியம்</span></a><a href="index.html#visit">Visit<span class="tamil">வழி</span></a><a class="cta" href="appointment.html">Book Appointment</a></div>
+<div class="mobnav"><a href="index.html" class="on">Home<span class="tamil">முகப்பு</span></a><a href="index.html#specialties">Specialties<span class="tamil">சிறப்பு பிரிவுகள்</span></a><a href="doctors.html">Doctors<span class="tamil">மருத்துவர்கள்</span></a><a href="facilities.html">Facilities<span class="tamil">வசதிகள்</span></a><a href="blog.html">Health Tips<span class="tamil">ஆரோக்கியம்</span></a><a href="index.html#visit">Visit<span class="tamil">வழி</span></a><a href="#" id="dloginM">Doctor login<span class="tamil">மருத்துவர் நுழைவு</span></a><a class="cta" href="appointment.html">Book Appointment</a></div>
 
 <section class="hero" style="padding-bottom:120px">
   <div class="bg"><div class="blob b1"></div><div class="blob b2"></div></div>
@@ -1220,6 +1240,49 @@ nav.main a:not(.on):hover{background:transparent}
 {"@type":"Physician","name":"Dr. Suresh Perumal","medicalSpecialty":"Orthopedic Surgery","worksFor":{"@type":"Hospital","name":"A P Medical Center","address":"Saradha College Road, Salem, Tamil Nadu 636016"},"image":"https://apmedicalcentre.vercel.app/images/doctors/dr-suresh-perumal.jpg"},
 {"@type":"Physician","name":"Dr. K. Dinesh","medicalSpecialty":"Pediatrics","worksFor":{"@type":"Hospital","name":"A P Medical Center","address":"Saradha College Road, Salem, Tamil Nadu 636016"},"image":"https://apmedicalcentre.vercel.app/images/doctors/dr-dinesh.jpg"}
 ]}
+</script>
+<div id="dlModal"><div class="bg"></div><div class="card">
+  <svg class="ecg2" viewBox="0 0 380 30" preserveAspectRatio="none"><path d="M0 19 H110 L128 19 L139 6 L149 26 L158 12 L167 19 H380"/></svg>
+  <button class="x" aria-label="Close">&#10005;</button>
+  <h3>Doctor sign in</h3><div class="sub">A P Medical Center staff portal</div>
+  <label>Email</label><input type="email" id="dlE" autocomplete="username" placeholder="your.name@apmedicalcenter.com">
+  <label>Password</label><input type="password" id="dlP" autocomplete="current-password" placeholder="••••••••">
+  <div class="er" id="dlEr"></div>
+  <button class="go" id="dlGo">Sign in → portal</button>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var sb = supabase.createClient('https://rjceujscaepqyxdlmqyp.supabase.co','sb_publishable_OmWwOc2efyaKNiWjwVPO-A_bZRfLT0i');
+  var M=document.getElementById('dlModal');
+  function open(e){e.preventDefault();M.classList.remove('open');void M.offsetWidth;M.classList.add('open');document.getElementById('dlE').focus();}
+  function close(){M.classList.remove('open');}
+  var l1=document.getElementById('dlogin'),l2=document.getElementById('dloginM');
+  sb.auth.getSession().then(function(r){
+    if(r.data.session){
+      if(l1){l1.textContent='ௐ My portal →';l1.href='portal.html';}
+      if(l2){l2.firstChild.textContent='My portal →';l2.href='portal.html';}
+    } else {
+      if(l1)l1.addEventListener('click',open);
+      if(l2)l2.addEventListener('click',open);
+    }
+  });
+  M.querySelector('.bg').addEventListener('click',close);
+  M.querySelector('.x').addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  document.getElementById('dlP').addEventListener('keydown',function(e){if(e.key==='Enter')go();});
+  document.getElementById('dlGo').addEventListener('click',go);
+  function go(){
+    var b=document.getElementById('dlGo'),er=document.getElementById('dlEr');
+    b.disabled=true;b.textContent='Signing in…';er.style.display='none';
+    sb.auth.signInWithPassword({email:document.getElementById('dlE').value.trim(),password:document.getElementById('dlP').value})
+      .then(function(r){
+        if(r.error){b.disabled=false;b.textContent='Sign in → portal';er.textContent='Sign-in failed — check your email and password.';er.style.display='block';return;}
+        b.textContent='Welcome — opening portal…';
+        setTimeout(function(){location.href='portal.html';},350);
+      });
+  }
+})();
 </script>
 </body>
 </html>
