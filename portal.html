@@ -335,6 +335,7 @@ a{color:inherit;text-decoration:none}
             <div class="cal-vtog">
               <button class="cvbtn on" id="cvDay" onclick="setCalView('day')">Day</button>
               <button class="cvbtn" id="cvWeek" onclick="setCalView('week')">Week</button>
+              <button class="cvbtn" id="cvMonth" onclick="setCalView('month')">Month</button>
             </div>
             <button class="cal-nb" onclick="calNav(-1)">&#8249;</button>
             <span class="cal-rl" id="calRangeLabel"></span>
@@ -481,7 +482,7 @@ function go(p){
   $('p-'+p).classList.add('on');
   var h=HDRS[p]||['',''];$('tTitle').textContent=h[0];$('tSub').textContent=h[1]();
 }
-document.querySelectorAll('.rib').forEach(b=>b.addEventListener('click',()=>{go(b.dataset.p);if(b.dataset.p==='day')renderCalendar();}));
+document.querySelectorAll('.rib').forEach(b=>b.addEventListener('click',()=>{go(b.dataset.p);if(b.dataset.p==='day'){setTimeout(renderCalendar,50);}}));
 
 
 /* ── INBOX ── */
@@ -605,7 +606,7 @@ document.querySelector('#modal .mbg').addEventListener('click',closeModal);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
 /* ── MY DAY — now handled by calendar; stub kept for loadAll() compatibility ── */
-function loadDay(){ if(typeof renderCalendar==='function' && me) renderCalendar(); }
+function loadDay(){ /* calendar pane — rendered on tab open via setTimeout */ }
 
 /* ── BLOCKS ── */
 $('bSave').addEventListener('click',()=>{
@@ -679,58 +680,47 @@ $('npBtn').addEventListener('click',()=>{
   sb.auth.updateUser({password:a}).then(r=>{if(r.error)return toast('Could not update');$('np1').value='';$('np2').value='';toast('Password updated');});
 });
 })();
-</script>
-</body>
-</html>/* ─── CALENDAR ─── */
+/* ─── CALENDAR ─── */
 var calView='day', calAnchor=new Date();
 calAnchor.setHours(0,0,0,0);
 var DAYS_S=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+var DAYS_L=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 var MONTHS_C=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-var CAL_HDR=40, HOUR_H=56, BREAK_H=20;
+var MONTHS_L=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var CAL_HDR=40, HOUR_H=56, BREAK_H=18;
 var MOR_S=10, MOR_E=14, EVE_S=18, EVE_E=21;
 
 function calY(iso){
   var d=new Date(iso),h=d.getHours(),m=d.getMinutes();
-  var morPx=(MOR_E-MOR_S)*HOUR_H;
   if(h>=MOR_S&&h<MOR_E) return CAL_HDR+(h-MOR_S)*HOUR_H+m/60*HOUR_H;
-  if(h>=EVE_S&&h<EVE_E) return CAL_HDR+morPx+BREAK_H+(h-EVE_S)*HOUR_H+m/60*HOUR_H;
+  if(h>=EVE_S&&h<EVE_E) return CAL_HDR+(MOR_E-MOR_S)*HOUR_H+BREAK_H+(h-EVE_S)*HOUR_H+m/60*HOUR_H;
   return -1;
 }
 function calTH(){ return CAL_HDR+(MOR_E-MOR_S)*HOUR_H+BREAK_H+(EVE_E-EVE_S)*HOUR_H; }
 
 function buildGutter(){
   var g=document.getElementById('calGutter');
+  if(!g) return;
   g.innerHTML='<div class="cal-gt-hdr"></div>';
-  var TH=calTH();
-  g.style.height=TH+'px';
+  g.style.height=calTH()+'px';
   var top=CAL_HDR;
   for(var hr=MOR_S;hr<MOR_E;hr++){
     var lbl=document.createElement('div');
-    lbl.className='cal-gt-lbl';
-    lbl.style.top=top+'px';
-    lbl.textContent=hr+':00';
-    g.appendChild(lbl);
-    top+=HOUR_H;
+    lbl.className='cal-gt-lbl'; lbl.style.top=top+'px'; lbl.textContent=hr+':00';
+    g.appendChild(lbl); top+=HOUR_H;
   }
   var brk=document.createElement('div');
-  brk.className='cal-gt-brk';
-  brk.style.cssText='top:'+top+'px;height:'+BREAK_H+'px';
-  brk.textContent='break';
-  g.appendChild(brk);
-  top+=BREAK_H;
+  brk.className='cal-gt-brk'; brk.style.cssText='top:'+top+'px;height:'+BREAK_H+'px'; brk.textContent='break';
+  g.appendChild(brk); top+=BREAK_H;
   for(var hr=EVE_S;hr<EVE_E;hr++){
     var lbl=document.createElement('div');
-    lbl.className='cal-gt-lbl';
-    lbl.style.top=top+'px';
-    lbl.textContent=hr+':00';
-    g.appendChild(lbl);
-    top+=HOUR_H;
+    lbl.className='cal-gt-lbl'; lbl.style.top=top+'px'; lbl.textContent=hr+':00';
+    g.appendChild(lbl); top+=HOUR_H;
   }
 }
 
 function buildCol(date, appts, blocks){
-  var TH=calTH();
-  var isToday=date.toDateString()===new Date().toDateString();
+  var TH=calTH(), isToday=date.toDateString()===new Date().toDateString();
   var col=document.createElement('div');
   col.className='cal-dc'+(isToday?' is-today':'');
   col.style.height=TH+'px';
@@ -741,77 +731,123 @@ function buildCol(date, appts, blocks){
     +'<div class="cal-dnm">'+DAYS_S[date.getDay()]+'</div>';
   col.appendChild(hdr);
 
-  // hour lines
   var y=CAL_HDR;
   for(var hr=MOR_S;hr<MOR_E;hr++){
-    var row=document.createElement('div');
-    row.className='cal-hr';
-    row.style.cssText='top:'+y+'px;height:'+HOUR_H+'px';
-    col.appendChild(row); y+=HOUR_H;
+    var row=document.createElement('div'); row.className='cal-hr';
+    row.style.cssText='top:'+y+'px;height:'+HOUR_H+'px'; col.appendChild(row); y+=HOUR_H;
   }
-  var brk=document.createElement('div');
-  brk.className='cal-brk';
-  brk.style.cssText='top:'+y+'px;height:'+BREAK_H+'px';
-  col.appendChild(brk); y+=BREAK_H;
+  var b2=document.createElement('div'); b2.className='cal-brk';
+  b2.style.cssText='top:'+y+'px;height:'+BREAK_H+'px'; col.appendChild(b2); y+=BREAK_H;
   for(var hr=EVE_S;hr<EVE_E;hr++){
-    var row=document.createElement('div');
-    row.className='cal-hr';
-    row.style.cssText='top:'+y+'px;height:'+HOUR_H+'px';
-    col.appendChild(row); y+=HOUR_H;
+    var row=document.createElement('div'); row.className='cal-hr';
+    row.style.cssText='top:'+y+'px;height:'+HOUR_H+'px'; col.appendChild(row); y+=HOUR_H;
   }
 
-  // now line
   if(isToday){
     var ny=calY(new Date().toISOString());
-    if(ny>0){
-      var nl=document.createElement('div');
-      nl.className='cal-now';
-      nl.style.top=ny+'px';
-      col.appendChild(nl);
-    }
+    if(ny>0){var nl=document.createElement('div');nl.className='cal-now';nl.style.top=ny+'px';col.appendChild(nl);}
   }
 
-  // appointment chips
   appts.forEach(function(a){
     var ty=calY(a.slot_start), by=calY(a.slot_end);
     if(ty<0) return;
-    var h=Math.max(26,by-ty);
+    var h=Math.max(28,by-ty);
     var chip=document.createElement('div');
     chip.className='cal-chip '+a.status;
     chip.style.cssText='top:'+ty+'px;height:'+h+'px';
     var t=new Date(a.slot_start).toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit',hour12:true});
     chip.innerHTML='<div class="cal-chip-name">'+esc(a.patient_name)+'</div>'
       +'<div class="cal-chip-time">'+t+'</div>'
-      +(h>42?'<div class="cal-chip-tag">'+a.status.replace(/_/g,' ')+'</div>':'');
+      +(h>44?'<div class="cal-chip-tag">'+a.status.replace(/_/g,' ')+'</div>':'');
     chip.addEventListener('click',function(e){e.stopPropagation();showPop(a,e);});
     col.appendChild(chip);
   });
 
-  // blocks
   (blocks||[]).forEach(function(b){
     var iso=date.toISOString().slice(0,10);
-    var ty=calY(iso+'T'+b.from_time);
-    var by=calY(iso+'T'+b.to_time);
+    var ty=calY(iso+'T'+b.from_time), by=calY(iso+'T'+b.to_time);
     if(ty<0) return;
-    var chip=document.createElement('div');
-    chip.className='cal-chip blocked';
-    chip.style.cssText='top:'+ty+'px;height:'+Math.max(26,by-ty)+'px';
-    chip.innerHTML='<div class="cal-chip-name" style="font-size:10.5px">\uD83D\uDD12 '+esc(b.category||'Blocked')+'</div>';
+    var chip=document.createElement('div'); chip.className='cal-chip blocked';
+    chip.style.cssText='top:'+ty+'px;height:'+Math.max(28,by-ty)+'px';
+    chip.innerHTML='<div class="cal-chip-name" style="font-size:10px">\uD83D\uDD12 '+esc(b.category||'Blocked')+'</div>';
     col.appendChild(chip);
   });
 
   return col;
 }
 
+function buildMonthView(dates, appts){
+  var cols=document.getElementById('calCols');
+  var gt=document.getElementById('calGutter');
+  if(gt){gt.innerHTML='';gt.style.cssText='display:none;width:0';}
+  cols.style.cssText='flex:1;display:block;width:100%;overflow-y:auto;max-height:calc(100vh - 200px)';
+
+  var hdrRow=document.createElement('div');
+  hdrRow.style.cssText='display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid #e8f0eb;background:#fff;position:sticky;top:0;z-index:4';
+  ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(function(d){
+    var cell=document.createElement('div');
+    cell.style.cssText='padding:8px 4px;text-align:center;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#8aada4';
+    cell.textContent=d; hdrRow.appendChild(cell);
+  });
+  cols.appendChild(hdrRow);
+
+  var grid=document.createElement('div');
+  grid.style.cssText='display:grid;grid-template-columns:repeat(7,1fr)';
+  var today=new Date(); today.setHours(0,0,0,0);
+  var curMonth=calAnchor.getMonth();
+
+  for(var i=0;i<42;i++){
+    var cellDate=dates[i];
+    var iso=cellDate.toISOString().slice(0,10);
+    var isThisMonth=cellDate.getMonth()===curMonth;
+    var isToday2=cellDate.toDateString()===today.toDateString();
+    var cell=document.createElement('div');
+    cell.style.cssText='min-height:88px;border-right:1px solid #edf3f0;border-bottom:1px solid #edf3f0;padding:6px 5px 4px;'
+      +(isThisMonth?'background:#fff;':'background:#f8faf9;');
+
+    var numEl=document.createElement('div');
+    numEl.style.cssText='width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;margin-bottom:3px;'
+      +(isToday2?'background:#0E5348;color:#fff;box-shadow:0 2px 8px rgba(14,83,72,.35);'
+        :(isThisMonth?'color:#17211D;':'color:#c0d4cc;'));
+    numEl.textContent=cellDate.getDate();
+    cell.appendChild(numEl);
+
+    var dayAppts=appts.filter(function(a){return a.slot_start.slice(0,10)===iso;});
+    var maxShow=isThisMonth?3:1;
+    dayAppts.slice(0,maxShow).forEach(function(a){
+      var pill=document.createElement('div');
+      var t=new Date(a.slot_start).toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit',hour12:true});
+      var bg=a.status==='confirmed'?'#daeee8':a.status==='pending'?'#fdf0d8':'#f2eeea';
+      var bc=a.status==='confirmed'?'#0E5348':a.status==='pending'?'#E8A13D':'#b8b0a8';
+      pill.style.cssText='background:'+bg+';border-left:3px solid '+bc+';border-radius:4px;padding:2px 5px;font-size:9.5px;font-weight:700;color:#17211D;margin-bottom:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;cursor:pointer;max-width:100%';
+      pill.textContent=t+' '+esc(a.patient_name);
+      pill.title=a.patient_name+' · '+t;
+      pill.addEventListener('click',function(e){e.stopPropagation();showPop(a,e);});
+      cell.appendChild(pill);
+    });
+    if(dayAppts.length>maxShow){
+      var more=document.createElement('div');
+      more.style.cssText='font-size:9px;font-weight:700;color:#8aada4;padding:1px 0';
+      more.textContent='+'+(dayAppts.length-maxShow)+' more';
+      cell.appendChild(more);
+    }
+    grid.appendChild(cell);
+  }
+  cols.appendChild(grid);
+}
+
 window.setCalView=function(v){
   calView=v;
   document.getElementById('cvDay').classList.toggle('on',v==='day');
   document.getElementById('cvWeek').classList.toggle('on',v==='week');
+  document.getElementById('cvMonth').classList.toggle('on',v==='month');
   renderCalendar();
 };
 window.calNav=function(dir){
   var d=new Date(calAnchor);
-  calView==='day'?d.setDate(d.getDate()+dir):d.setDate(d.getDate()+dir*7);
+  if(calView==='day') d.setDate(d.getDate()+dir);
+  else if(calView==='week') d.setDate(d.getDate()+dir*7);
+  else d.setMonth(d.getMonth()+dir);
   calAnchor=d; renderCalendar();
 };
 window.calGoToday=function(){calAnchor=new Date();calAnchor.setHours(0,0,0,0);renderCalendar();};
@@ -821,30 +857,47 @@ function renderCalendar(){
   var pill=document.getElementById('calDocLabel');
   if(pill){
     pill.style.display='flex';
-    document.getElementById('calDocAv').textContent=ini(me.full_name);
-    document.getElementById('calDocName').textContent=me.full_name;
+    var av=document.getElementById('calDocAv'), dn=document.getElementById('calDocName');
+    if(av) av.textContent=ini(me.full_name);
+    if(dn) dn.textContent=me.full_name;
   }
-  buildGutter();
   var cols=document.getElementById('calCols');
+  var gt=document.getElementById('calGutter');
+  if(!cols) return;
   cols.innerHTML='';
-  var dates=[];
+
+  if(calView==='month'){
+    if(gt) gt.style.cssText='display:none;width:0';
+    cols.style.cssText='flex:1;display:block;width:100%;';
+  } else {
+    if(gt) gt.style.cssText='width:54px;flex-shrink:0;border-right:1px solid #e8f0eb;background:#fff;position:relative;display:block';
+    cols.style.cssText='flex:1;display:flex;overflow-x:auto;overflow-y:auto;max-height:calc(100vh - 200px);min-height:'+calTH()+'px;scrollbar-width:thin';
+    buildGutter();
+  }
+
+  var dates=[], rangeLabel='';
   if(calView==='day'){
     dates=[new Date(calAnchor)];
-    document.getElementById('calRangeLabel').textContent=
-      calAnchor.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  } else {
-    var mon=new Date(calAnchor);
-    var dow=mon.getDay()||7;
+    rangeLabel=DAYS_L[calAnchor.getDay()]+', '+calAnchor.getDate()+' '+MONTHS_L[calAnchor.getMonth()]+' '+calAnchor.getFullYear();
+  } else if(calView==='week'){
+    var mon=new Date(calAnchor), dow=mon.getDay()||7;
     mon.setDate(mon.getDate()-(dow-1));
     for(var i=0;i<6;i++){var x=new Date(mon);x.setDate(mon.getDate()+i);dates.push(x);}
-    document.getElementById('calRangeLabel').textContent=
-      dates[0].getDate()+' '+MONTHS_C[dates[0].getMonth()]+' \u2013 '+
-      dates[5].getDate()+' '+MONTHS_C[dates[5].getMonth()]+' '+dates[5].getFullYear();
+    rangeLabel=dates[0].getDate()+' '+MONTHS_C[dates[0].getMonth()]+' \u2013 '+dates[5].getDate()+' '+MONTHS_C[dates[5].getMonth()]+' '+dates[5].getFullYear();
+  } else {
+    var firstDay=new Date(calAnchor.getFullYear(),calAnchor.getMonth(),1);
+    var startDow=firstDay.getDay()||7;
+    var gridStart=new Date(firstDay);
+    gridStart.setDate(firstDay.getDate()-(startDow-1));
+    for(var i=0;i<42;i++){var x=new Date(gridStart);x.setDate(gridStart.getDate()+i);dates.push(x);}
+    rangeLabel=MONTHS_L[calAnchor.getMonth()]+' '+calAnchor.getFullYear();
   }
+
+  var rl=document.getElementById('calRangeLabel');
+  if(rl) rl.textContent=rangeLabel;
+
   var from=dates[0].toISOString().slice(0,10)+'T00:00:00';
   var to=dates[dates.length-1].toISOString().slice(0,10)+'T23:59:59';
-  var TH=calTH();
-  cols.style.minHeight=TH+'px';
 
   var q=sb.from('appointments').select('id,booking_ref,patient_name,patient_phone,reason,slot_start,slot_end,status,doctor_id')
     .gte('slot_start',from).lte('slot_start',to).in('status',['pending','confirmed','rescheduled']).order('slot_start');
@@ -855,33 +908,38 @@ function renderCalendar(){
 
   Promise.all([q,bq]).then(function(res){
     var appts=res[0].data||[], blocks=res[1].data||[];
-    dates.forEach(function(d){
-      var iso=d.toISOString().slice(0,10);
-      cols.appendChild(buildCol(d,
-        appts.filter(function(a){return a.slot_start.slice(0,10)===iso;}),
-        blocks.filter(function(b){return b.block_date===iso;})
-      ));
-    });
+    if(calView==='month'){
+      buildMonthView(dates, appts);
+    } else {
+      dates.forEach(function(d){
+        var iso=d.toISOString().slice(0,10);
+        cols.appendChild(buildCol(d,
+          appts.filter(function(a){return a.slot_start.slice(0,10)===iso;}),
+          blocks.filter(function(b){return b.block_date===iso;})
+        ));
+      });
+    }
   });
 }
 
 function showPop(a,e){
   var pop=document.getElementById('calPopover');
+  if(!pop) return;
   var t=new Date(a.slot_start).toLocaleString('en-IN',{weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit',hour12:true});
   document.getElementById('cpName').textContent=a.patient_name;
-  document.getElementById('cpSpec').textContent=(a.booking_ref||'—')+' \u00b7 '+a.status.replace(/_/g,' ').toUpperCase();
+  document.getElementById('cpSpec').textContent=(a.booking_ref||'\u2014')+' \u00b7 '+a.status.replace(/_/g,' ').toUpperCase();
   document.getElementById('cpTime').innerHTML='<strong>'+t+'</strong>';
   document.getElementById('cpPhone').innerHTML='<a href="tel:+91'+a.patient_phone+'" style="color:#0E5348;font-weight:700;text-decoration:none">+91 '+a.patient_phone+'</a>';
   var rr=document.getElementById('cpReasonRow');
   if(a.reason){rr.style.display='flex';document.getElementById('cpReason').textContent=a.reason;}
-  else{rr.style.display='none';}
+  else rr.style.display='none';
   var acts='';
-  if(a.status==='pending') acts='<button class="cpop-btn cpop-ok" onclick="calConfirm(\''+a.id+'\')">Confirm</button>'
-    +'<button class="cpop-btn cpop-no" onclick="calDecline(\''+a.id+'\')">Decline</button>';
+  if(a.status==='pending') acts='<button class="cpop-btn cpop-ok" onclick="calConfirm(\''+a.id+'\')">Confirm</button><button class="cpop-btn cpop-no" onclick="calDecline(\''+a.id+'\')">Decline</button>';
   if(a.status==='confirmed') acts='<button class="cpop-btn cpop-no" onclick="calDecline(\''+a.id+'\')">Cancel</button>';
   document.getElementById('cpActions').innerHTML=acts;
-  var rect=e.target.closest('.cal-chip').getBoundingClientRect();
-  pop.style.cssText='display:block;top:'+Math.min(rect.bottom+6,window.innerHeight-280)+'px;left:'+Math.min(rect.right+8,window.innerWidth-310)+'px';
+  var tgt=e.target.closest ? (e.target.closest('.cal-chip')||e.target) : e.target;
+  var r=tgt.getBoundingClientRect ? tgt.getBoundingClientRect() : {bottom:e.clientY+6,right:e.clientX+8};
+  pop.style.cssText='display:block;top:'+Math.min(r.bottom+6,window.innerHeight-300)+'px;left:'+Math.min(r.right+8,window.innerWidth-310)+'px';
 }
 window.calConfirm=function(id){
   sb.from('appointments').update({status:'confirmed'}).eq('id',id)
@@ -897,6 +955,7 @@ document.addEventListener('click',function(e){
   if(pop&&pop.style.display==='block'&&!pop.contains(e.target)&&!e.target.closest('.cal-chip'))
     pop.style.display='none';
 });
+
 
 </script>
 </body>
