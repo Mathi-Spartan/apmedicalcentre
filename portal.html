@@ -47,8 +47,8 @@ input,select,textarea{font-family:'Figtree';outline:none}
 /* RAIL */
 .rail{width:60px;background:var(--navy);display:flex;flex-direction:column;align-items:center;padding:12px 0 16px;gap:2px;flex-shrink:0;z-index:30}
 .rmark{width:34px;height:34px;border-radius:10px;background:var(--blue);display:grid;place-items:center;margin-bottom:18px;font-family:'Instrument Serif',serif;font-size:15px;color:#fff;flex-shrink:0}
-.rib{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;cursor:pointer;color:rgba(255,255,255,.38);transition:all .18s;position:relative;flex-shrink:0}
-.rib svg{width:17px;height:17px}
+.rib{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;cursor:pointer;color:rgba(255,255,255,.6);transition:all .18s;position:relative;flex-shrink:0}
+.rib svg{width:18px;height:18px}
 .rib:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.75)}
 .rib.on{background:rgba(61,126,191,.22);color:#fff}
 .rib.on::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:22px;background:var(--blue);border-radius:0 3px 3px 0}
@@ -82,7 +82,7 @@ input,select,textarea{font-family:'Figtree';outline:none}
 .ds-k{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:3px}
 
 /* dashboard calendar card */
-.dash-cal-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-bottom:16px}
+.dash-cal-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-bottom:16px;min-height:200px}
 .dash-cal-card .cal-tb-mini{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line)}
 #dashCal{overflow:hidden}
 
@@ -598,7 +598,7 @@ document.querySelectorAll('.rib').forEach(b=>b.addEventListener('click',()=>{
 
 /* INBOX */
 var cache={pending:[],upcoming:[],past:[]};
-function loadAll(){loadInbox();loadBlocks();loadTimings();if(isAdmin)loadRoster();setTimeout(renderDash,200);}
+function loadAll(){loadInbox();loadBlocks();loadTimings();if(isAdmin)loadRoster();}
 function loadInbox(){
   var now=new Date().toISOString(),p30=new Date(Date.now()-30*864e5).toISOString();
   var q1=sb.from('appointments').select('id,booking_ref,patient_name,patient_phone,reason,slot_start,slot_end,status,doctor_id,doctors!appointments_doctor_id_fkey(full_name)').eq('status','pending').order('slot_start');
@@ -609,6 +609,7 @@ function loadInbox(){
     cache.pending=r1.data||[];cache.upcoming=r2.data||[];cache.past=r3.data||[];
     var n=cache.pending.length;
     $('ribBadge').style.display=n?'grid':'none';$('ribBadge').textContent=n;
+    renderDash();
     var todayC=cache.upcoming.filter(a=>dkey(a.slot_start)===todayK()).length;
     var weekC=cache.upcoming.filter(a=>new Date(a.slot_start)-Date.now()<7*864e5).length;
     $('bands').innerHTML=band('b1',n,'Awaiting decision','M12 8v4l2 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0')+band('b2',todayC,'Confirmed today','M5 13l4 4L19 7')+band('b3',weekC,'This week','M8 3v4M16 3v4M3 10h18M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2')+band('b4',cache.past.length,'Past 30 days','M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2');
@@ -773,7 +774,6 @@ $('npBtn').addEventListener('click',()=>{
 /* ─── DASHBOARD ─── */
 function renderDash(){
   if(!me) return;
-  var db=$('dashBody');if(!db)return;
   var now=new Date().toISOString();
   var todayK2=todayK();
   var n=cache.pending.length;
@@ -812,6 +812,24 @@ function renderDash(){
   $('dPendingList').innerHTML=pendHtml;
   $('dPendingCount').textContent=n;
   $('dPendingCount').style.display=n?'':'none';
+
+  // Mini calendar
+  renderDashCal();
+
+  // Upcoming today strip
+  var todayAppts=cache.upcoming.filter(function(a){return dkey(a.slot_start)===todayK2;}).slice(0,6);
+  var upcomBox=$('dashUpcoming');
+  if(upcomBox){
+    upcomBox.innerHTML=todayAppts.length
+      ? todayAppts.map(function(a){
+          return'<div class="dash-upcoming-row">'
+            +'<div class="dur-dot" style="background:'+(a.status==='confirmed'?'var(--green)':'var(--amber)')+'"></div>'
+            +'<div class="dur-name">'+esc(a.patient_name)+'</div>'
+            +'<div class="dur-time">'+fT(a.slot_start)+'</div>'
+            +'</div>';
+        }).join('')
+      : '<div style="padding:14px 16px;font-size:13px;color:var(--muted);text-align:center">No appointments today.</div>';
+  }
 }
 
 window.askReject2=function(id){
