@@ -562,11 +562,11 @@ function boot(){
       $('acctInfo').innerHTML=`<div style="width:52px;height:52px;border-radius:50%;background:${c[0]};color:${c[1]};display:grid;place-items:center;font-size:15px;font-weight:800;flex:none">${ini(me.full_name)}</div><div><b style="font-size:15px;display:block;color:var(--navy)">${esc(me.full_name)}</b><div style="font-size:12.5px;color:var(--muted)">${esc(me.specialty||'')}${isAdmin?'<span class="admin-badge">Admin</span>':''}</div><button class="btn dng" id="btnOut" style="margin-top:10px;font-size:12.5px;padding:7px 16px">Sign out</button></div>`;
       document.getElementById('btnOut').addEventListener('click',()=>sb.auth.signOut().then(()=>location.reload()));
       // Dashboard greeting
-      var dg=\$('dashGreeting'),ds=\$('dashSub');
+      var dg=$('dashGreeting'),ds=$('dashSub');
       if(dg) dg.textContent='Good '+greeting()+', '+me.full_name.replace(/^Dr\.?\s*/i,'').split(' ')[0];
       if(ds) ds.textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+(isAdmin?' · Hospital Admin':'· '+me.specialty);
       if(isAdmin){
-        var ic=\$('dashInfoCard');
+        var ic=$('dashInfoCard');
         if(ic) ic.style.background='linear-gradient(135deg,#1A3353 0%,#7A4E10 100%)';
       }
       go('dash');loadAll();
