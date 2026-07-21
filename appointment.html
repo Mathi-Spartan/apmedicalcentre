@@ -358,11 +358,6 @@ footer .ftamil{color:var(--mari);margin-top:12px}
           <input type="text" id="spec-search" placeholder="Search specialty or doctor name…">
         </div>
 
-        <p class="doc-section-lbl">&#11088; Senior Consultants</p>
-        <div class="doc-grid" id="featured-grid" style="margin-bottom:20px"></div>
-
-        <div class="divider"></div>
-        <p class="doc-section-lbl">Filter by department</p>
         <div class="spec-grid" id="spec-grid">
           <!-- populated by JS -->
         </div>
@@ -661,36 +656,6 @@ var stripOffset = 0;
 
 // ── Initials helper ──
 function initials(n){ return n.replace('Dr. ','').split(' ').filter(Boolean).map(function(w){return w[0]}).join('').slice(0,2).toUpperCase(); }
-
-// ── Featured doctors row (always visible) ──
-(function(){
-  var fg = document.getElementById('featured-grid');
-  DOCS.filter(function(d){ return d.featured; }).forEach(function(doc){
-    var card = document.createElement('div');
-    card.className = 'doc-pick featured';
-    var avHtml = doc.photo
-      ? '<img src="'+doc.photo+'" alt="'+doc.name+'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">'
-        +'<div class="fallback" style="display:none;--c1:'+doc.c1+';--c2:'+doc.c2+'">'+initials(doc.name)+'</div>'
-      : '<div class="fallback" style="--c1:'+doc.c1+';--c2:'+doc.c2+'">'+initials(doc.name)+'</div>';
-    card.innerHTML = '<div class="doc-feat-badge">Senior Consultant</div>'
-      +'<div class="doc-av">'+avHtml+'</div>'
-      +'<div class="doc-name">'+doc.name+'</div>'
-      +'<div class="doc-spec-lbl">'+doc.spec+'</div>'
-      +'<div class="doc-avail">Available today</div>';
-    card.addEventListener('click', function(){
-      document.querySelectorAll('.doc-pick').forEach(function(x){x.classList.remove('sel')});
-      card.classList.add('sel');
-      selDocName = doc.name;
-      selSpec = doc.spec;
-      document.getElementById('s1-next').disabled = false;
-      document.querySelectorAll('.spec-chip').forEach(function(x){
-        x.classList.toggle('sel', x.querySelector('.sl') && x.querySelector('.sl').textContent===doc.spec);
-      });
-      renderDocs(doc.spec);
-    });
-    fg.appendChild(card);
-  });
-})();
 
 // ── Build specialty grid ──
 var sgEl = document.getElementById('spec-grid');
