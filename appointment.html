@@ -139,6 +139,12 @@ body.hdr-scrolled .brand .mark{transform:scale(.88)}
 .doc-pick.any{border-style:dashed;background:var(--pea-ghost)}
 .doc-pick.any .any-ico{font-size:26px;margin-bottom:6px}
 .doc-pick.any .doc-name{color:var(--pea)}
+/* ── Featured doctor highlight ── */
+.doc-pick.featured{border-color:var(--mari);background:linear-gradient(160deg,#FFFDF7,#FDF5E4);box-shadow:0 4px 18px -6px rgba(232,161,61,.25)}
+.doc-pick.featured:hover{border-color:var(--mari-deep);box-shadow:0 10px 28px -8px rgba(232,161,61,.38)}
+.doc-pick.featured .doc-av{border-color:var(--mari)}
+.doc-feat-badge{display:inline-flex;align-items:center;gap:3px;background:var(--mari);color:#3A2A0E;font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:99px;margin-bottom:6px}
+.doc-feat-badge::before{content:'★';font-size:8px}
 
 /* step 1 sidebar */
 .sidebar-info{background:linear-gradient(155deg,var(--pea),var(--pea-deep));border-radius:22px;padding:28px;color:#fff;position:sticky;top:160px}
@@ -594,10 +600,10 @@ var SPECS = [
 var ALL_SPECIALTIES = ['Anaesthesiology','Arthroscopy & Sports Medicine','Cardiology','Clinical Psychology','Dermatology','Diabetology & Geriatrics','ENT Surgery','Emergency & Critical Care','Endocrinology','Fetal Medicine','General Medicine','General Surgery','Neonatology','Nephrology','Neurosurgery','Obstetrics & Fertility','Obstetrics & Gynecology','Oral & Maxillofacial Surgery','Orthopedic Surgery','Paediatric Surgery','Paediatrics','Palliative & Critical Care','Plastic Surgery','Psychiatry','Pulmonology','Radiodiagnosis','Radiodiagnosis & Fetal Medicine','Surgical Gastroenterology','Surgical Oncology','Urology & Andrology','Vascular Surgery'];
 
 var DOCS = [
-  {name:'Dr. A. P. Shankar Narayanan',spec:'Surgical Gastroenterology',photo:'images/doctors/dr-shankar-narayanan.jpg',c1:'#0E5348',c2:'#083730'},
-  {name:'Dr. G. Kirana Selvi',spec:'Obstetrics & Fertility',photo:'images/doctors/dr-kirana-selvi.jpg',c1:'#6F5BB5',c2:'#4C3D8A'},
+  {name:'Dr. A. P. Shankar Narayanan',spec:'Surgical Gastroenterology',photo:'images/doctors/dr-shankar-narayanan.jpg',c1:'#0E5348',c2:'#083730',featured:true},
+  {name:'Dr. G. Kirana Selvi',spec:'Obstetrics & Fertility',photo:'images/doctors/dr-kirana-selvi.jpg',c1:'#6F5BB5',c2:'#4C3D8A',featured:true},
   {name:'Dr. Suresh Perumal',spec:'Arthroscopy & Sports Medicine',photo:'images/doctors/dr-suresh-perumal.jpg',c1:'#3B6FA8',c2:'#1D4F87'},
-  {name:'Dr. K. Dinesh',spec:'Paediatrics',photo:'images/doctors/dr-dinesh.jpg',c1:'#1D8A78',c2:'#0D6054'},
+  {name:'Dr. K. Dinesh',spec:'Paediatrics',photo:'images/doctors/dr-dinesh.jpg',c1:'#1D8A78',c2:'#0D6054',featured:true},
   {name:'Dr. P. Justin',spec:'Anaesthesiology',photo:'images/doctors/dr-justin.jpg',c1:'#5B6FA8',c2:'#3B4F88'},
   {name:'Dr. K. Krishna Moorthy',spec:'Cardiology',c1:'#B4544C',c2:'#8C3C35'},
   {name:'Dr. K. S. Suseenth Kanna',spec:'Cardiology',c1:'#C97F1E',c2:'#A05F0E'},
@@ -703,14 +709,18 @@ function renderDocList(list, spec){
     dg.appendChild(any);
   }
 
-  list.forEach(function(doc){
+  // Sort featured doctors to the top
+  var sorted = list.slice().sort(function(a,b){ return (b.featured?1:0)-(a.featured?1:0); });
+  sorted.forEach(function(doc){
     var card = document.createElement('div');
-    card.className = 'doc-pick';
+    card.className = 'doc-pick' + (doc.featured ? ' featured' : '');
     var avHtml = doc.photo
       ? '<img src="'+doc.photo+'" alt="'+doc.name+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
         +'<div class="fallback" style="display:none;--c1:'+doc.c1+';--c2:'+doc.c2+'">'+initials(doc.name)+'</div>'
       : '<div class="fallback" style="--c1:'+doc.c1+';--c2:'+doc.c2+'">'+initials(doc.name)+'</div>';
-    card.innerHTML = '<div class="doc-av">'+avHtml+'</div>'
+    var badge = doc.featured ? '<div class="doc-feat-badge">Senior Consultant</div>' : '';
+    card.innerHTML = badge
+      +'<div class="doc-av">'+avHtml+'</div>'
       +'<div class="doc-name">'+doc.name+'</div>'
       +'<div class="doc-spec-lbl">'+doc.spec+'</div>'
       +'<div class="doc-avail">Available today</div>';
