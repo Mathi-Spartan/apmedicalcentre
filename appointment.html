@@ -112,12 +112,12 @@ body.hdr-scrolled .brand .mark{transform:scale(.88)}
 .search-box .si{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted)}
 
 /* specialty grid */
-.spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
-.spec-chip{background:var(--pea-ghost);border:1.5px solid transparent;border-radius:14px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .2s cubic-bezier(.34,1.56,.4,1)}
+.spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:24px}
+.spec-chip{background:var(--pea-ghost);border:1.5px solid transparent;border-radius:14px;padding:11px 8px;text-align:center;cursor:pointer;transition:all .2s cubic-bezier(.34,1.56,.4,1)}
 .spec-chip:hover{background:var(--pea-soft);border-color:var(--pea-soft);transform:translateY(-2px)}
 .spec-chip.sel{background:var(--pea-soft);border-color:var(--pea);transform:translateY(-2px)}
-.spec-chip .si{font-size:22px;margin-bottom:6px}
-.spec-chip .sl{font-size:11.5px;font-weight:700;color:var(--ink);line-height:1.3}
+.spec-chip .si{font-size:20px;margin-bottom:5px}
+.spec-chip .sl{font-size:11px;font-weight:700;color:var(--ink);line-height:1.3}
 .spec-chip.sel .sl{color:var(--pea-deep)}
 
 /* doctor cards */
@@ -573,7 +573,22 @@ var SPECS = [
   {ico:'🔦',label:'Dermatology'},
   {ico:'🫂',label:'Psychiatry'},
   {ico:'🩻',label:'Radiodiagnosis'},
-  {ico:'➕',label:'More specialties…'}
+  {ico:'💉',label:'Anaesthesiology'},
+  {ico:'🏃',label:'Arthroscopy & Sports Medicine'},
+  {ico:'🧘',label:'Clinical Psychology'},
+  {ico:'🚨',label:'Emergency & Critical Care'},
+  {ico:'👶',label:'Fetal Medicine'},
+  {ico:'🍼',label:'Neonatology'},
+  {ico:'💧',label:'Nephrology'},
+  {ico:'🌸',label:'Obstetrics & Fertility'},
+  {ico:'🦷',label:'Oral & Maxillofacial Surgery'},
+  {ico:'👧',label:'Paediatric Surgery'},
+  {ico:'🕊️',label:'Palliative & Critical Care'},
+  {ico:'✂️',label:'Plastic Surgery'},
+  {ico:'🩻',label:'Radiodiagnosis & Fetal Medicine'},
+  {ico:'🔭',label:'Surgical Gastroenterology'},
+  {ico:'🎗️',label:'Surgical Oncology'},
+  {ico:'🫀',label:'Vascular Surgery'}
 ];
 
 var ALL_SPECIALTIES = ['Anaesthesiology','Arthroscopy & Sports Medicine','Cardiology','Clinical Psychology','Dermatology','Diabetology & Geriatrics','ENT Surgery','Emergency & Critical Care','Endocrinology','Fetal Medicine','General Medicine','General Surgery','Neonatology','Nephrology','Neurosurgery','Obstetrics & Fertility','Obstetrics & Gynecology','Oral & Maxillofacial Surgery','Orthopedic Surgery','Paediatric Surgery','Paediatrics','Palliative & Critical Care','Plastic Surgery','Psychiatry','Pulmonology','Radiodiagnosis','Radiodiagnosis & Fetal Medicine','Surgical Gastroenterology','Surgical Oncology','Urology & Andrology','Vascular Surgery'];
@@ -643,7 +658,6 @@ SPECS.forEach(function(s){
   d.className = 'spec-chip';
   d.innerHTML = '<div class="si">'+s.ico+'</div><div class="sl">'+s.label+'</div>';
   d.addEventListener('click', function(){
-    if(s.label==='More specialties…'){ showAllSpecs(); return; }
     document.querySelectorAll('.spec-chip').forEach(function(x){x.classList.remove('sel')});
     d.classList.add('sel');
     selSpec = s.label; selDocName = ''; selSlot = null; selSlotStart = null;
@@ -652,25 +666,6 @@ SPECS.forEach(function(s){
   });
   sgEl.appendChild(d);
 });
-
-function showAllSpecs(){
-  sgEl.innerHTML = '';
-  ALL_SPECIALTIES.forEach(function(sp){
-    var found = SPECS.find(function(x){return x.label===sp});
-    var ico = found ? found.ico : '🩺';
-    var d = document.createElement('div');
-    d.className = 'spec-chip';
-    d.innerHTML = '<div class="si">'+ico+'</div><div class="sl">'+sp+'</div>';
-    d.addEventListener('click', function(){
-      document.querySelectorAll('.spec-chip').forEach(function(x){x.classList.remove('sel')});
-      d.classList.add('sel');
-      selSpec = sp; selDocName = ''; selSlot = null; selSlotStart = null;
-      renderDocs(sp);
-      document.getElementById('s1-next').disabled = true;
-    });
-    sgEl.appendChild(d);
-  });
-}
 
 // ── Search ──
 document.getElementById('spec-search').addEventListener('input', function(){
