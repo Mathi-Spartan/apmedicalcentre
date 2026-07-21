@@ -137,6 +137,9 @@ body.hdr-scrolled .brand .mark{transform:scale(.88)}
 .doc-avail{font-size:10px;color:var(--teal);font-weight:700;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:4px}
 .doc-avail::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0}
 .doc-pick.any{border-style:dashed;background:var(--pea-ghost)}
+.featured-row{margin-bottom:4px}
+.featured-row .doc-pick.featured{border-color:var(--mari);background:linear-gradient(160deg,#FFFDF7,#FDF3DC)}
+.featured-row .doc-pick.featured:hover{transform:translateY(-4px);box-shadow:0 12px 30px -10px rgba(232,161,61,.35)}
 .doc-pick.any .any-ico{font-size:26px;margin-bottom:6px}
 .doc-pick.any .doc-name{color:var(--pea)}
 /* ── Featured doctor highlight ── */
@@ -358,6 +361,12 @@ footer .ftamil{color:var(--mari);margin-top:12px}
           <input type="text" id="spec-search" placeholder="Search specialty or doctor name…">
         </div>
 
+        <!-- Pinned Senior Consultants -->
+        <p class="doc-section-lbl" style="margin-bottom:10px">&#11088; Senior Consultants</p>
+        <div class="doc-grid featured-row" id="featured-grid"></div>
+
+        <div class="divider" style="margin:20px 0 16px"></div>
+        <p class="doc-section-lbl" style="margin-bottom:10px">Filter by department</p>
         <div class="spec-grid" id="spec-grid">
           <!-- populated by JS -->
         </div>
@@ -649,6 +658,39 @@ var dbDocs = {};
 sb.from('doctors_public').select('id,full_name').then(function(r){
   (r.data||[]).forEach(function(d){ dbDocs[d.full_name] = d; });
 });
+
+// ── Populate pinned Senior Consultants row ──
+(function(){
+  var fg = document.getElementById('featured-grid');
+  DOCS.filter(function(d){ return d.featured; }).forEach(function(doc){
+    var card = document.createElement('div');
+    card.className = 'doc-pick featured';
+    var avHtml = doc.photo
+      ? '<img src="'+doc.photo+'" alt="'+doc.name+'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">'
+        +'<div class="fallback" style="display:none;--c1:'+doc.c1+';--c2:'+doc.c2+'">'+initials(doc.name)+'</div>'
+      : '<div class="fallback" style="--c1:'+doc.c1+';--c2:'+doc.c2+'">'+initials(doc.name)+'</div>';
+    card.innerHTML = '<div class="doc-feat-badge">Senior Consultant</div>'
+      +'<div class="doc-av">'+avHtml+'</div>'
+      +'<div class="doc-name">'+doc.name+'</div>'
+      +'<div class="doc-spec-lbl">'+doc.spec+'</div>'
+      +'<div class="doc-avail">Available today</div>';
+    card.addEventListener('click', function(){
+      document.querySelectorAll('.doc-pick').forEach(function(x){x.classList.remove('sel')});
+      card.classList.add('sel');
+      selDocName = doc.name;
+      selSpec = doc.spec;
+      document.getElementById('s1-next').disabled = false;
+      // highlight their department pill too
+      document.querySelectorAll('.spec-chip').forEach(function(x){
+        x.classList.toggle('sel', x.querySelector('.sl') && x.querySelector('.sl').textContent === doc.spec);
+      });
+      renderDocs(doc.spec);
+      // scroll doc-section into view
+      document.getElementById('doc-section-lbl').scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+    fg.appendChild(card);
+  });
+})();
 
 // ── State ──
 var selSpec = '', selDocName = '', selDate = '', selSlot = null, selSlotStart = null;
