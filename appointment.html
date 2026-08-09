@@ -8,14 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#FAF8F3;--card:#FFFFFF;--ink:#17211D;--muted:#5F6E67;
-  --pea:#0E5348;--pea-deep:#093B33;--pea-soft:#E3EFEB;--pea-ghost:#F0F6F4;
-  --mari:#E8A13D;--mari-deep:#C97F1E;--mari-soft:#FBF0DC;
+  --paper:#F7F8FB;--card:#FFFFFF;--ink:#17202E;--muted:#5C6879;
+  --pea:#153468;--pea-deep:#0D2246;--pea-soft:#E4EBF6;--pea-ghost:#EEF2F9;
+  --mari:#EF8F2E;--mari-deep:#C56E12;--mari-soft:#FDF0DE;
   --rose:#B4544C;--rose-soft:#F9ECE9;
   --blue:#3B6FA8;--blue-soft:#E8F0FA;
   --lav:#6F5BB5;--lav-soft:#EFEAF9;
   --teal:#1D8A78;--teal-soft:#E1F4F0;
-  --line:#E7E3D8;--shadow:0 1px 2px rgba(23,33,29,.05),0 12px 32px -12px rgba(23,33,29,.14);
+  --line:#E2E6EE;--shadow:0 1px 2px rgba(23,32,46,.05),0 12px 32px -12px rgba(23,32,46,.14);
   --r:20px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -32,7 +32,7 @@ svg{display:block}
 /* buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;font-size:15px;padding:14px 26px;border-radius:999px;transition:all .2s;border:none;cursor:pointer;font-family:'Figtree'}
 .btn:active{transform:scale(.98)}
-.btn-p{background:var(--pea);color:#fff;box-shadow:0 8px 20px -8px rgba(14,83,72,.5)}
+.btn-p{background:var(--pea);color:#fff;box-shadow:0 8px 20px -8px rgba(21,52,104,.5)}
 .btn-p:hover{background:var(--pea-deep);transform:translateY(-1px)}
 .btn-m{background:var(--mari);color:#3A2A0E;box-shadow:0 8px 20px -8px rgba(201,127,30,.5)}
 .btn-m:hover{background:var(--mari-deep);color:#fff;transform:translateY(-1px)}
@@ -62,7 +62,7 @@ nav.main a.on{color:var(--pea);background:var(--pea-soft)}
 nav.main a:not(.on)::after{content:"";position:absolute;left:16px;right:16px;bottom:5px;height:2px;background:var(--mari);border-radius:2px;transform:scaleX(0);transform-origin:center;transition:transform .3s cubic-bezier(.3,.7,.2,1)}
 nav.main a:not(.on):hover::after{transform:scaleX(1)}
 nav.main a:not(.on):hover{background:transparent}
-body.hdr-scrolled header{background:rgba(250,248,243,.78);backdrop-filter:blur(16px) saturate(1.5);box-shadow:0 8px 30px -18px rgba(23,33,29,.25)}
+body.hdr-scrolled header{background:rgba(250,248,243,.78);backdrop-filter:blur(16px) saturate(1.5);box-shadow:0 8px 30px -18px rgba(23,32,46,.25)}
 body.hdr-scrolled header .wrap{height:62px}
 body.hdr-scrolled .brand .mark{transform:scale(.88)}
 .hamburger{display:none;width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;place-items:center;margin-left:auto;margin-right:12px}
@@ -76,12 +76,12 @@ body.hdr-scrolled .brand .mark{transform:scale(.88)}
 @media(max-width:600px){.topbar .wrap span:last-child{display:none}}
 
 /* page hero */
-.phero{background:linear-gradient(155deg,#0F5A4E,var(--pea-deep));color:#fff;padding:60px 0 48px;position:relative;overflow:hidden}
-.phero .glow{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(232,161,61,.22),transparent 65%);top:-200px;right:-100px;pointer-events:none}
+.phero{background:linear-gradient(155deg,#17406E,var(--pea-deep));color:#fff;padding:60px 0 48px;position:relative;overflow:hidden}
+.phero .glow{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(239,143,46,.22),transparent 65%);top:-200px;right:-100px;pointer-events:none}
 .phero .eyebrow{color:var(--mari);font-size:14px;font-weight:700;margin-bottom:10px;letter-spacing:.05em}
 .phero h1{font-size:clamp(32px,4vw,52px);color:#fff;margin-bottom:12px}
 .phero h1 em{font-style:italic;color:var(--mari)}
-.phero p{color:#BFDAD3;max-width:56ch;font-size:16px}
+.phero p{color:#C0CFE6;max-width:56ch;font-size:16px}
 
 /* ───── PROGRESS BAR ───── */
 .progress-wrap{background:var(--card);border-bottom:1px solid var(--line);padding:20px 0;position:sticky;top:78px;z-index:40}
@@ -125,7 +125,7 @@ body.hdr-scrolled .brand .mark{transform:scale(.88)}
 .doc-section-lbl{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:14px}
 .doc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .doc-pick{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:16px 12px;cursor:pointer;transition:all .2s cubic-bezier(.3,.7,.2,1);text-align:center;position:relative}
-.doc-pick:hover{border-color:var(--pea);background:var(--pea-ghost);transform:translateY(-3px);box-shadow:0 8px 20px -8px rgba(14,83,72,.18)}
+.doc-pick:hover{border-color:var(--pea);background:var(--pea-ghost);transform:translateY(-3px);box-shadow:0 8px 20px -8px rgba(21,52,104,.18)}
 .doc-pick.sel{border-color:var(--pea);background:var(--pea-soft)}
 .doc-pick.sel::after{content:"✓";position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;background:var(--pea);color:#fff;font-size:10px;font-weight:800;display:grid;place-items:center}
 .doc-av{width:68px;height:68px;border-radius:50%;margin:0 auto 10px;overflow:hidden;border:3px solid var(--pea-soft);position:relative}
@@ -140,8 +140,8 @@ body.hdr-scrolled .brand .mark{transform:scale(.88)}
 .doc-pick.any .any-ico{font-size:26px;margin-bottom:6px}
 .doc-pick.any .doc-name{color:var(--pea)}
 /* ── Featured doctor highlight ── */
-.doc-pick.featured{border-color:var(--mari);background:linear-gradient(160deg,#FFFDF7,#FDF5E4);box-shadow:0 4px 18px -6px rgba(232,161,61,.25)}
-.doc-pick.featured:hover{border-color:var(--mari-deep);box-shadow:0 10px 28px -8px rgba(232,161,61,.38)}
+.doc-pick.featured{border-color:var(--mari);background:linear-gradient(160deg,#FFFDF7,#FDF5E4);box-shadow:0 4px 18px -6px rgba(239,143,46,.25)}
+.doc-pick.featured:hover{border-color:var(--mari-deep);box-shadow:0 10px 28px -8px rgba(239,143,46,.38)}
 .doc-pick.featured .doc-av{border-color:var(--mari)}
 .doc-feat-badge{display:inline-flex;align-items:center;gap:3px;background:var(--mari);color:#3A2A0E;font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:99px;margin-bottom:6px}
 .doc-feat-badge::before{content:'★';font-size:8px}
@@ -150,10 +150,10 @@ body.hdr-scrolled .brand .mark{transform:scale(.88)}
 .sidebar-info{background:linear-gradient(155deg,var(--pea),var(--pea-deep));border-radius:22px;padding:28px;color:#fff;position:sticky;top:160px}
 .si-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--mari);margin-bottom:16px}
 .si-steps{list-style:none;counter-reset:s}
-.si-steps li{counter-increment:s;display:flex;gap:12px;margin-bottom:14px;font-size:14px;color:#BFDAD3;align-items:flex-start}
+.si-steps li{counter-increment:s;display:flex;gap:12px;margin-bottom:14px;font-size:14px;color:#C0CFE6;align-items:flex-start}
 .si-steps li::before{content:counter(s);width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.15);color:var(--mari);font-weight:800;display:grid;place-items:center;flex-shrink:0;font-size:11px}
 .si-timings{margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.15)}
-.si-timings p{font-size:13px;color:#BFDAD3}
+.si-timings p{font-size:13px;color:#C0CFE6}
 .si-timings b{color:#fff}
 .emg-card{background:var(--rose);border-radius:16px;padding:18px 20px;margin-top:16px;color:#fff}
 .emg-card p{font-size:12px;color:#F3D4CF;margin-bottom:4px}
@@ -169,7 +169,7 @@ body.hdr-scrolled .brand .mark{transform:scale(.88)}
 .date-strip::-webkit-scrollbar{display:none}
 .dchip{flex-shrink:0;width:58px;text-align:center;padding:12px 6px;border-radius:16px;border:1.5px solid var(--line);background:var(--paper);cursor:pointer;transition:all .2s cubic-bezier(.3,.7,.2,1)}
 .dchip:hover{border-color:var(--pea);background:var(--pea-ghost);transform:translateY(-2px)}
-.dchip.sel{background:var(--pea);border-color:var(--pea);transform:translateY(-2px);box-shadow:0 6px 16px -6px rgba(14,83,72,.4)}
+.dchip.sel{background:var(--pea);border-color:var(--pea);transform:translateY(-2px);box-shadow:0 6px 16px -6px rgba(21,52,104,.4)}
 .dchip.sel .dday,.dchip.sel .dnum,.dchip.sel .dmon{color:#fff}
 .dchip.today .dday{color:var(--rose)}
 .dchip.disabled{opacity:.35;cursor:not-allowed;pointer-events:none}
@@ -186,7 +186,7 @@ body.hdr-scrolled .brand .mark{transform:scale(.88)}
 .tcbar{flex:1;border-radius:4px 4px 0 0;cursor:pointer;transition:all .2s;min-height:8px}
 .tcbar:hover{filter:brightness(.85)}
 .tcbar.sel{background:var(--pea)!important}
-.tcbar.booked{background:#E7E3D8!important;cursor:not-allowed;opacity:.5}
+.tcbar.booked{background:#E2E6EE!important;cursor:not-allowed;opacity:.5}
 .time-axis{display:flex;justify-content:space-between;margin-top:4px;padding:0 2px}
 .time-axis span{font-size:9px;font-weight:700;color:var(--muted)}
 
@@ -197,7 +197,7 @@ body.hdr-scrolled .brand .mark{transform:scale(.88)}
 .slt{padding:11px 6px;text-align:center;border-radius:12px;border:1.5px solid var(--line);background:var(--paper);font-size:12px;font-weight:700;color:var(--ink);cursor:pointer;transition:all .18s}
 .slt:hover{border-color:var(--pea);color:var(--pea)}
 .slt.taken{background:#F5F3EF;color:#C3BFB5;cursor:not-allowed;text-decoration:line-through}
-.slt.sel{background:var(--mari);border-color:var(--mari);color:#3A2A0E;box-shadow:0 4px 10px -4px rgba(232,161,61,.5)}
+.slt.sel{background:var(--mari);border-color:var(--mari);color:#3A2A0E;box-shadow:0 4px 10px -4px rgba(239,143,46,.5)}
 .slot-legend{display:flex;gap:14px;margin-top:12px;flex-wrap:wrap}
 .leg{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);font-weight:600}
 .leg-sq{width:12px;height:12px;border-radius:3px}
@@ -237,7 +237,7 @@ body.hdr-scrolled .brand .mark{transform:scale(.88)}
 .back-btn{flex:1;padding:15px;background:transparent;border:1.5px solid var(--line);border-radius:14px;font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Figtree';transition:.18s}
 .back-btn:hover{border-color:var(--pea);color:var(--pea)}
 .next-btn{flex:2;padding:15px;background:var(--pea);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:800;cursor:pointer;font-family:'Figtree';transition:all .2s;letter-spacing:.01em}
-.next-btn:hover{background:var(--pea-deep);transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(14,83,72,.5)}
+.next-btn:hover{background:var(--pea-deep);transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(21,52,104,.5)}
 .next-btn:disabled{background:var(--line);color:var(--muted);cursor:not-allowed;transform:none;box-shadow:none}
 .wa-btn{width:100%;padding:14px;background:#25D366;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Figtree';display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;margin-top:14px}
 .wa-btn:hover{background:#1ea855;transform:translateY(-1px)}
@@ -428,7 +428,7 @@ footer .ftamil{color:var(--mari);margin-top:12px}
 
         <div class="slot-legend">
           <div class="leg"><div class="leg-sq" style="background:var(--mari)"></div>Selected</div>
-          <div class="leg"><div class="leg-sq" style="background:#E7E3D8"></div>Taken</div>
+          <div class="leg"><div class="leg-sq" style="background:#E2E6EE"></div>Taken</div>
           <div class="leg"><div class="leg-sq" style="background:var(--paper);border:1.5px solid var(--line)"></div>Available</div>
         </div>
       </div>
@@ -600,47 +600,47 @@ var SPECS = [
 var ALL_SPECIALTIES = ['Anaesthesiology','Arthroscopy & Sports Medicine','Cardiology','Clinical Psychology','Dermatology','Diabetology & Geriatrics','ENT Surgery','Emergency & Critical Care','Endocrinology','Fetal Medicine','General Medicine','General Surgery','Neonatology','Nephrology','Neurosurgery','Obstetrics & Fertility','Obstetrics & Gynecology','Oral & Maxillofacial Surgery','Orthopedic Surgery','Paediatric Surgery','Paediatrics','Palliative & Critical Care','Plastic Surgery','Psychiatry','Pulmonology','Radiodiagnosis','Radiodiagnosis & Fetal Medicine','Surgical Gastroenterology','Surgical Oncology','Urology & Andrology','Vascular Surgery'];
 
 var DOCS = [
-  {name:'Dr. A. P. Shankar Narayanan',spec:'Surgical Gastroenterology',photo:'images/doctors/dr-shankar-narayanan.jpg',c1:'#0E5348',c2:'#083730',featured:true},
+  {name:'Dr. A. P. Shankar Narayanan',spec:'Surgical Gastroenterology',photo:'images/doctors/dr-shankar-narayanan.jpg',c1:'#153468',c2:'#083730',featured:true},
   {name:'Dr. G. Kirana Selvi',spec:'Obstetrics & Fertility',photo:'images/doctors/dr-kirana-selvi.jpg',c1:'#6F5BB5',c2:'#4C3D8A',featured:true},
   {name:'Dr. K. Dinesh',spec:'Paediatrics',photo:'images/doctors/dr-dinesh.jpg',c1:'#1D8A78',c2:'#0D6054',featured:true},
   {name:'Dr. Suresh Perumal',spec:'Arthroscopy & Sports Medicine',photo:'images/doctors/dr-suresh-perumal.jpg',c1:'#3B6FA8',c2:'#1D4F87'},
   {name:'Dr. P. Justin',spec:'Anaesthesiology',photo:'images/doctors/dr-justin.jpg',c1:'#5B6FA8',c2:'#3B4F88'},
   {name:'Dr. K. Krishna Moorthy',spec:'Cardiology',c1:'#B4544C',c2:'#8C3C35'},
-  {name:'Dr. K. S. Suseenth Kanna',spec:'Cardiology',c1:'#C97F1E',c2:'#A05F0E'},
-  {name:'Dr. S. Prabhagaran',spec:'Diabetology & Geriatrics',c1:'#0E5348',c2:'#083730'},
+  {name:'Dr. K. S. Suseenth Kanna',spec:'Cardiology',c1:'#C56E12',c2:'#A05F0E'},
+  {name:'Dr. S. Prabhagaran',spec:'Diabetology & Geriatrics',c1:'#153468',c2:'#083730'},
   {name:'Dr. N. Tharaneeswaran',spec:'Emergency & Critical Care',c1:'#B4544C',c2:'#8C3C35'},
   {name:'Dr. A. Prem Kumar',spec:'Endocrinology',c1:'#3B6FA8',c2:'#1D4F87'},
   {name:'Dr. S. Anjankumar',spec:'ENT Surgery',photo:'images/doctors/dr-anjankumar.jpg',c1:'#1D8A78',c2:'#0D6054'},
   {name:'Dr. K. S. Sri Rathna Maheswari',spec:'Dermatology',photo:'images/doctors/dr-rathna-maheswari.png',c1:'#6F5BB5',c2:'#4C3D8A'},
-  {name:'Dr. V. Sathiskumar',spec:'General Medicine',photo:'images/doctors/dr-sathiskumar.png',c1:'#0E5348',c2:'#083730'},
+  {name:'Dr. V. Sathiskumar',spec:'General Medicine',photo:'images/doctors/dr-sathiskumar.png',c1:'#153468',c2:'#083730'},
   {name:'Dr. Rajan David',spec:'General Surgery',c1:'#3B6FA8',c2:'#1D4F87'},
   {name:'Dr. Deepa Justine',spec:'Fetal Medicine',c1:'#6F5BB5',c2:'#4C3D8A'},
   {name:'Dr. S. Balaji',spec:'Neonatology',c1:'#1D8A78',c2:'#0D6054'},
-  {name:'Dr. S. P. Goutham',spec:'Neurosurgery',c1:'#0E5348',c2:'#083730'},
+  {name:'Dr. S. P. Goutham',spec:'Neurosurgery',c1:'#153468',c2:'#083730'},
   {name:'Dr. Archana Chiniwalar',spec:'Nephrology',c1:'#B4544C',c2:'#8C3C35'},
   {name:'Dr. Kavya',spec:'Nephrology',photo:'images/doctors/dr-kavya.jpg',c1:'#6F5BB5',c2:'#4C3D8A'},
-  {name:'Dr. Vidhya Prabakar',spec:'Obstetrics & Gynecology',c1:'#C97F1E',c2:'#A05F0E'},
+  {name:'Dr. Vidhya Prabakar',spec:'Obstetrics & Gynecology',c1:'#C56E12',c2:'#A05F0E'},
   {name:'Dr. Arunita Nandy Goutham',spec:'Obstetrics & Gynecology',c1:'#6F5BB5',c2:'#4C3D8A'},
   {name:'Dr. P. Sathya Sudhakar',spec:'Obstetrics & Gynecology',c1:'#3B6FA8',c2:'#1D4F87'},
   {name:'Dr. G. Divya',spec:'Obstetrics & Gynecology',photo:'images/doctors/dr-divya.png',c1:'#1D8A78',c2:'#0D6054'},
   {name:'Dr. M. Madhumitha Arunkarthick',spec:'Obstetrics & Gynecology',photo:'images/doctors/dr-madhumitha.png',c1:'#B4544C',c2:'#8C3C35'},
   {name:'Dr. P. Narendran',spec:'Orthopedic Surgery',photo:'images/doctors/dr-narendran.jpg',c1:'#3B6FA8',c2:'#1D4F87'},
-  {name:'Dr. Prabhu Thangam',spec:'Orthopedic Surgery',c1:'#C97F1E',c2:'#A05F0E'},
-  {name:'Dr. G. M. Jagadeesan',spec:'Surgical Oncology',c1:'#0E5348',c2:'#083730'},
+  {name:'Dr. Prabhu Thangam',spec:'Orthopedic Surgery',c1:'#C56E12',c2:'#A05F0E'},
+  {name:'Dr. G. M. Jagadeesan',spec:'Surgical Oncology',c1:'#153468',c2:'#083730'},
   {name:'Dr. B. S. Saravanan',spec:'Oral & Maxillofacial Surgery',c1:'#3B6FA8',c2:'#1D4F87'},
   {name:'Dr. N. Vishwanthan',spec:'Palliative & Critical Care',c1:'#5B6FA8',c2:'#3B4F88'},
   {name:'Dr. Ravichandran',spec:'Paediatric Surgery',c1:'#1D8A78',c2:'#0D6054'},
-  {name:'Dr. N. Saravanan',spec:'Paediatric Surgery',c1:'#C97F1E',c2:'#A05F0E'},
+  {name:'Dr. N. Saravanan',spec:'Paediatric Surgery',c1:'#C56E12',c2:'#A05F0E'},
   {name:'Dr. S. Vijay Kannan',spec:'Plastic Surgery',c1:'#B4544C',c2:'#8C3C35'},
   {name:'Dr. R. Karthikeyan',spec:'Psychiatry',photo:'images/doctors/dr-karthikeyan.png',c1:'#6F5BB5',c2:'#4C3D8A'},
   {name:'Dr. Babu Rangarajan',spec:'Clinical Psychology',photo:'images/doctors/dr-babu-rangarajan.png',c1:'#3B6FA8',c2:'#1D4F87'},
-  {name:'Dr. G. Vedhamoorthy',spec:'Pulmonology',c1:'#0E5348',c2:'#083730'},
+  {name:'Dr. G. Vedhamoorthy',spec:'Pulmonology',c1:'#153468',c2:'#083730'},
   {name:'Dr. S. Samundram',spec:'Pulmonology',photo:'images/doctors/dr-samundram.jpg',c1:'#1D8A78',c2:'#0D6054'},
-  {name:'Dr. Sathiya Narayanan',spec:'Radiodiagnosis',c1:'#C97F1E',c2:'#A05F0E'},
+  {name:'Dr. Sathiya Narayanan',spec:'Radiodiagnosis',c1:'#C56E12',c2:'#A05F0E'},
   {name:'Dr. S. Sivaranjanie',spec:'Radiodiagnosis & Fetal Medicine',photo:'images/doctors/dr-sivaranjanie.jpg',c1:'#6F5BB5',c2:'#4C3D8A'},
   {name:'Dr. S. Gowthaman',spec:'Urology & Andrology',c1:'#3B6FA8',c2:'#1D4F87'},
   {name:'Dr. P. Arun Karthick',spec:'Urology & Andrology',c1:'#B4544C',c2:'#8C3C35'},
-  {name:'Dr. G. P. Kirubakaran',spec:'Anaesthesiology',c1:'#0E5348',c2:'#083730'},
+  {name:'Dr. G. P. Kirubakaran',spec:'Anaesthesiology',c1:'#153468',c2:'#083730'},
   {name:'Dr. M. Balaji',spec:'Vascular Surgery',c1:'#5B6FA8',c2:'#3B4F88'}
 ];
 
@@ -1019,6 +1019,17 @@ document.getElementById('direct-btn').addEventListener('click',function(){doSubm
 // init
 renderDocs('');
 
+})();
+</script>
+
+<script>
+/* deep-link from homepage widget: ?spec=... prefills step-1 search */
+(function(){
+  try{
+    var p=new URLSearchParams(location.search).get('spec');
+    if(p){var el=document.getElementById('spec-search');
+      if(el){el.value=p;el.dispatchEvent(new Event('input',{bubbles:true}));}}
+  }catch(e){}
 })();
 </script>
 </body>
