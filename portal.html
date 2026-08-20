@@ -413,10 +413,21 @@ input,select,textarea{font-family:'Figtree';outline:none}
       <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5M15 15c2.3.3 4.5 1.9 4.5 4"/></svg>
     <span class="rlbl">Hospital roster</span></button>
     <div class="rsep"></div>
-    <button class="rib sp" data-p="acct" title="Account">
+    <button class="rib sp mob-only" data-p="acct" title="Account">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
     <span class="rlbl">Account</span></button>
-    <button class="rib" id="ava" title="Profile">--</button>
+    <button class="rib" id="ava" title="Profile" style="display:none">--</button>
+    <div class="rfoot" id="odFoot">
+      <button class="rf-id" id="rfId" title="Open account">
+        <span class="rf-av" id="rfAv">--</span>
+        <span class="rf-meta"><b id="rfName">—</b><small id="rfRole">Signed in</small></span>
+        <svg viewBox="0 0 24 24" class="rf-chev"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <button class="rf-out" id="rfOut">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        Sign out · வெளியேறு
+      </button>
+    </div>
   </div>
 
   <!-- MAIN -->
@@ -1492,6 +1503,24 @@ document.addEventListener('click',function(e){
 .tchip.y{background:var(--mari-soft);color:var(--mari-deep)}
 @media(max-width:700px){.od-clock{display:none}}
 
+/* ── rail footer: identity card + sign out ── */
+.rib.mob-only{display:none}
+.rfoot{margin-top:auto;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:8px}
+.rf-id{display:flex;gap:10px;align-items:center;width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:10px 11px;text-align:left;transition:all .18s}
+.rf-id:hover{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.2)}
+.rf-av{width:38px;height:38px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:800;font-size:12px;color:#3d2405;background:radial-gradient(circle at 32% 28%,#ffb45c,#ef8f2e 62%,#c56e12);border:2px dashed rgba(61,36,5,.35);box-shadow:inset 0 1px 3px rgba(255,255,255,.5)}
+.rf-meta{min-width:0;flex:1}
+.rf-meta b{display:block;font-size:12.5px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rf-meta small{display:block;font-size:10.5px;color:#8fa3c6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rf-chev{width:14px;height:14px;color:#8fa3c6;flex:none}
+.rf-out{display:flex;gap:9px;align-items:center;justify-content:center;width:100%;background:transparent;border:1px solid rgba(255,180,92,.35);border-radius:12px;padding:10px;font-size:12px;font-weight:800;color:#ffb45c;transition:all .18s}
+.rf-out svg{width:15px;height:15px}
+.rf-out:hover{background:rgba(239,143,46,.15);border-color:#ffb45c}
+@media(max-width:900px){
+  .rfoot{display:none}
+  .rib.mob-only{display:flex}
+}
+
 /* ── Duty Board (roster) ── */
 #rosterGrid{display:block!important;grid-template-columns:none!important;gap:0!important}
 .ro-flaps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
@@ -1615,6 +1644,31 @@ document.addEventListener('click',function(e){
   if(getComputedStyle(card).position==='static')card.style.position='relative';
   card.appendChild(s);
 },true);
+/* rail footer: mirror identity after boot, wire sign out to the existing handler */
+(function(){
+  var done=false;
+  var t=setInterval(function(){
+    var ava=document.getElementById('ava');
+    if(done||!ava||ava.textContent==='--')return;
+    var av=document.getElementById('rfAv'),nm=document.getElementById('rfName'),rl=document.getElementById('rfRole');
+    if(av)av.textContent=ava.textContent;
+    var acct=document.getElementById('acctInfo');
+    if(acct){
+      var b=acct.querySelector('b');if(b&&nm)nm.textContent=b.textContent;
+      var sub=b&&b.nextElementSibling;
+      if(sub&&rl){var cl=sub.cloneNode(true);var bd=cl.querySelector('.admin-badge');var isAd=!!bd;if(bd)bd.remove();var base=(cl.textContent||'').trim();rl.textContent=(base||'Signed in')+(isAd?' · Admin':'');}
+    }
+    done=true;clearInterval(t);
+  },400);
+  var idb=document.getElementById('rfId');
+  if(idb)idb.addEventListener('click',function(){if(window.go)window.go('acct')});
+  var ob=document.getElementById('rfOut');
+  if(ob)ob.addEventListener('click',function(){
+    var real=document.getElementById('btnOut');
+    if(real){real.click();return;}
+    try{supabase.createClient('https://rjceujscaepqyxdlmqyp.supabase.co','sb_publishable_OmWwOc2efyaKNiWjwVPO-A_bZRfLT0i').auth.signOut().then(function(){location.reload()});}catch(e){location.reload();}
+  });
+})();
 })();
 </script>
 
