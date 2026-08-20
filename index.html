@@ -961,28 +961,28 @@ chips.addEventListener('click',function(e){
         <div class="av"><b>SN</b><img src="images/doctors/dr-shankar-narayanan.jpg" alt="Dr. A. P. Shankar Narayanan"><span class="plus"><svg class="ico" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></span></div>
         <h3>Dr. A. P. Shankar Narayanan</h3><div class="spec">Surgical Gastroenterology</div>
         <div class="qual">M.S, M.Ch (SGE), FMAS, Fellow HPB &amp; Colorectal</div>
-        <a class="btn btn-o" href="appointment.html">Book consult</a>
+        <a class="btn btn-o" href="appointment.html?doctor=Not%20sure%20whom%20to%20consult%3F%20%3Cspan%20style%3D%22font-family%3A%27Noto%20Sans%20Tamil%27%2Csans-serif%3Bfont-size%3A15px%3Bcolor%3Avar%28--muted%29%22%3E%E0%AE%8E%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AF%81%20%E0%AE%B5%E0%AE%B2%E0%AE%BF%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AE%BF%E0%AE%B1%E0%AE%A4%E0%AF%81%3F%3C/span%3E">Book consult</a>
       </div>
       
       <div class="doc" data-doc="kirana">
         <div class="av"><b>KS</b><img src="images/doctors/dr-kirana-selvi.jpg" alt="Dr. G. Kirana Selvi"><span class="plus"><svg class="ico" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></span></div>
         <h3>Dr. G. Kirana Selvi</h3><div class="spec">Obstetrics &amp; Fertility</div>
         <div class="qual">M.S (OG), DRM (Germany), FAMS, FICS</div>
-        <a class="btn btn-o" href="appointment.html">Book consult</a>
+        <a class="btn btn-o" href="appointment.html?doctor=Dr.%20G.%20Kirana%20Selvi">Book consult</a>
       </div>
       
       <div class="doc" data-doc="sureshp">
         <div class="av"><b>SP</b><img src="images/doctors/dr-suresh-perumal.jpg" alt="Dr. Suresh Perumal"><span class="plus"><svg class="ico" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></span></div>
         <h3>Dr. Suresh Perumal</h3><div class="spec">Sports Medicine</div>
         <div class="qual">M.S (Ortho), M.Ch (Ortho)</div>
-        <a class="btn btn-o" href="appointment.html">Book consult</a>
+        <a class="btn btn-o" href="appointment.html?doctor=Dr.%20Suresh%20Perumal">Book consult</a>
       </div>
       
       <div class="doc" data-doc="dinesh">
         <div class="av"><b>DI</b><img src="images/doctors/dr-dinesh.jpg" alt="Dr. K. Dinesh"><span class="plus"><svg class="ico" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></span></div>
         <h3>Dr. K. Dinesh</h3><div class="spec">Paediatrics</div>
         <div class="qual">M.D (Paed), PGPN (Boston, USA)</div>
-        <a class="btn btn-o" href="appointment.html">Book consult</a>
+        <a class="btn btn-o" href="appointment.html?doctor=Dr.%20K.%20Dinesh">Book consult</a>
       </div>
     </div>
   </div>
@@ -1386,6 +1386,7 @@ chips.addEventListener('click',function(e){
       m.querySelector('.dm-exp').textContent=d.exp;
       m.querySelector('.dm-bio').textContent=d.bio;
       m.querySelector('.dm-qual').textContent=d.q;
+      m.querySelector('.dm-card a.btn').href='appointment.html?doctor='+encodeURIComponent(d.n);
       m.querySelector('.dm-tags').innerHTML=d.tags.map(function(t,i){return '<span style="animation-delay:'+(0.52+i*0.09)+'s">'+t+'</span>'}).join('');
       m.classList.remove('open');void m.offsetWidth;m.classList.add('open');document.body.style.overflow='hidden';
     });
