@@ -556,15 +556,39 @@ input,select,textarea{font-family:'Figtree';outline:none}
       </div>
     </div>
 
-    <!-- ROSTER (admin only) -->
+    <!-- ROSTER (admin only) — Duty Board -->
     <div class="pane" id="p-roster">
       <div class="pg">
-        <div class="srow">
-          <input type="date" class="fi" style="width:auto" id="roDate">
+        <div class="ro-flaps" id="roFlaps"></div>
+        <div class="ro-ctrl">
+          <div class="ro-rail" id="roRail"></div>
+          <input type="date" class="fi ro-date" id="roDate" title="Pick any date">
           <button class="btn" id="roToday">Today</button>
-          <span id="roSum" style="font-size:13px;color:var(--muted);margin-left:8px"></span>
         </div>
-        <div id="rosterGrid"></div>
+        <div class="ro-ctrl2">
+          <div class="ro-search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input id="roQ" placeholder="Search doctor or department…">
+          </div>
+          <div class="ro-modes">
+            <button class="ro-mode on" data-m="all">All</button>
+            <button class="ro-mode" data-m="pending">With pending</button>
+            <button class="ro-mode" data-m="blocked">With blocks</button>
+            <button class="ro-mode" data-m="full">Fully booked</button>
+          </div>
+          <span id="roSum" style="font-size:12.5px;color:var(--muted);margin-left:auto"></span>
+        </div>
+        <div class="ro-board">
+          <div class="ro-head">
+            <div>Doctor · மருத்துவர்</div>
+            <div class="c">Morning <i>காலை</i></div>
+            <div class="c">Evening <i>மாலை</i></div>
+            <div class="c">Waiting</div>
+            <div class="c">Visits</div>
+            <div></div>
+          </div>
+          <div id="rosterGrid"></div>
+        </div>
       </div>
     </div>
 
@@ -829,24 +853,127 @@ window.addSess=function(w){
 /* ROSTER */
 $('roDate').addEventListener('change',loadRoster);
 $('roToday').addEventListener('click',()=>{$('roDate').value=todayK();loadRoster();});
+var roCache={board:[],appts:[],blocks:[],day:''},roMode='all';
+function roDates(n){
+  var out=[],d=new Date(new Date().toLocaleString('en-US',{timeZone:TZ}));
+  while(out.length<n){
+    if(d.getDay()!==0)out.push({iso:d.toLocaleDateString('en-CA',{timeZone:'UTC'})===undefined?'':d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),dow:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()],day:d.getDate(),mon:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()],today:out.length===0&&d.getDate()===new Date(new Date().toLocaleString('en-US',{timeZone:TZ})).getDate()});
+    d.setDate(d.getDate()+1);
+  }
+  return out;
+}
+function roSyncRail(day){
+  var r=$('roRail');if(!r)return;
+  if(!r.childElementCount){
+    roDates(8).forEach(function(dd){
+      var b=document.createElement('button');b.className='ro-dt';b.dataset.iso=dd.iso;
+      b.innerHTML='<small>'+(dd.today?'Today':dd.dow)+'</small><b>'+dd.day+'</b><span>'+dd.mon+'</span>';
+      b.addEventListener('click',function(){$('roDate').value=dd.iso;loadRoster();});
+      r.appendChild(b);
+    });
+  }
+  r.querySelectorAll('.ro-dt').forEach(function(b){b.classList.toggle('on',b.dataset.iso===day)});
+}
+document.querySelectorAll('.ro-mode').forEach(function(b){b.addEventListener('click',function(){
+  roMode=b.dataset.m;document.querySelectorAll('.ro-mode').forEach(function(x){x.classList.toggle('on',x===b)});renderRosterBoard();
+})});
+var roQel=document.getElementById('roQ');if(roQel)roQel.addEventListener('input',renderRosterBoard);
+function roFlap(n,label,warm){return '<div class="ro-fc"><span class="ro-fn'+(warm?' warm':'')+'">'+n+'</span><div><b>'+label+'</b></div></div>'}
 function loadRoster(){
   var day=$('roDate').value;if(!day)return;
+  roSyncRail(day);
   var from=new Date(day+'T00:00:00+05:30').toISOString(),to=new Date(day+'T23:59:59+05:30').toISOString();
+  $('rosterGrid').innerHTML='<div class="ro-loading">Loading the duty board…</div>';
   Promise.all([
-    sb.from('appointments').select('doctor_id,status').gte('slot_start',from).lte('slot_start',to).in('status',['pending','confirmed']),
-    sb.from('slot_blocks').select('doctor_id,category').lte('start_at',to).gte('end_at',from)
-  ]).then(([r1,r2])=>{
-    var ap=r1.data||[],bl=r2.data||[],tot={p:0,c:0};
-    $('rosterGrid').innerHTML=allDocs.sort((a,b)=>a.full_name.localeCompare(b.full_name)).map((d,i)=>{
-      var mine=ap.filter(a=>a.doctor_id===d.id);
-      var p=mine.filter(a=>a.status==='pending').length,c=mine.filter(a=>a.status==='confirmed').length;
-      tot.p+=p;tot.c+=c;
-      var bls=bl.filter(b=>b.doctor_id===d.id),col=pal(d.full_name);
-      return`<div class="rcard" style="animation-delay:${i*0.015}s"><div style="display:flex;gap:10px;align-items:center;margin-bottom:8px"><div style="width:38px;height:38px;border-radius:50%;background:${col[0]};color:${col[1]};display:grid;place-items:center;font-size:12px;font-weight:800;flex:none">${ini(d.full_name)}</div><div style="min-width:0"><div class="rn">${esc(d.full_name)}</div><div class="rs">${esc(d.specialty||'')}</div></div></div><div class="rr"><span>Pending</span><span class="tchip y">${p}</span></div><div class="rr"><span>Confirmed</span><span class="tchip g">${c}</span></div><div class="rr"><span>Blocks</span><span class="tchip ${bls.length?'r':'g'}">${bls.length?bls.map(b=>b.category).join(', '):'none'}</span></div></div>`;
-    }).join('');
-    $('roSum').textContent=`${tot.p} pending · ${tot.c} confirmed hospital-wide`;
+    sb.rpc('get_day_board',{p_day:day}),
+    sb.from('appointments').select('doctor_id,status,patient_name,slot_start,booking_ref').gte('slot_start',from).lte('slot_start',to).in('status',['pending','confirmed']).order('slot_start'),
+    sb.from('slot_blocks').select('doctor_id,category,start_at,end_at,note').lte('start_at',to).gte('end_at',from)
+  ]).then(function(rs){
+    roCache={board:rs[0].data||[],appts:rs[1].data||[],blocks:rs[2].data||[],day:day};
+    var p=roCache.appts.filter(function(a){return a.status==='pending'}).length;
+    var c=roCache.appts.filter(function(a){return a.status==='confirmed'}).length;
+    var free=roCache.board.reduce(function(s,r){return s+r.morning_free+r.evening_free},0);
+    var blocked={};roCache.blocks.forEach(function(b){blocked[b.doctor_id]=1});
+    $('roFlaps').innerHTML=roFlap(p,'Waiting for stamp',true)+roFlap(c,'Confirmed visits',false)+roFlap(free,'Free tokens',false)+roFlap(Object.keys(blocked).length,'Doctors with blocks',false);
+    $('roSum').textContent=p+' pending · '+c+' confirmed hospital-wide';
+    renderRosterBoard();
   });
 }
+function renderRosterBoard(){
+  var box=$('rosterGrid');if(!box||!roCache.day)return;
+  var q=(roQel&&roQel.value||'').trim().toLowerCase();
+  var isSun=new Date(roCache.day+'T12:00:00').getDay()===0;
+  var byDoc={};roCache.appts.forEach(function(a){(byDoc[a.doctor_id]=byDoc[a.doctor_id]||[]).push(a)});
+  var blByDoc={};roCache.blocks.forEach(function(b){(blByDoc[b.doctor_id]=blByDoc[b.doctor_id]||[]).push(b)});
+  var rows=roCache.board.filter(function(r){
+    if(q&&r.full_name.toLowerCase().indexOf(q)<0&&(r.specialty||'').toLowerCase().indexOf(q)<0)return false;
+    var mine=byDoc[r.doctor_id]||[];
+    var pend=mine.filter(function(a){return a.status==='pending'}).length;
+    if(roMode==='pending')return pend>0;
+    if(roMode==='blocked')return !!blByDoc[r.doctor_id];
+    if(roMode==='full')return !isSun&&r.morning_free===0&&r.evening_free===0;
+    return true;
+  });
+  rows.sort(function(a,b){
+    var pa=(byDoc[a.doctor_id]||[]).filter(function(x){return x.status==='pending'}).length;
+    var pb=(byDoc[b.doctor_id]||[]).filter(function(x){return x.status==='pending'}).length;
+    if(pb!==pa)return pb-pa;return a.full_name.localeCompare(b.full_name);
+  });
+  if(!rows.length){box.innerHTML='<div class="ro-loading">No doctors match this filter.</div>';return;}
+  box.innerHTML=rows.map(function(r,i){
+    var col=pal(r.full_name),mine=byDoc[r.doctor_id]||[];
+    var pend=mine.filter(function(a){return a.status==='pending'}).length;
+    var conf=mine.filter(function(a){return a.status==='confirmed'}).length;
+    var bls=blByDoc[r.doctor_id]||[];
+    function cell(v){
+      if(isSun)return '<div class="ro-cell off">Holiday</div>';
+      if(v===0)return '<div class="ro-cell full">Full</div>';
+      return '<div class="ro-cell'+(v<=2?' warm':'')+'">'+v+' free</div>';
+    }
+    return '<div class="ro-row" data-doc="'+r.doctor_id+'" style="animation-delay:'+(i*0.02)+'s">'
+      +'<button class="ro-top" onclick="roExpand(this)">'
+      +'<div class="ro-who"><div class="ro-av" style="background:'+col[0]+';color:'+col[1]+'">'+ini(r.full_name)+'</div>'
+      +'<div class="ro-nm"><b>'+esc(r.full_name)+'</b><small>'+esc(r.specialty||'')+(bls.length?' · <span class="ro-blk">⏸ '+bls.map(function(b){return b.category}).join(', ')+'</span>':'')+'</small></div></div>'
+      +cell(r.morning_free)+cell(r.evening_free)
+      +'<div class="ro-cell '+(pend?'pendy':'quiet')+'">'+pend+'</div>'
+      +'<div class="ro-cell '+(conf?'confy':'quiet')+'">'+conf+'</div>'
+      +'<span class="ro-chev">▾</span>'
+      +'</button>'
+      +'<div class="ro-tray"><div class="ro-tray-in" data-loaded=""></div></div>'
+      +'</div>';
+  }).join('');
+}
+window.roExpand=function(btn){
+  var row=btn.closest('.ro-row'),tray=row.querySelector('.ro-tray'),inner=row.querySelector('.ro-tray-in');
+  var open=tray.classList.contains('open');
+  document.querySelectorAll('.ro-tray.open').forEach(function(t){t.classList.remove('open');t.closest('.ro-row').classList.remove('open')});
+  if(open)return;
+  tray.classList.add('open');row.classList.add('open');
+  if(inner.dataset.loaded===roCache.day)return;
+  inner.innerHTML='<div class="ro-loading" style="padding:14px 0">Reading the token grid…</div>';
+  var docId=row.dataset.doc;
+  sb.rpc('get_slot_grid',{p_doctor:docId,p_day:roCache.day}).then(function(res){
+    var slots=res.data||[];
+    var bls=roCache.blocks.filter(function(b){return b.doctor_id===docId});
+    function inBlock(s){return bls.some(function(b){return new Date(s.slot_start)<new Date(b.end_at)&&new Date(s.slot_end)>new Date(b.start_at)})}
+    function strip(ses,lbl){
+      var mine=slots.filter(function(s){return s.session===ses});
+      if(!mine.length)return '<div class="ro-strip"><div class="ro-strip-lbl">'+lbl+'</div><span class="ro-none">No session</span></div>';
+      return '<div class="ro-strip"><div class="ro-strip-lbl">'+lbl+'</div><div class="ro-tks">'+mine.map(function(s){
+        var cls=s.is_free?'':(inBlock(s)?' blk':' gone');
+        return '<span class="ro-tk'+cls+'"><small>'+s.session+'-'+String(s.token_no).padStart(2,'0')+'</small>'+fT(s.slot_start)+'</span>';
+      }).join('')+'</div></div>';
+    }
+    var visits=roCache.appts.filter(function(a){return a.doctor_id===docId});
+    var vhtml=visits.length?visits.map(function(a){
+      return '<div class="ro-visit"><span class="ro-vdot '+a.status+'"></span><b>'+esc(a.patient_name)+'</b><span class="ro-vt">'+fT(a.slot_start)+'</span><span class="ro-vref">'+esc(a.booking_ref||'')+'</span><span class="ro-vst '+a.status+'">'+a.status+'</span></div>';
+    }).join(''):'<div class="ro-none" style="padding:6px 0">No visits booked this day.</div>';
+    inner.innerHTML='<div class="ro-tray-grid"><div>'+strip('M','Morning · காலை')+strip('E','Evening · மாலை')
+      +'<div class="ro-key"><span><i class="k1"></i>Free</span><span><i class="k2"></i>Booked</span><span><i class="k3"></i>Blocked</span></div></div>'
+      +'<div><div class="ro-strip-lbl">Day\u2019s visits</div>'+vhtml+'</div></div>';
+    inner.dataset.loaded=roCache.day;
+  });
+};
 
 /* ACCOUNT */
 $('npBtn').addEventListener('click',()=>{
@@ -1364,6 +1491,91 @@ document.addEventListener('click',function(e){
 .cal-tb-today{background:#153468!important;color:#fff!important}
 .tchip.y{background:var(--mari-soft);color:var(--mari-deep)}
 @media(max-width:700px){.od-clock{display:none}}
+
+/* ── Duty Board (roster) ── */
+#rosterGrid{display:block!important;grid-template-columns:none!important;gap:0!important}
+.ro-flaps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.ro-fc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;gap:14px;align-items:center;box-shadow:var(--shadow)}
+.ro-fn{background:#0d2246;color:#fff;font-family:'Instrument Serif',serif;font-size:24px;min-width:52px;padding:5px 10px;border-radius:9px;text-align:center;position:relative;overflow:hidden;display:inline-block}
+.ro-fn::after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.25)}
+.ro-fn.warm{background:var(--mari);color:#3d2405}
+.ro-fc b{font-size:12.5px;font-weight:700}
+.ro-ctrl{display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.ro-rail{display:flex;gap:7px;overflow-x:auto;background:#0d2246;border-radius:16px;padding:9px;flex:1;min-width:0;scrollbar-width:none}
+.ro-rail::-webkit-scrollbar{display:none}
+.ro-dt{flex:0 0 auto;min-width:66px;border:1px solid rgba(255,255,255,.14);border-radius:11px;padding:6px 9px;background:transparent;color:#c0cfe6;text-align:center}
+.ro-dt small{display:block;font-size:9px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;opacity:.85}
+.ro-dt b{display:block;font-family:'Instrument Serif',serif;font-weight:400;font-size:19px;line-height:1.05;color:#fff}
+.ro-dt span{display:block;font-size:9px}
+.ro-dt.on{background:var(--mari);border-color:var(--mari);color:#3d2405}
+.ro-dt.on b{color:#3d2405}
+.ro-date{width:auto}
+.ro-ctrl2{display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.ro-search{position:relative;flex:1;min-width:200px}
+.ro-search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted)}
+.ro-search input{width:100%;border:1px solid var(--line);border-radius:999px;padding:10px 14px 10px 36px;font:600 13px 'Figtree';background:var(--card)}
+.ro-modes{display:flex;gap:6px;flex-wrap:wrap}
+.ro-mode{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 14px;font-size:12px;font-weight:700;color:var(--pea)}
+.ro-mode.on{background:var(--pea);color:#fff;border-color:var(--pea)}
+.ro-board{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.ro-head{display:grid;grid-template-columns:1fr 96px 96px 76px 76px 30px;gap:8px;padding:11px 18px;background:var(--tint);border-bottom:1px solid var(--line);font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--pea)}
+.ro-head .c{text-align:center}
+.ro-head i{display:block;font-style:normal;font-family:'Noto Sans Tamil',sans-serif;font-size:9px;letter-spacing:0;text-transform:none;font-weight:600;opacity:.7}
+.ro-row{border-bottom:1px solid var(--line);animation:navIn .3s ease-out both}
+.ro-row:last-child{border-bottom:none}
+.ro-top{display:grid;grid-template-columns:1fr 96px 96px 76px 76px 30px;gap:8px;align-items:center;width:100%;padding:10px 18px;background:transparent;text-align:left;transition:background .15s}
+.ro-top:hover{background:#fbfcff}
+.ro-row.open .ro-top{background:#f6f9ff}
+.ro-who{display:flex;gap:11px;align-items:center;min-width:0}
+.ro-av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;flex:none}
+.ro-nm{min-width:0}
+.ro-nm b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ro-nm small{font-size:11px;color:var(--muted)}
+.ro-blk{color:var(--slate);font-weight:700}
+.ro-cell{border-radius:9px;text-align:center;font-weight:800;font-size:12px;padding:7px 4px;background:var(--tint);color:var(--pea)}
+.ro-cell.warm{background:var(--mari-soft);color:var(--mari-deep)}
+.ro-cell.full{background:repeating-linear-gradient(45deg,#f2f4f9 0 6px,#e9edf5 6px 12px);color:#8a94a8}
+.ro-cell.off{background:var(--rose-s);color:var(--rose);font-size:10.5px}
+.ro-cell.pendy{background:var(--mari-soft);color:var(--mari-deep)}
+.ro-cell.confy{background:var(--green-s);color:var(--green)}
+.ro-cell.quiet{background:transparent;color:var(--faint)}
+.ro-chev{color:var(--faint);font-size:12px;text-align:center;transition:transform .25s}
+.ro-row.open .ro-chev{transform:rotate(180deg)}
+.ro-tray{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.3,.7,.2,1);background:linear-gradient(180deg,#fbfcff,#f3f6fc)}
+.ro-tray.open{max-height:560px;border-top:1px dashed var(--line)}
+.ro-tray-in{padding:14px 18px 18px}
+.ro-tray-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:22px}
+.ro-strip{margin-bottom:12px}
+.ro-strip-lbl{font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--pea);margin-bottom:8px}
+.ro-tks{display:flex;flex-wrap:wrap;gap:6px}
+.ro-tk{border:1px solid var(--line);background:#fff;border-radius:9px;padding:5px 8px;font-size:11.5px;font-weight:700;color:var(--ink)}
+.ro-tk small{display:block;font-size:8.5px;font-weight:800;letter-spacing:.08em;color:var(--mari-deep)}
+.ro-tk.gone{opacity:.5;background:repeating-linear-gradient(45deg,#fff 0 5px,#f1f4f9 5px 10px)}
+.ro-tk.gone,.ro-tk.blk{text-decoration:none}
+.ro-tk.gone{text-decoration:line-through}
+.ro-tk.blk{background:var(--slate-s);color:var(--slate);border-color:transparent}
+.ro-key{display:flex;gap:14px;font-size:10.5px;color:var(--muted);font-weight:700;margin-top:4px}
+.ro-key i{display:inline-block;width:14px;height:9px;border-radius:3px;margin-right:4px;vertical-align:middle;border:1px solid var(--line)}
+.ro-key .k1{background:#fff}.ro-key .k2{background:repeating-linear-gradient(45deg,#fff 0 4px,#f1f4f9 4px 8px)}.ro-key .k3{background:var(--slate-s);border-color:transparent}
+.ro-visit{display:flex;gap:8px;align-items:center;padding:7px 0;border-bottom:1px dotted var(--line);font-size:12.5px;min-width:0}
+.ro-visit:last-child{border:none}
+.ro-visit b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ro-vdot{width:7px;height:7px;border-radius:50%;flex:none}
+.ro-vdot.confirmed{background:var(--green)}.ro-vdot.pending{background:var(--mari)}
+.ro-vt{color:var(--muted);font-weight:700;margin-left:auto;flex:none}
+.ro-vref{color:var(--faint);font-size:10.5px;flex:none}
+.ro-vst{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-radius:99px;padding:2px 8px;flex:none}
+.ro-vst.pending{background:var(--mari-soft);color:var(--mari-deep)}
+.ro-vst.confirmed{background:var(--green-s);color:var(--green)}
+.ro-none{font-size:12px;color:var(--faint)}
+.ro-loading{padding:30px;text-align:center;color:var(--muted);font-size:13px}
+@media(max-width:900px){
+  .ro-flaps{grid-template-columns:repeat(2,1fr)}
+  .ro-head{display:none}
+  .ro-top{grid-template-columns:1fr 70px 70px 30px}
+  .ro-top .ro-cell:nth-of-type(4),.ro-top .ro-cell:nth-of-type(5){display:none}
+  .ro-tray-grid{grid-template-columns:1fr}
+}
 </style>
 
 <script id="odscript">
